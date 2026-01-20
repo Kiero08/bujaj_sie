@@ -1,6 +1,7 @@
-/* --- CZCIONKI I PODSTAWY --- */
+/* --- IMPORT CZCIONKI --- */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
 
+/* --- ZMIENNE --- */
 :root {
     --bg-dark: #05070a;
     --glass-bg: rgba(255, 255, 255, 0.03);
@@ -8,8 +9,10 @@
     --neon-cyan: #00f2ff;
     --neon-purple: #7000ff;
     --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
 }
 
+/* --- RESET --- */
 * {
     margin: 0;
     padding: 0;
@@ -21,12 +24,65 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     line-height: 1.6;
-    /* Subtelny animowany gradient w tle strony */
     background: radial-gradient(circle at 50% -20%, #1a1f35, var(--bg-dark));
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* --- RESPONSYWNY KONTENER --- */
+/* --- FIX: NAWIGACJA (MENU) --- */
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    background: rgba(5, 7, 10, 0.85); /* Ciemne, półprzezroczyste tło */
+    backdrop-filter: blur(15px); /* Efekt rozmycia szkła */
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--neon-cyan) !important;
+    text-decoration: none;
+    letter-spacing: -1px;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+nav ul li a {
+    color: var(--text-main) !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 12px;
+}
+
+nav ul li a:hover {
+    color: var(--neon-cyan) !important;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- KONTENER I HERO --- */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -34,150 +90,125 @@ body {
     padding: 20px;
 }
 
-/* --- NOWY STYL KARTY (Zamiast tego z obrazka) --- */
-.offer-item {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px); /* Efekt mrożonego szkła */
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 40px;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.hero-section {
+    text-align: center;
+    padding: 100px 20px 60px;
 }
 
-/* Efekt "Aury" po najechaniu */
-.offer-item:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(0, 242, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
-                0 0 20px rgba(0, 242, 255, 0.1);
-}
-
-/* Dynamiczny akcent w narożniku zamiast paska u góry */
-.offer-item::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
-    transition: 0.5s;
-    pointer-events: none;
-}
-
-.offer-item h2 {
-    font-size: 2rem;
+.hero-section h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem); /* Skaluje się na mobile */
     font-weight: 900;
-    margin-bottom: 15px;
-    background: linear-gradient(135deg, #fff 0%, #888 100%);
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #fff, var(--neon-cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.offer-item p {
-    color: #94a3b8;
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-}
-
-/* Przycisk "Dowiedz się więcej" jako neonowy link */
-.offer-item .more-link {
-    color: var(--neon-cyan);
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* --- PRZYCISKI --- */
+.btn {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+    color: white !important;
+    padding: 16px 35px;
+    border-radius: 50px;
     text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+    cursor: pointer;
 }
 
-.offer-item .more-link::after {
-    content: '→';
-    transition: transform 0.3s;
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 242, 255, 0.4);
 }
 
-.offer-item:hover .more-link::after {
-    transform: translateX(5px);
-}
-
-/* --- SIATKA (GRID) --- */
+/* --- SIATKA I KARTY --- */
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 kolumny na desktopie */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-top: 50px;
-}
-
-/* --- RESPONSYWNOŚĆ (MOBILE FIRST) --- */
-
-/* Dla tabletów */
-@media (max-width: 1024px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Dla telefonów */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-    
-    .grid {
-        grid-template-columns: 1fr; /* 1 kolumna na telefonie */
-        gap: 20px;
-    }
-    
-    .offer-item {
-        padding: 30px;
-        border-radius: 20px;
-    }
-    
-    h1 {
-        font-size: 2.5rem !important;
-        text-align: center;
-    }
-    
-    .offer-item h2 {
-        font-size: 1.6rem;
-    }
-}
-
-/* --- DODATKOWE "ŻYWE" ELEMENTY --- */
-.hero-section {
-    text-align: center;
-    padding: 100px 0 60px;
-}
-
-.hero-section h1 {
-    font-size: 5rem;
-    font-weight: 900;
-    letter-spacing: -2px;
-    margin-bottom: 20px;
-    line-height: 1;
-}
-
-/* Animacja delikatnego pływania dla kart */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
+    margin-top: 40px;
 }
 
 .offer-item {
-    animation: fadeIn 0.6s ease-out backwards;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.offer-item:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 242, 255, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.offer-item h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.offer-item p {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+.more-link {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* --- MAPA --- */
+.map-container {
+    margin-top: 30px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.map-container iframe {
+    filter: invert(90%) hue-rotate(180deg) contrast(90%);
+}
+
+/* --- STOPKA --- */
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* --- RESPONSYWNOŚĆ --- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    nav ul {
+        gap: 10px;
+    }
+
+    nav ul li a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .hero-section {
+        padding: 60px 20px;
+    }
 }
