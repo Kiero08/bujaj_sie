@@ -1,8 +1,7 @@
-/* --- IMPORT CZCIONEK Z GOOGLE FONTS --- */
-/* Fredoka obsługuje polskie znaki w 100% i ma bardzo podobny "bąbelkowy" styl */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Outfit:wght@300;400;700;900&display=swap');
+/* --- 1. IMPORT CZCIONEK (Z wymuszeniem polskich znaków) --- */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- ZMIENNE KOLORYSTYCZNE --- */
+/* --- 2. ZMIENNE (Kolory i efekty) --- */
 :root {
     --bg-dark: #05070a;
     --glass-bg: rgba(255, 255, 255, 0.03);
@@ -13,7 +12,7 @@
     --text-muted: #94a3b8;
 }
 
-/* --- PODSTAWY --- */
+/* --- 3. RESET I PODSTAWY --- */
 * {
     margin: 0;
     padding: 0;
@@ -30,13 +29,13 @@ body {
     overflow-x: hidden;
 }
 
-/* --- NAWIGACJA --- */
+/* --- 4. NAWIGACJA (Naprawione menu) --- */
 header {
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 0;
+    padding: 12px 0;
     background: rgba(5, 7, 10, 0.85);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -52,22 +51,20 @@ nav {
     padding: 0 20px;
 }
 
-/* STYL DLA LOGO "Bujaj Się Lębork" - POPRAWIONE POLSKIE ZNAKI */
+/* LOGO: Baloo 2 idealnie radzi sobie z "ę" i "ś" */
 .logo a {
-    font-family: 'Fredoka', sans-serif; 
+    font-family: 'Baloo 2', cursive;
     font-size: 2.2rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--neon-cyan) !important;
     text-decoration: none;
-    letter-spacing: 0.5px;
-    /* Neonowa poświata jak na Twoim przykładzie */
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.6), 0 0 20px rgba(0, 242, 255, 0.2);
-    transition: all 0.3s ease;
-    display: inline-block;
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(0, 242, 255, 0.5);
+    transition: 0.3s;
 }
 
 .logo a:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
     text-shadow: 0 0 20px var(--neon-cyan);
 }
 
@@ -81,7 +78,7 @@ nav ul li a {
     color: var(--text-main) !important;
     text-decoration: none;
     font-weight: 600;
-    padding: 8px 12px;
+    padding: 8px 15px;
     border-radius: 10px;
     transition: 0.3s;
     font-size: 0.95rem;
@@ -92,7 +89,7 @@ nav ul li a:hover {
     color: var(--neon-cyan) !important;
 }
 
-/* --- KONTENER I HERO --- */
+/* --- 5. HERO SECTION --- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -105,16 +102,16 @@ nav ul li a:hover {
 }
 
 .hero-section h1 {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 900;
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
+    font-weight: 800;
     margin-bottom: 20px;
     background: linear-gradient(to right, #fff, var(--neon-cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'Fredoka', sans-serif; /* Spójność z logo */
 }
 
-/* --- PRZYCISKI --- */
+/* --- 6. PRZYCISKI --- */
 .btn {
     display: inline-block;
     background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
@@ -133,7 +130,7 @@ nav ul li a:hover {
     box-shadow: 0 15px 30px rgba(0, 242, 255, 0.4);
 }
 
-/* --- GRID I SZKLANE KARTY --- */
+/* --- 7. GRID I SZKLANE KARTY --- */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -157,14 +154,18 @@ nav ul li a:hover {
 .offer-item:hover {
     transform: translateY(-10px);
     border-color: rgba(0, 242, 255, 0.3);
-    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .offer-item h2 {
     font-size: 1.8rem;
     margin-bottom: 15px;
     color: white;
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Baloo 2', cursive;
+}
+
+.offer-item p {
+    color: var(--text-muted);
 }
 
 .more-link {
@@ -177,17 +178,19 @@ nav ul li a:hover {
     display: inline-block;
 }
 
-/* --- STOPKA --- */
+/* --- 8. STOPKA --- */
 footer {
     text-align: center;
     padding: 60px 20px;
     color: var(--text-muted);
     font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 40px;
 }
 
-/* --- RESPONSYWNOŚĆ --- */
+/* --- 9. RESPONSYWNOŚĆ --- */
 @media (max-width: 768px) {
     nav { flex-direction: column; gap: 15px; }
     nav ul { flex-wrap: wrap; justify-content: center; }
-    .hero-section { padding: 40px 20px; }
+    .logo a { font-size: 1.8rem; }
 }
