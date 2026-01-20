@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bujaj się Lębork | Bilard, Shuffleboard & Fun</title>
+    <title>Bujaj się Lębork | Nowoczesny Bilard i Shuffleboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,68 +15,66 @@
             </div>
             <ul>
                 <li><a href="index.html">Start</a></li>
-                <li><a href="oferta.html">Atrakcje</a></li>
+                <li><a href="oferta.html">Oferta</a></li>
                 <li><a href="wydarzenia.html">Wydarzenia</a></li>
                 <li><a href="kontakt.html">Kontakt</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="hero">
-        <h1>Bujaj się w Lęborku</h1>
-        <p>Bilard • Shuffleboard • Gry Planszowe • Zimne Napoje</p>
-        <div class="hero-buttons">
-            <a href="oferta.html" class="btn">Zobacz atrakcje</a>
-            <a href="tel:+48791700777" class="btn" style="background: transparent; border: 2px solid var(--color-neon-blue); margin-left: 10px;">Zarezerwuj stół</a>
+    <section class="hero-section">
+        <div class="container">
+            <h1>Bujaj się w Lęborku</h1>
+            <p style="color: #94a3b8; font-size: 1.2rem; margin-bottom: 30px;">Centrum nowoczesnej rozrywki: Bilard • Shuffleboard • Planszówki</p>
+            <a href="tel:+48791700777" class="btn">Zarezerwuj stół teraz</a>
         </div>
     </section>
 
     <main class="container">
         
-        <section class="intro-text" style="text-align: center; margin-bottom: 60px;">
-            <h2>Więcej niż bar</h2>
-            <p style="color: var(--color-text-muted); font-size: 1.2rem;">
-                „Bujaj się” to nowoczesna przestrzeń w sercu Lęborka, stworzona z myślą o integracji, 
-                dobrej zabawie i relaksie. Nieważne, czy masz 15 czy 70 lat – u nas znajdziesz swój rytm.
-            </p>
-        </section>
-
-        <div class="grid">
-            <article class="offer-item">
-                <h2>Bilard</h2>
-                <p>Cztery profesjonalne stoły czekają na Twoje mistrzowskie uderzenia. Idealne na wieczór ze znajomymi.</p>
-                <a href="oferta.html" style="color: var(--color-neon-blue); font-weight: bold; display: block; margin-top: 15px;">Dowiedz się więcej &rarr;</a>
-            </article>
-
-            <article class="offer-item">
-                <h2>Shuffleboard</h2>
-                <p>Absolutna nowość w regionie! 6-metrowe stoły do gry, która podbija świat. Spróbuj swoich sił.</p>
-                <a href="oferta.html" style="color: var(--color-neon-blue); font-weight: bold; display: block; margin-top: 15px;">Dowiedz się więcej &rarr;</a>
-            </article>
-
-            <article class="offer-item">
-                <h2>Gry Planszowe</h2>
-                <p>Od klasyków po najnowsze tytuły. Idealne na spokojniejszy wieczór przy kawie lub czymś mocniejszym.</p>
-                <a href="oferta.html" style="color: var(--color-neon-blue); font-weight: bold; display: block; margin-top: 15px;">Dowiedz się więcej &rarr;</a>
-            </article>
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Wybierz swoją grę</h2>
+            <p style="color: #64748b;">Odkryj przestrzeń, gdzie czas płynie inaczej.</p>
         </div>
 
-        <section class="promo-section" style="margin-top: 80px; background: var(--color-bg-secondary); padding: 40px; border-radius: 20px; text-align: center; border: 1px dashed var(--color-neon-purple);">
-            <h3>Dołącz do „Grania w Ciemno”</h3>
-            <p>Nie masz ekipy? Przyjdź na nasze cykliczne spotkania. Losujemy składy i gramy w najlepsze planszówki!</p>
-            <a href="wydarzenia.html" class="btn" style="margin-top: 20px;">Sprawdź kalendarz</a>
+        <div class="grid">
+            
+            <article class="offer-item">
+                <div>
+                    <h2>Bilard</h2>
+                    <p>Cztery profesjonalne stoły czekają na Twoje mistrzowskie uderzenia. Idealne na wieczór ze znajomymi.</p>
+                </div>
+                <a href="oferta.html" class="more-link">Sprawdź cennik</a>
+            </article>
+
+            <article class="offer-item">
+                <div>
+                    <h2>Shuffleboard</h2>
+                    <p>Absolutna nowość w regionie! 6-metrowe stoły do gry, która podbija świat. Spróbuj swoich sił w rywalizacji.</p>
+                </div>
+                <a href="oferta.html" class="more-link">Jak grać?</a>
+            </article>
+
+            <article class="offer-item">
+                <div>
+                    <h2>Planszówki</h2>
+                    <p>Od klasyków po najnowsze tytuły. Idealne na spokojniejszy wieczór przy kawie lub czymś mocniejszym.</p>
+                </div>
+                <a href="wydarzenia.html" class="more-link">Nasza kolekcja</a>
+            </article>
+
+        </div>
+
+        <section style="margin-top: 80px; padding: 50px; background: var(--glass-bg); backdrop-filter: blur(10px); border-radius: 30px; border: 1px solid var(--glass-border); text-align: center;">
+            <h2 style="margin-bottom: 20px;">Dołącz do „Grania w Ciemno”</h2>
+            <p style="margin-bottom: 30px; max-width: 600px; margin-inline: auto;">Nie masz ekipy? To żaden problem! Przyjdź na nasze cykliczne spotkania, gdzie losujemy składy i wspólnie testujemy najlepsze gry planszowe.</p>
+            <a href="wydarzenia.html" class="btn" style="background: var(--neon-purple); box-shadow: 0 0 20px rgba(112, 0, 255, 0.4);">Zobacz terminy</a>
         </section>
 
     </main>
 
     <footer>
-        <div class="footer-content">
-            <p><strong>Bujaj się Lębork</strong></p>
-            <p>ul. Słupska 16G/5, 84-300 Lębork</p>
-            <p>Telefon: 791 700 777</p>
-            <br>
-            <p>&copy; 2026 Wszelkie prawa zastrzeżone.</p>
-        </div>
+        <p>&copy; 2026 Bujaj się Lębork | ul. Słupska 16G/5</p>
     </footer>
 
 </body>
