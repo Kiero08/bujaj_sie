@@ -110,7 +110,6 @@ nav ul li a:hover {
 
 .offer-item {
     background: rgba(0, 30, 35, 0.85);
-    /* Zwiększamy lekko ramkę kontenera, żeby kieszenie lepiej pasowały */
     border: 3px solid #001a1d; 
     padding: 40px; position: relative; transition: 0.4s; 
     box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.4);
@@ -119,65 +118,85 @@ nav ul li a:hover {
 
 .offer-item:hover {
     transform: translateY(-5px); 
-    /* Po najechaniu ramka stołu robi się złota */
     border-color: var(--gold-border);
 }
 
 
 /* --- STYL KIESZENI BILARDOWYCH --- */
+
+/* Wspólny styl bazowy (czarne tło, cień wewnątrz) */
 .offer-item .pocket-tl, .offer-item .pocket-tr,
 .offer-item .pocket-bl, .offer-item .pocket-br,
 .offer-item .pocket-mt, .offer-item .pocket-mb {
     position: absolute;
-    border: 4px solid var(--gold-border);
     background-color: #000;
     z-index: 5;
     box-shadow: inset 0 0 10px rgba(0,0,0,1);
     pointer-events: none;
 }
 
-/* Narożniki */
+/* --- NAROŻNIKI (Te były dobre - przywracamy wersję z ramkami) --- */
 .pocket-tl {
     top: -6px; left: -6px; width: 50px; height: 50px;
-    border-right: none !important; border-bottom: none !important;
-    border-top-left-radius: 25px; border-bottom-right-radius: 40px;
+    border: 4px solid var(--gold-border); /* Pełna ramka */
+    border-right: none !important; border-bottom: none !important; /* Usuwamy wewnętrzne */
+    border-top-left-radius: 25px; 
+    border-bottom-right-radius: 40px; /* Wewnętrzny łuk */
 }
 .pocket-tr {
     top: -6px; right: -6px; width: 50px; height: 50px;
+    border: 4px solid var(--gold-border);
     border-left: none !important; border-bottom: none !important;
-    border-top-right-radius: 25px; border-bottom-left-radius: 40px;
+    border-top-right-radius: 25px; 
+    border-bottom-left-radius: 40px;
 }
 .pocket-bl {
     bottom: -6px; left: -6px; width: 50px; height: 50px;
+    border: 4px solid var(--gold-border);
     border-right: none !important; border-top: none !important;
-    border-bottom-left-radius: 25px; border-top-right-radius: 40px;
+    border-bottom-left-radius: 25px; 
+    border-top-right-radius: 40px;
 }
 .pocket-br {
     bottom: -6px; right: -6px; width: 50px; height: 50px;
+    border: 4px solid var(--gold-border);
     border-left: none !important; border-top: none !important;
-    border-bottom-right-radius: 25px; border-top-left-radius: 40px;
+    border-bottom-right-radius: 25px; 
+    border-top-left-radius: 40px;
 }
 
-/* --- ŚRODKOWE KIESZENI (POPRAWIONE) --- */
-/* Są teraz bliżej środka (-2px zamiast -6px) i wyglądają jak zewnętrzne okucie */
+/* --- ŚRODKOWE KIESZENIE (NAPRAWA) --- */
+/* Złoty kolor TYLKO na prostej krawędzi przy bandzie */
+
 .pocket-mt {
-    top: -2px; /* Bliżej środka */
+    top: -3px; /* Pozycjonowanie na krawędzi */
     left: 50%; transform: translateX(-50%);
     width: 64px; height: 32px;
-    border-top: none !important; /* Zewnętrzne wykończenie */
+    
+    /* Złota linia TYLKO na górze */
+    border-top: 4px solid var(--gold-border);
+    /* Reszta bez ramki (czarny łuk) */
+    border-right: none; border-bottom: none; border-left: none;
+    
     border-bottom-left-radius: 32px; 
     border-bottom-right-radius: 32px;
 }
+
 .pocket-mb {
-    bottom: -2px; /* Bliżej środka */
+    bottom: -3px; /* Pozycjonowanie na krawędzi */
     left: 50%; transform: translateX(-50%);
     width: 64px; height: 32px;
-    border-bottom: none !important; /* Zewnętrzne wykończenie */
+    
+    /* Złota linia TYLKO na dole */
+    border-bottom: 4px solid var(--gold-border);
+    /* Reszta bez ramki */
+    border-right: none; border-top: none; border-left: none;
+    
     border-top-left-radius: 32px; 
     border-top-right-radius: 32px;
 }
 
-/* --- NOWA ANIMACJA: START NA STOLE --- */
+/* --- ANIMACJA: WPADANIE DO PRAWEGO DOLNEGO ROGU --- */
 .offer-item::after {
     content: '8'; 
     position: absolute;
@@ -192,9 +211,7 @@ nav ul li a:hover {
     background-image: radial-gradient(circle at center, #fff 45%, #000 46%);
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     
-    /* Domyślnie niewidoczna */
-    opacity: 0;
-    pointer-events: none; z-index: 10;
+    opacity: 0; pointer-events: none; z-index: 10;
 }
 
 .offer-item:hover::after { 
@@ -204,11 +221,11 @@ nav ul li a:hover {
 
 @keyframes pocketEightBall {
     0% { 
-        /* Start na stole, pojawia się */
+        /* Start na stole */
         top: 50%; left: 10%;
         opacity: 0; transform: translateY(-50%) scale(1);
     }
-    5% { opacity: 1; } /* Szybkie pojawienie się */
+    5% { opacity: 1; }
     
     30% { 
         top: 85%; left: 30%; /* Odbicie dolna banda */
