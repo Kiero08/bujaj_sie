@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="wood-grain" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d4a066"/>
+      <stop offset="100%" stop-color="#b07e4c"/>
+    </linearGradient>
+    <filter id="puck-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+      <feOffset in="blur" dx="2" dy="2" result="offsetBlur"/>
+      <feMerge>
+        <feMergeNode in="offsetBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <path d="M 30,20 L 226,20 L 195,240 L 61,240 Z" fill="url(#wood-grain)" stroke="#8f5e30" stroke-width="4"/>
+
+  <g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
+    <line x1="96" y1="185" x2="160" y2="185" />
+    <line x1="82" y1="135" x2="174" y2="135" />
+    <line x1="68" y1="85" x2="188" y2="85" />
+    <line x1="128" y1="25" x2="128" y2="235" stroke-width="2" stroke-dasharray="8,6" opacity="0.7"/>
+  </g>
+
+  <g fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-weight="bold" text-anchor="middle" style="pointer-events: none;">
+    <text x="128" y="220" font-size="28">10</text>
+    <text x="128" y="168" font-size="24">8</text>
+    <text x="128" y="118" font-size="24">7</text>
+  </g>
+
+  <g transform="translate(105, 110)" filter="url(#puck-shadow)">
+    <circle cx="0" cy="0" r="18" fill="#e53935" stroke="#c62828" stroke-width="3"/>
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#ffcdd2" stroke-width="2" opacity="0.8"/>
+  </g>
+
+  <g transform="translate(140, 200)" filter="url(#puck-shadow)">
+    <circle cx="0" cy="0" r="18" fill="#1e88e5" stroke="#1565c0" stroke-width="3"/>
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#bbdefb" stroke-width="2" opacity="0.8"/>
+  </g>
+</svg>
