@@ -3,11 +3,16 @@
 
 /* --- 2. PALETA KOLORÓW --- */
 :root {
-    --deep-teal: #006064;     /* Baza tła */
-    --gold: #ffcc00;          /* Podstawowe złoto */
+    --deep-teal: #006064;     /* Rozjaśniony morski */
     --neon-cyan: #00e5ff;     /* Cyjan */
-    --nav-dark: #001a1d;      /* Ciemny pasek */
-    --card-dark: #002529;     /* Bardzo ciemne tło kart */
+    --nav-dark: #001a1d;      /* Ciemny pasek nawigacji */
+    --glass-bg: rgba(0, 70, 75, 0.7);
+    --gold-border: #ffcc00;   /* Kolor dla ramek */
+
+    /* NOWE KOLORY DLA TEKSTU (Z GRAFIKI) */
+    --text-yellow-top: #ffe552;    /* Jasny żółty (góra liter) */
+    --text-orange-bottom: #ffb300; /* Miodowy (dół liter) */
+    --text-outline: #000000;       /* Czarny obrys i cień */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,10 +24,10 @@ body {
     background-color: var(--deep-teal);
     overflow-x: hidden;
     
-    /* TŁO: Czysty gradient */
+    /* --- TŁO --- */
     background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgba(255, 229, 82, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.2) 0px, transparent 50%),
         linear-gradient(180deg, #00838f 0%, #004d50 100%);
     background-attachment: fixed;
 }
@@ -31,7 +36,7 @@ body {
 header {
     position: sticky; top: 0; z-index: 1000; padding: 12px 0;
     background: var(--nav-dark);
-    border-bottom: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold-border);
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
@@ -40,16 +45,23 @@ nav {
     max-width: 1200px; margin: 0 auto; padding: 0 20px;
 }
 
+/* LOGO - STYL Z GRAFIKI */
 .logo a {
-    font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800;
+    font-family: 'Baloo 2', cursive; font-size: 2.2rem; font-weight: 800;
     text-decoration: none;
-    /* EFEKT METALICZNEGO ZŁOTA */
-    background: linear-gradient(to bottom, #cfc09f 22%, #ffecb3 24%, #3a2c0f 26%, #997f43 27%, #ffcc00 40%, #f7f0c6 78%); 
+
+    /* 1. DWUKOLOROWE WYPEŁNIENIE (Hard Stop Gradient) */
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: #ffcc00;
-    text-shadow: 0px 0px 0px rgba(255,255,255,0); /* Reset cienia dla clip-text */
-    filter: drop-shadow(1px 1px 0 #000); /* Cień zewnętrzny */
+    
+    /* 2. GRUBY OBRYS I TWARDY CIEŃ (Stack filtrów) */
+    filter: 
+        drop-shadow(1.5px 1.5px 0 var(--text-outline)) 
+        drop-shadow(-1.5px -1.5px 0 var(--text-outline)) 
+        drop-shadow(1.5px -1.5px 0 var(--text-outline)) 
+        drop-shadow(-1.5px 1.5px 0 var(--text-outline))
+        drop-shadow(3px 3px 0 var(--text-outline)); /* Ostatni tworzy głębię */
 }
 
 nav ul { list-style: none; display: flex; gap: 20px; }
@@ -57,61 +69,64 @@ nav ul li a {
     text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem;
     padding: 8px 12px; transition: 0.3s; border-radius: 4px;
 }
+
 nav ul li a:hover {
-    background: rgba(0, 229, 255, 0.15); color: var(--gold);
+    background: rgba(0, 229, 255, 0.15); color: var(--text-yellow-top);
 }
 
-/* --- WSPÓLNY STYL DLA ZŁOTYCH OKUĆ (Narożników) --- */
-.gold-corner-box {
-    position: relative;
-    border: 1px solid rgba(0, 229, 255, 0.15); /* Subtelna ramka reszty */
-}
-
-/* To tworzy "Okucie" w lewym górnym rogu */
-.gold-corner-box::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: -1px; /* Pozycjonowanie na krawędzi */
-    width: 40px; height: 40px; /* Wielkość okucia */
-    border-top: 4px solid var(--gold);
-    border-left: 4px solid var(--gold);
-    z-index: 5;
-    box-shadow: -2px -2px 10px rgba(255, 204, 0, 0.3); /* Złota poświata rogu */
-}
-
-/* --- HERO SECTION --- */
+/* --- HERO SECTION (NAPRAWIONY LAYOUT) --- */
 .hero-section { 
     padding: 60px 20px; display: flex; justify-content: center; align-items: center;
 }
 
 .hero-glass-box {
-    /* Zastosowanie klasy okucia w HTML, tutaj style bazowe */
-    background: rgba(0, 40, 45, 0.6); /* Ciemniejsze szkło */
-    padding: 50px 30px;
-    width: 100%; max-width: 900px;
+    background: var(--glass-bg);
+    /* Asymetryczne cięcie - naprawione, by nie ucinało treści */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 95% 100%, 0% 100%);
+    border: 2px solid var(--neon-cyan);
+    /* Flexbox do centrowania */
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    backdrop-filter: blur(15px);
-    border-radius: 4px; /* Lekkie zaokrąglenie, ale rogi ostre dla okucia */
+    padding: 50px 30px 70px 30px; /* Większy padding na dole dla clip-path */
+    width: 100%; max-width: 900px;
+    position: relative; backdrop-filter: blur(15px);
+    border-radius: 10px;
 }
 
+/* Celowniki */
+.hero-glass-box::before {
+    content: '['; position: absolute; top: 10px; left: 10px; color: var(--gold-border); font-size: 2rem; line-height: 1;
+}
+.hero-glass-box::after {
+    content: ']'; position: absolute; bottom: 25px; right: 30px; color: var(--gold-border); font-size: 2rem; line-height: 1;
+}
+
+/* POPRAWIONY OBRAZEK */
 .hero-logo-img {
     max-width: 350px; width: 100%; height: auto; margin-bottom: 20px;
-    object-fit: contain;
+    object-fit: contain; 
     filter: drop-shadow(0 0 15px var(--neon-cyan));
     transform-origin: top center; animation: swing 5s ease-in-out infinite;
 }
+
 @keyframes swing { 0% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-3deg); } }
 
-/* H1 - METALICZNE ZŁOTO */
+/* H1 - STYL Z GRAFIKI */
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(2rem, 5vw, 4rem);
-    margin-bottom: 10px; text-align: center; line-height: 1.2;
-    
-    /* Gradient imitujący połysk metalu */
-    background: linear-gradient(45deg, #FFD700 0%, #FDB931 25%, #FFFFE0 50%, #FDB931 75%, #FFD700 100%);
+    font-family: 'Baloo 2', cursive; font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 10px; text-align: center; line-height: 1.1;
+
+    /* Dwukolorowe wypełnienie */
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px 0 #000);
+    
+    /* Gruby obrys i twardy cień */
+    filter: 
+        drop-shadow(2px 2px 0 var(--text-outline)) 
+        drop-shadow(-2px -2px 0 var(--text-outline)) 
+        drop-shadow(2px -2px 0 var(--text-outline)) 
+        drop-shadow(-2px 2px 0 var(--text-outline))
+        drop-shadow(5px 5px 0 var(--text-outline));
 }
 
 .hero-section p {
@@ -123,74 +138,74 @@ nav ul li a:hover {
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .offer-item {
-    /* CIEMNIEJSZE TŁO KART */
-    background-color: var(--card-dark);
-    padding: 40px; 
-    transition: 0.3s; 
-    overflow: hidden; /* Ważne dla przelatującego krążka */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: rgba(0, 40, 45, 0.8);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    padding: 40px; position: relative; transition: 0.4s; overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .offer-item:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    transform: translateY(-5px); border-color: var(--gold-border);
 }
 
-/* ANIMACJA: PRZELATUJĄCY KRĄŻEK (PUCK) */
+/* Złoty róg */
+.offer-item::before {
+    content: ''; position: absolute; top: -1px; left: -1px; width: 40px; height: 40px;
+    border-top: 4px solid var(--gold-border); border-left: 4px solid var(--gold-border);
+    z-index: 5; box-shadow: -2px -2px 10px rgba(255, 204, 0, 0.3);
+}
+
+/* Animacja Krążka */
 .offer-item::after {
-    content: '';
-    position: absolute;
-    top: 50%; 
-    left: -100px; /* Start poza ekranem z lewej */
-    width: 60px; height: 10px; /* Spłaszczony krążek w ruchu */
-    background: radial-gradient(circle, #fff, var(--neon-cyan));
-    border-radius: 50%;
-    box-shadow: 0 0 20px var(--neon-cyan);
-    opacity: 0.8;
-    transform: translateY(-50%);
-    transition: none; /* Reset tranzycji dla animacji */
+    content: ''; position: absolute; top: 50%; left: -100px; 
+    width: 60px; height: 10px; background: radial-gradient(circle, #fff, var(--neon-cyan));
+    border-radius: 50%; box-shadow: 0 0 20px var(--neon-cyan);
+    opacity: 0.8; transform: translateY(-50%); transition: none;
 }
-
-/* Wyzwolenie animacji po najechaniu */
-.offer-item:hover::after {
-    animation: shootPuck 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
+.offer-item:hover::after { animation: shootPuck 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 @keyframes shootPuck {
     0% { left: -100px; opacity: 0; width: 100px; }
     10% { opacity: 1; }
-    100% { left: 120%; opacity: 0; width: 60px; } /* Wylatuje na prawo */
+    100% { left: 120%; opacity: 0; width: 60px; }
 }
 
-/* H2 - METALICZNE ZŁOTO */
+/* H2 - STYL Z GRAFIKI */
 .offer-item h2 { 
-    font-family: 'Baloo 2', cursive; font-size: 2rem; 
-    margin-bottom: 15px;
+    font-family: 'Baloo 2', cursive; font-size: 2.2rem; margin-bottom: 15px;
     
-    background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    /* Dwukolorowe wypełnienie */
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(1px 1px 0 #000);
+    
+    /* Obrys i cień */
+    filter: 
+        drop-shadow(1.5px 1.5px 0 var(--text-outline)) 
+        drop-shadow(-1.5px -1.5px 0 var(--text-outline)) 
+        drop-shadow(1.5px -1.5px 0 var(--text-outline)) 
+        drop-shadow(-1.5px 1.5px 0 var(--text-outline))
+        drop-shadow(3px 3px 0 var(--text-outline));
 }
-
-.offer-item p { color: #ccc; line-height: 1.6; }
 
 /* --- PRZYCISK --- */
 .btn {
     display: inline-block; padding: 16px 45px;
     background: transparent; border: 2px solid var(--neon-cyan);
-    color: var(--gold) !important; font-weight: 800; text-transform: uppercase;
+    color: var(--gold-border) !important; font-weight: 800; text-transform: uppercase;
     transition: 0.3s; text-decoration: none;
+    /* Prostszy cień dla przycisku */
     text-shadow: 1px 1px 0 #000;
 }
+
 .btn:hover {
-    background: var(--neon-cyan); color: #000 !important;
+    background: var(--neon-cyan); color: var(--nav-dark) !important;
     text-shadow: none; box-shadow: 0 0 25px var(--neon-cyan);
 }
 
 /* --- MOBILE --- */
 @media (max-width: 768px) {
-    .logo a { font-size: 1.5rem; }
+    .logo a { font-size: 1.8rem; }
+    .hero-glass-box { clip-path: none; border-radius: 20px; padding: 30px 20px; }
     .hero-logo-img { max-width: 250px; }
+    .hero-section h1 { font-size: 2.5rem; }
 }
