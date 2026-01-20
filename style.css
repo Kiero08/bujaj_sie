@@ -22,8 +22,6 @@ body {
     min-height: 100vh;
     background-color: var(--deep-teal);
     overflow-x: hidden;
-    
-    /* Czyste tło liniowe, bez promienistych gradientów */
     background-image: linear-gradient(180deg, #00838f 0%, #004d50 100%);
     background-attachment: fixed;
 }
@@ -74,9 +72,7 @@ nav ul li a:hover {
     border-radius: 40px;
     border: 3px solid var(--gold-border);
     box-shadow: 0 0 50px rgba(0, 229, 255, 0.1);
-    /* Upewniamy się, że nie ma żadnego obrazka w tle (usuwa ewentualny okrąg) */
     background-image: none; 
-    
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 60px 40px;
     width: 100%; max-width: 900px;
@@ -132,30 +128,45 @@ nav ul li a:hover {
     border-top-left-radius: 20px;
 }
 
-/* --- NOWA ANIMACJA KRĄŻKA (Puck) --- */
+/* --- NOWA ANIMACJA: BILARDOWA ÓSEMKA --- */
 .offer-item::after {
-    content: ''; position: absolute;
-    /* Startowa pozycja poza ekranem */
-    top: 10%; left: -50px;
-    width: 40px; height: 40px; /* Bardziej okrągły */
-    background: radial-gradient(circle at 30% 30%, #fff, var(--neon-cyan));
-    border-radius: 50%; box-shadow: 0 0 20px var(--neon-cyan);
+    content: '8'; /* Dodajemy cyfrę 8 */
+    position: absolute;
+    top: 10%; left: -60px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    
+    /* Stylizacja Ósemki */
+    color: #000; /* Czarny tekst */
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center; /* Centrowanie '8' */
+    
+    /* Tło kuli: Czarne z białym kołem w środku */
+    background-color: #000;
+    background-image: radial-gradient(circle at center, #fff 45%, #000 46%);
+    
+    /* Subtelny cień dla głębi, zamiast neonu */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    
     opacity: 0; pointer-events: none;
+    z-index: 10;
 }
 
-/* Wyzwolenie animacji po najechaniu - WOLNIEJSZA (4s) i liniowa */
+/* Wyzwolenie animacji - PRZYSPIESZONA do 3s */
 .offer-item:hover::after { 
-    animation: bouncePuck 4s linear infinite; 
+    animation: bounceEightBall 3s linear infinite; 
 }
 
-/* Definicja ruchu odbijającego się (zygzak) */
-@keyframes bouncePuck {
-    0% { top: 10%; left: -50px; opacity: 0; } /* Start z lewej */
+/* Zygzak (ścieżka bez zmian) */
+@keyframes bounceEightBall {
+    0% { top: 10%; left: -60px; opacity: 0; }
     5% { opacity: 1; }
-    25% { top: 85%; left: 30%; } /* Odbicie dół */
-    50% { top: 10%; left: 60%; } /* Odbicie góra */
-    75% { top: 85%; left: 90%; } /* Odbicie dół */
-    100% { top: 20%; left: 110%; opacity: 0; } /* Wylot w prawo */
+    25% { top: 80%; left: 30%; }
+    50% { top: 15%; left: 60%; }
+    75% { top: 80%; left: 90%; }
+    100% { top: 25%; left: 110%; opacity: 0; }
 }
 
 .offer-item h2 { 
@@ -194,4 +205,3 @@ nav ul li a:hover {
     .hero-section h1 { font-size: 2.5rem; }
     .offer-item h2 { min-height: auto; }
 }
-
