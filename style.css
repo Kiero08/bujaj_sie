@@ -1,20 +1,19 @@
 /* --- 1. IMPORT CZCIONEK --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- 2. PALETA KOLORÓW (Głęboki morski + Złoto + Morski) --- */
+/* --- 2. PALETA KOLORÓW (Turkus, Złoto, Morski) --- */
 :root {
-    --deep-teal: #004b54;     /* Twoja baza */
-    --gold: #ffcc00;          /* Złoty zamiast żółtego */
-    --deep-gold: #b8860b;     /* Ciemne złoto do gradientów */
-    --neon-teal: #00e5ff;     /* Morski błękit */
-    --neon-blue: #0077ff;
+    --base-teal: #006d77;      /* Nowy, jaśniejszy turkusowy odcień bazowy */
+    --deep-teal: #004b54;      /* Twój poprzedni kolor (teraz jako cień) */
+    --gold: #ffcc00;           /* Złoty */
+    --neon-teal: #48d1cc;      /* Jasny turkus do rozświetleń */
     
-    --text-outline: #000000;  /* Czarny obrys */
+    --text-outline: #000000;   /* Czarny obrys */
     --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    --text-muted: #e2e8f0;
     
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(0, 229, 255, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(72, 209, 204, 0.3);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,21 +24,21 @@ body {
     font-family: 'Outfit', sans-serif;
     color: var(--text-main);
     min-height: 100vh;
-    background-color: var(--deep-teal);
+    background-color: var(--base-teal);
     overflow-x: hidden;
 
-    /* --- ROZJAŚNIONY MESH GRADIENT (Złoto + Morski) --- */
+    /* --- ROZJAŚNIONY GRADIENT TURKUSOWY --- */
     background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.15) 0px, transparent 40%),  /* Złota poświata */
-        radial-gradient(at 100% 0%, rgba(0, 229, 255, 0.18) 0px, transparent 40%), /* Morski błękit */
-        linear-gradient(180deg, #0b2c31 0%, var(--deep-teal) 100%);
+        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.1) 0px, transparent 40%), 
+        radial-gradient(at 100% 0%, rgba(72, 209, 204, 0.25) 0px, transparent 45%),
+        linear-gradient(180deg, #007b83 0%, var(--base-teal) 100%);
     background-attachment: fixed;
 }
 
 /* --- NAWIGACJA --- */
 header {
     position: sticky; top: 0; z-index: 1000; padding: 15px 0;
-    background: rgba(0, 43, 48, 0.9);
+    background: rgba(0, 109, 119, 0.85); /* Na bazie Morskiego Turkusu */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
@@ -50,7 +49,6 @@ nav {
     max-width: 1200px; margin: 0 auto; padding: 0 20px;
 }
 
-/* LOGO: ZŁOTO Z CZARNYM OBRYSEM */
 .logo a {
     font-family: 'Baloo 2', cursive; font-size: 2.2rem; font-weight: 800;
     color: var(--gold) !important; text-decoration: none;
@@ -69,7 +67,7 @@ nav ul li a {
     padding: 10px 15px; transition: 0.3s;
 }
 
-nav ul li a:hover { color: var(--gold); }
+nav ul li a:hover { color: var(--gold); text-shadow: 0 0 5px var(--gold); }
 
 /* --- HERO SECTION --- */
 .hero-section { 
@@ -80,19 +78,19 @@ nav ul li a:hover { color: var(--gold); }
 }
 
 .hero-glass-box {
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 60px 40px;
     max-width: 950px;
-    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.4);
 }
 
 .hero-logo-img {
     max-width: 560px; width: 90%; margin-bottom: 25px;
-    filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.4));
+    filter: drop-shadow(0 0 30px rgba(72, 209, 204, 0.5));
     transform-origin: top center; 
     animation: swing 5s ease-in-out infinite;
 }
@@ -101,16 +99,14 @@ nav ul li a:hover { color: var(--gold); }
     0% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-3deg); }
 }
 
-/* H1: ZŁOTO Z MOCNYM OBRYSEM */
+/* H1: ZŁOTO Z OBRYSEM */
 .hero-section h1 {
     font-family: 'Baloo 2', cursive; 
     font-size: clamp(2.5rem, 7vw, 4.5rem);
     margin-bottom: 15px;
-    /* Złoty gradient */
     background: linear-gradient(to right, var(--gold), #fff700);
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
-    /* Obrys realizowany przez filtry dla gradientu tekstowego */
     filter: drop-shadow(2px 2px 0 var(--text-outline)) 
             drop-shadow(-2px -2px 0 var(--text-outline))
             drop-shadow(2px -2px 0 var(--text-outline))
@@ -119,23 +115,24 @@ nav ul li a:hover { color: var(--gold); }
 }
 
 .hero-section p {
-    font-size: 1.3rem; color: var(--text-muted); margin-bottom: 35px;
-    letter-spacing: 1px;
+    font-size: 1.3rem; color: var(--text-main); margin-bottom: 35px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* --- PRZYCISKI --- */
 .btn {
     display: inline-block;
-    background: linear-gradient(135deg, var(--neon-teal), var(--neon-blue));
+    background: linear-gradient(135deg, var(--neon-teal), #008b8b);
     color: #fff !important; padding: 20px 55px; border-radius: 60px;
     text-decoration: none; font-weight: 800; text-transform: uppercase; 
     transition: 0.3s;
-    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 0 50px var(--neon-teal);
+    box-shadow: 0 0 40px var(--neon-teal);
 }
 
 /* --- KARTY OFERTY --- */
@@ -152,11 +149,11 @@ nav ul li a:hover { color: var(--gold); }
 
 .offer-item:hover {
     transform: translateY(-12px);
+    background: rgba(255, 255, 255, 0.07);
     border-color: var(--gold);
-    box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.3);
 }
 
-/* H2 W KARTACH: ZŁOTY OBRYS */
 .offer-item h2 { 
     font-family: 'Baloo 2', cursive; font-size: 2.3rem; margin-bottom: 20px; 
     color: var(--gold);
@@ -166,6 +163,14 @@ nav ul li a:hover { color: var(--gold); }
         1px -1px 0 var(--text-outline),
        -1px  1px 0 var(--text-outline);
 }
+
+.offer-item p {
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* --- STOPKA --- */
+footer { text-align: center; padding: 60px; opacity: 0.8; font-size: 0.9rem; font-weight: 700; }
 
 @media (max-width: 768px) {
     .hero-glass-box { padding: 40px 20px; border-radius: 40px; }
