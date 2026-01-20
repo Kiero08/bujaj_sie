@@ -23,7 +23,7 @@ body {
     /* Nakładamy plik bilard-stamp.svg wielokrotnie w różnych miejscach */
     background-image: 
         url('bilard-stamp.svg'), 
-        url('bilard-stamp.svg'), 
+        url('shuffle-stamp.svg'), 
         url('bilard-stamp.svg'), 
         url('bilard-stamp.svg');
     
