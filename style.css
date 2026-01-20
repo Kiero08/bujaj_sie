@@ -1,16 +1,17 @@
-/* --- CZCIONKI --- */
+/* --- 1. IMPORT CZCIONEK (Pełne wsparcie PL znaków) --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
+/* --- 2. ZMIENNE --- */
 :root {
     --bg-dark: #05070a;
     --neon-cyan: #00f2ff;
     --neon-purple: #7000ff;
     --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
     --text-main: #e2e8f0;
 }
 
-/* --- TŁO ZE STEMPLAMI (WATERMARKS) --- */
+/* --- 3. TŁO ZE STEMPLAMI (Użycie bilard-stamp.svg) --- */
 body {
     margin: 0;
     font-family: 'Outfit', sans-serif;
@@ -19,29 +20,41 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     
-    /* STEMPLE SVG W TLE */
+    /* Nakładamy plik bilard-stamp.svg wielokrotnie w różnych miejscach */
     background-image: 
-        /* Bilard (kule) */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='10' stroke='%2300f2ff' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
-        /* Wiszące krzesło (prosty symbol) */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M30 20 L70 20 L60 70 L40 70 Z M50 0 L50 20' stroke='%237000ff' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
-        /* Shuffleboard (krążek) */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect x='40' y='40' width='20' height='20' rx='5' stroke='%2300f2ff' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+        url('bilard-stamp.svg'), 
+        url('bilard-stamp.svg'), 
+        url('bilard-stamp.svg'), 
+        url('bilard-stamp.svg');
     
-    background-position: 10% 10%, 80% 20%, 30% 70%, 90% 80%, 50% 40%;
-    background-repeat: repeat;
+    /* Różne rozmiary dla efektu głębi */
+    background-size: 180px, 120px, 250px, 150px;
+    
+    /* Różne pozycje (losowy układ) */
+    background-position: 
+        10% 15%, 
+        85% 10%, 
+        30% 80%, 
+        90% 70%;
+        
+    background-repeat: no-repeat;
     background-attachment: fixed;
+    
+    /* Subtelność stempli - żeby nie zasłaniały tekstu */
+    /* Jeśli plik SVG jest zbyt jaskrawy, filtr go przyciemni */
+    filter: none; 
 }
 
-/* --- NAWIGACJA --- */
+/* --- 4. NAWIGACJA (Szklany pasek) --- */
 header {
     position: sticky;
     top: 0;
-    background: rgba(5, 7, 10, 0.9);
+    background: rgba(5, 7, 10, 0.85);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
     z-index: 1000;
-    padding: 10px 0;
+    padding: 12px 0;
 }
 
 nav {
@@ -55,25 +68,24 @@ nav {
 
 .logo a {
     font-family: 'Baloo 2', cursive;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: var(--neon-cyan) !important;
     text-decoration: none;
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: 600;
-    font-size: 0.9rem;
-    padding: 8px 12px;
+    font-size: 0.95rem;
     transition: 0.3s;
 }
 
@@ -81,33 +93,32 @@ nav ul li a:hover {
     color: var(--neon-cyan);
 }
 
-/* --- HERO --- */
+/* --- 5. SEKCJA HERO (Główne uderzenie) --- */
 .hero-section {
     text-align: center;
     padding: 100px 20px;
+    position: relative;
 }
 
-.hero-logo {
-    font-family: 'Baloo 2', cursive;
-    font-size: 4rem;
-    font-weight: 800;
-    color: var(--neon-cyan);
-    text-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
-    margin-bottom: 10px;
+/* Duże logo na środku strony */
+.hero-logo-img {
+    height: 120px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px var(--neon-cyan));
 }
 
 .hero-section h1 {
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: white;
-    opacity: 0.8;
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    background: linear-gradient(to right, #fff, var(--neon-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
 }
 
-/* --- PRZYCISKI --- */
+/* --- 6. PRZYCISKI --- */
 .btn {
     display: inline-block;
-    margin-top: 30px;
     background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
     color: white !important;
     padding: 18px 40px;
@@ -116,6 +127,7 @@ nav ul li a:hover {
     font-weight: 800;
     box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
     transition: 0.3s;
+    margin-top: 20px;
 }
 
 .btn:hover {
@@ -123,7 +135,7 @@ nav ul li a:hover {
     box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
 }
 
-/* --- GRID --- */
+/* --- 7. SZKLANE KARTY --- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -140,6 +152,7 @@ nav ul li a:hover {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 30px;
     transition: 0.4s;
@@ -151,6 +164,7 @@ nav ul li a:hover {
 .offer-item:hover {
     transform: translateY(-10px);
     border-color: var(--neon-cyan);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
 .offer-item h2 {
@@ -160,7 +174,6 @@ nav ul li a:hover {
 }
 
 .more-link {
-    margin-top: 20px;
     color: var(--neon-cyan);
     text-decoration: none;
     font-weight: 800;
@@ -168,15 +181,16 @@ nav ul li a:hover {
     font-size: 0.8rem;
 }
 
+/* --- 8. STOPKA --- */
 footer {
     text-align: center;
     padding: 40px;
-    opacity: 0.5;
-    font-size: 0.8rem;
+    opacity: 0.6;
+    font-size: 0.9rem;
 }
 
-/* --- MOBILE --- */
+/* --- 9. MOBILE --- */
 @media (max-width: 768px) {
-    .hero-logo { font-size: 2.5rem; }
     nav { flex-direction: column; gap: 15px; }
+    .hero-section { padding: 60px 20px; }
 }
