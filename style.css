@@ -1,7 +1,8 @@
-/* --- IMPORT CZCIONKI --- */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
+/* --- IMPORT CZCIONEK Z GOOGLE FONTS --- */
+/* Sniglet - dla logo (Singlet Bold style), Outfit - dla treści */
+@import url('https://fonts.googleapis.com/css2?family=Sniglet:wght@800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- ZMIENNE --- */
+/* --- ZMIENNE KOLORYSTYCZNE --- */
 :root {
     --bg-dark: #05070a;
     --glass-bg: rgba(255, 255, 255, 0.03);
@@ -12,7 +13,7 @@
     --text-muted: #94a3b8;
 }
 
-/* --- RESET --- */
+/* --- PODSTAWY --- */
 * {
     margin: 0;
     padding: 0;
@@ -29,15 +30,15 @@ body {
     overflow-x: hidden;
 }
 
-/* --- FIX: NAWIGACJA (MENU) --- */
+/* --- NAWIGACJA Z NOWYM LOGO --- */
 header {
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0;
-    background: rgba(5, 7, 10, 0.85); /* Ciemne, półprzezroczyste tło */
-    backdrop-filter: blur(15px); /* Efekt rozmycia szkła */
+    padding: 10px 0;
+    background: rgba(5, 7, 10, 0.8);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -51,40 +52,46 @@ nav {
     padding: 0 20px;
 }
 
+/* STYL DLA LOGO "BUJAJ SIĘ" */
 .logo a {
-    font-size: 1.8rem;
-    font-weight: 900;
+    font-family: 'Sniglet', cursive; /* To jest odpowiednik Singlet Bold */
+    font-size: 2.5rem;
+    font-weight: 800;
     color: var(--neon-cyan) !important;
     text-decoration: none;
-    letter-spacing: -1px;
-    text-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.logo a:hover {
+    transform: scale(1.05) rotate(-2deg);
+    text-shadow: 0 0 25px var(--neon-cyan);
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 25px;
-    align-items: center;
+    gap: 20px;
 }
 
 nav ul li a {
     color: var(--text-main) !important;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    padding: 8px 16px;
-    border-radius: 12px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 
 nav ul li a:hover {
-    color: var(--neon-cyan) !important;
     background: rgba(255, 255, 255, 0.05);
+    color: var(--neon-cyan) !important;
 }
 
 /* --- KONTENER I HERO --- */
 .container {
-    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -92,13 +99,12 @@ nav ul li a:hover {
 
 .hero-section {
     text-align: center;
-    padding: 100px 20px 60px;
+    padding: 80px 20px;
 }
 
 .hero-section h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem); /* Skaluje się na mobile */
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
     font-weight: 900;
-    letter-spacing: -2px;
     margin-bottom: 20px;
     background: linear-gradient(to right, #fff, var(--neon-cyan));
     -webkit-background-clip: text;
@@ -110,40 +116,33 @@ nav ul li a:hover {
     display: inline-block;
     background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
     color: white !important;
-    padding: 16px 35px;
+    padding: 15px 35px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    transition: all 0.3s ease;
-    border: none;
     box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
-    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn:hover {
-    transform: translateY(-3px) scale(1.05);
+    transform: translateY(-3px);
     box-shadow: 0 15px 30px rgba(0, 242, 255, 0.4);
 }
 
-/* --- SIATKA I KARTY --- */
+/* --- GRID I SZKLANE KARTY --- */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    gap: 25px;
 }
 
 .offer-item {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.4s ease;
+    transition: 0.4s;
 }
 
 .offer-item:hover {
@@ -154,13 +153,8 @@ nav ul li a:hover {
 
 .offer-item h2 {
     font-size: 1.8rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: white;
-}
-
-.offer-item p {
-    color: var(--text-muted);
-    margin-bottom: 25px;
 }
 
 .more-link {
@@ -168,48 +162,12 @@ nav ul li a:hover {
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: 0.8rem;
 }
 
-/* --- MAPA --- */
-.map-container {
-    margin-top: 30px;
-    border-radius: 24px;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-}
-
-.map-container iframe {
-    filter: invert(90%) hue-rotate(180deg) contrast(90%);
-}
-
-/* --- STOPKA --- */
-footer {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-/* --- RESPONSYWNOŚĆ --- */
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    nav ul {
-        gap: 10px;
-    }
-
-    nav ul li a {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-    }
-
-    .hero-section {
-        padding: 60px 20px;
-    }
+    nav { flex-direction: column; gap: 15px; }
+    .logo a { font-size: 2rem; }
+    .hero-section { padding: 40px 20px; }
 }
-
