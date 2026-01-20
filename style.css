@@ -3,11 +3,11 @@
 
 /* --- 2. PALETA KOLORÓW --- */
 :root {
-    --deep-teal: #006064;     /* Rozjaśniony morski jako baza */
+    --deep-teal: #006064;     /* Rozjaśniony morski */
     --gold: #ffcc00;          /* Złoto */
     --neon-cyan: #00e5ff;     /* Cyjan */
-    --nav-dark: #001a1d;      /* Przyciemniony pasek nawigacyjny */
-    --glass-bg: rgba(0, 96, 100, 0.5);
+    --nav-dark: #001a1d;      /* Ciemny pasek nawigacji */
+    --glass-bg: rgba(0, 70, 75, 0.7); /* Bardziej kryjące tło boksu */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,18 +19,18 @@ body {
     background-color: var(--deep-teal);
     overflow-x: hidden;
     
-    /* --- ROZJAŚNIONE TŁO (Bez kratki) --- */
+    /* --- CZYSTE, JAŚNIEJSZE TŁO (Bez kratki) --- */
     background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 240, 0, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.15) 0px, transparent 50%),
-        linear-gradient(180deg, #00838f 0%, var(--deep-teal) 100%);
+        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.2) 0px, transparent 50%),
+        linear-gradient(180deg, #00838f 0%, #004d50 100%);
     background-attachment: fixed;
 }
 
-/* --- NAWIGACJA (Przyciemniona) --- */
+/* --- NAWIGACJA --- */
 header {
     position: sticky; top: 0; z-index: 1000; padding: 12px 0;
-    background: var(--nav-dark); /* Przyciemnienie */
+    background: var(--nav-dark);
     border-bottom: 2px solid var(--gold);
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
@@ -43,24 +43,24 @@ nav {
 .logo a {
     font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800;
     color: var(--gold) !important; text-decoration: none;
-    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    text-shadow: 1px 1px 0 #000;
 }
 
 nav ul { list-style: none; display: flex; gap: 20px; }
 nav ul li a {
     text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem;
-    padding: 8px 12px; transition: 0.3s;
-    border-radius: 4px;
+    padding: 8px 12px; transition: 0.3s; border-radius: 4px;
 }
 
 nav ul li a:hover {
-    background: rgba(0, 229, 255, 0.15);
-    color: var(--gold);
+    background: rgba(0, 229, 255, 0.15); color: var(--gold);
 }
 
-/* --- HERO SECTION (Blueprint Style) --- */
+/* --- HERO SECTION (NAPRAWA) --- */
 .hero-section { 
-    padding: 80px 20px; display: flex; justify-content: center;
+    padding: 60px 20px; /* Zmniejszony padding */
+    display: flex; justify-content: center;
+    align-items: center;
 }
 
 .hero-glass-box {
@@ -68,24 +68,41 @@ nav ul li a:hover {
     /* Asymetryczne cięcie */
     clip-path: polygon(4% 0%, 100% 0%, 100% 92%, 96% 100%, 0% 100%, 0% 8%);
     border: 2px solid var(--neon-cyan);
-    padding: 60px 40px;
+    /* Ważne: Flexbox układa elementy pionowo i centruje */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 50px 30px;
+    width: 100%;
     max-width: 900px;
     position: relative;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
 }
 
-/* Celowniki w rogach */
+/* Celowniki */
 .hero-glass-box::before {
-    content: '['; position: absolute; top: 15px; left: 15px; color: var(--gold); font-size: 2rem;
+    content: '['; position: absolute; top: 10px; left: 10px; color: var(--gold); font-size: 2rem; line-height: 1;
 }
 .hero-glass-box::after {
-    content: ']'; position: absolute; bottom: 15px; right: 15px; color: var(--gold); font-size: 2rem;
+    content: ']'; position: absolute; bottom: 10px; right: 10px; color: var(--gold); font-size: 2rem; line-height: 1;
 }
 
+/* --- KLUCZOWA POPRAWKA OBRAZKA --- */
 .hero-logo-img {
-    max-width: 500px; width: 85%; margin-bottom: 20px;
+    /* Ograniczenie wielkości */
+    max-width: 350px; 
+    width: 100%; 
+    height: auto;
+    margin-bottom: 20px;
+    
+    /* Zabezpieczenie przed wychodzeniem */
+    object-fit: contain; 
+    
     filter: drop-shadow(0 0 15px var(--neon-cyan));
-    transform-origin: top center; animation: swing 5s ease-in-out infinite;
+    transform-origin: top center; 
+    animation: swing 5s ease-in-out infinite;
 }
 
 @keyframes swing {
@@ -93,70 +110,64 @@ nav ul li a:hover {
 }
 
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-family: 'Baloo 2', cursive; font-size: clamp(2rem, 5vw, 3.5rem);
     color: var(--gold);
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    text-shadow: 2px 2px 0 #000;
     margin-bottom: 10px;
+    text-align: center;
+    line-height: 1.2;
 }
 
-/* --- KARTY OFERTY --- */
+.hero-section p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+/* --- KARTY --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .offer-item {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(0, 229, 255, 0.3);
-    padding: 40px;
-    position: relative;
-    transition: 0.4s;
-    overflow: hidden;
+    padding: 40px; position: relative; transition: 0.4s; overflow: hidden;
 }
 
 .offer-item:hover {
-    background: rgba(0, 229, 255, 0.1);
-    transform: translateY(-5px);
-    border-color: var(--gold);
+    background: rgba(0, 229, 255, 0.1); transform: translateY(-5px); border-color: var(--gold);
 }
 
-/* Linia skanująca */
 .offer-item:hover::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-    background: var(--neon-cyan);
-    box-shadow: 0 0 10px var(--neon-cyan);
+    background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan);
     animation: scan 2s linear infinite;
 }
 
-@keyframes scan {
-    0% { top: 0%; } 100% { top: 100%; }
-}
+@keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
 .offer-item h2 { 
     font-family: 'Baloo 2', cursive; font-size: 2rem; color: var(--gold);
-    text-shadow: 1px 1px 0 #000;
-    margin-bottom: 15px;
+    text-shadow: 1px 1px 0 #000; margin-bottom: 15px;
 }
 
 /* --- PRZYCISK --- */
 .btn {
     display: inline-block; padding: 16px 45px;
-    background: transparent;
-    border: 2px solid var(--neon-cyan);
-    color: var(--gold) !important;
-    font-weight: 800; text-transform: uppercase;
-    transition: 0.3s;
-    text-shadow: 1px 1px 0 #000;
+    background: transparent; border: 2px solid var(--neon-cyan);
+    color: var(--gold) !important; font-weight: 800; text-transform: uppercase;
+    transition: 0.3s; text-shadow: 1px 1px 0 #000; text-decoration: none;
 }
 
 .btn:hover {
-    background: var(--neon-cyan);
-    color: var(--nav-dark) !important;
-    text-shadow: none;
-    box-shadow: 0 0 25px var(--neon-cyan);
+    background: var(--neon-cyan); color: var(--nav-dark) !important;
+    text-shadow: none; box-shadow: 0 0 25px var(--neon-cyan);
 }
 
 /* --- MOBILE --- */
 @media (max-width: 768px) {
-    .logo a { font-size: 1.6rem; }
-    .hero-glass-box { clip-path: none; border-radius: 20px; }
-    nav ul { gap: 10px; }
+    .logo a { font-size: 1.5rem; } /* Mniejsze logo w menu */
+    .hero-glass-box { clip-path: none; border-radius: 20px; padding: 30px 15px; }
+    .hero-logo-img { max-width: 250px; } /* Jeszcze mniejszy obrazek na telefonie */
 }
