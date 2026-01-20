@@ -112,8 +112,8 @@ nav ul li a:hover {
     background: rgba(0, 30, 35, 0.85);
     border: 1px solid rgba(0, 229, 255, 0.3);
     padding: 40px; position: relative; transition: 0.4s; 
-    /* Usunięto overflow: hidden, aby kieszenie wystawały */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    /* Box shadow dla głębi stołu */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.4);
     border-radius: 20px;
 }
 
@@ -121,62 +121,65 @@ nav ul li a:hover {
     transform: translateY(-5px); border-color: var(--gold-border);
 }
 
-/* USUNIĘTO STARE ::before DLA POJEDYNCZEGO ROGU */
 
-/* --- STYL KIESZENI BILARDOWYCH (6 SZTUK) --- */
-
-/* Wspólny styl dla wszystkich kieszeni */
+/* --- STYL KIESZENI BILARDOWYCH (POPRAWIONY) --- */
+/* Wspólny styl */
 .offer-item .pocket-tl, .offer-item .pocket-tr,
 .offer-item .pocket-bl, .offer-item .pocket-br,
 .offer-item .pocket-mt, .offer-item .pocket-mb {
     position: absolute;
     border: 4px solid var(--gold-border);
+    background-color: #000; /* Ciemne wnętrze kieszeni */
     z-index: 5;
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
-    pointer-events: none; /* Żeby nie blokowały hovera */
+    box-shadow: inset 0 0 10px rgba(0,0,0,1), 0 0 5px rgba(255, 204, 0, 0.4);
+    pointer-events: none;
 }
 
-/* Narożniki (Top-Left, Top-Right, Bottom-Left, Bottom-Right) */
+/* Narożniki */
 .pocket-tl {
-    top: -4px; left: -4px; width: 45px; height: 45px;
+    top: -6px; left: -6px; width: 50px; height: 50px;
     border-right: none !important; border-bottom: none !important;
-    border-top-left-radius: 20px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 40px; /* Łuk wewnętrzny */
 }
 .pocket-tr {
-    top: -4px; right: -4px; width: 45px; height: 45px;
+    top: -6px; right: -6px; width: 50px; height: 50px;
     border-left: none !important; border-bottom: none !important;
-    border-top-right-radius: 20px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 40px;
 }
 .pocket-bl {
-    bottom: -4px; left: -4px; width: 45px; height: 45px;
+    bottom: -6px; left: -6px; width: 50px; height: 50px;
     border-right: none !important; border-top: none !important;
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 40px;
 }
 .pocket-br {
-    bottom: -4px; right: -4px; width: 45px; height: 45px;
+    bottom: -6px; right: -6px; width: 50px; height: 50px;
     border-left: none !important; border-top: none !important;
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 40px;
 }
 
-/* Środkowe kieszenie (Middle-Top, Middle-Bottom) */
+/* Środkowe kieszenie (Poprawione) */
 .pocket-mt {
-    top: -4px; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 30px;
+    top: -6px; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 35px;
     border-top: none !important;
-    border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 35px; border-bottom-right-radius: 35px;
 }
 .pocket-mb {
-    bottom: -4px; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 30px;
+    bottom: -6px; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 35px;
     border-bottom: none !important;
-    border-top-left-radius: 30px; border-top-right-radius: 30px;
+    border-top-left-radius: 35px; border-top-right-radius: 35px;
 }
 
-
-/* --- ANIMACJA: BILARDOWA ÓSEMKA (bez zmian) --- */
+/* --- NOWA ANIMACJA: WPADANIE DO PRAWEGO DOLNEGO ROGU --- */
 .offer-item::after {
-    content: '8'; position: absolute;
-    top: 10%; left: -60px;
+    content: '8'; 
+    position: absolute;
+    top: 20%; left: -60px; /* Start z lewej */
     width: 44px; height: 44px; border-radius: 50%;
     color: #000; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.3rem;
     display: flex; align-items: center; justify-content: center;
@@ -185,11 +188,34 @@ nav ul li a:hover {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     opacity: 0; pointer-events: none; z-index: 10;
 }
-.offer-item:hover::after { animation: bounceEightBall 3s linear infinite; }
-@keyframes bounceEightBall {
-    0% { top: 10%; left: -60px; opacity: 0; }
-    5% { opacity: 1; } 25% { top: 80%; left: 30%; } 50% { top: 15%; left: 60%; }
-    75% { top: 80%; left: 90%; } 100% { top: 25%; left: 110%; opacity: 0; }
+
+.offer-item:hover::after { 
+    /* Czas: 2.5s - szybciej */
+    animation: pocketEightBall 2.5s ease-in-out forwards; 
+}
+
+@keyframes pocketEightBall {
+    0% { 
+        top: 20%; left: -60px; 
+        opacity: 0; transform: scale(1);
+    }
+    10% { 
+        opacity: 1; 
+    }
+    30% { 
+        top: 80%; left: 30%; /* Odbicie od dolnej bandy */
+    }
+    60% { 
+        top: 15%; left: 60%; /* Odbicie od górnej bandy */
+    }
+    90% {
+        top: 88%; left: 92%; /* Dolot do prawego dolnego rogu */
+        opacity: 1; transform: scale(1);
+    }
+    100% { 
+        top: 92%; left: 95%; /* Wpadnięcie */
+        opacity: 0; transform: scale(0.2); /* Zmniejszenie i zniknięcie */
+    }
 }
 
 .offer-item h2 { 
@@ -227,7 +253,4 @@ nav ul li a:hover {
     .hero-logo-img { max-width: 250px; }
     .hero-section h1 { font-size: 2.5rem; }
     .offer-item h2 { min-height: auto; }
-    /* Na mobile możemy ukryć środkowe kieszenie, jeśli będzie za ciasno */
-    /* .pocket-mt, .pocket-mb { display: none; } */
 }
-
