@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
 :root {
-    --bg-dark: #08080e;
+    /* ZMIANA: Tło rozjaśnione z #08080e na #121220 (głębszy, jaśniejszy granat) */
+    --bg-dark: #121220;
     --neon-cyan: #00e5ff;
     --neon-pink: #ff00cc;
-    --glass-bg: rgba(15, 15, 25, 0.75);
+    --glass-bg: rgba(20, 20, 35, 0.75);
     --glass-border: rgba(0, 229, 255, 0.15);
     --text-main: #f0f0f5;
-    --text-muted: #8a8a9e;
+    --text-muted: #a0a0b0; /* Lekko jaśniejszy kolor wyciszony */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,25 +19,20 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
-    /* Delikatna poświata z góry */
-    background: radial-gradient(circle at 50% -10%, #151525 0%, var(--bg-dark) 70%);
+    /* ZMIANA: Jaśniejszy i szerszy gradient w tle dla lepszej widoczności stempli */
+    background: radial-gradient(circle at 50% 0%, #1f1f3d 0%, var(--bg-dark) 80%);
 }
 
-/* --- SYSTEM STICKER BOMB (WATERMARKS) --- */
+/* --- SYSTEM STICKER BOMB (GĘSTY) --- */
 .sticker-bomb {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    overflow: hidden;
+    position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
 }
 
 .sticker {
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.07; /* Bardzo subtelne jako znak wodny */
-    /* Filtr zmieniający kolory SVG na neonowy błękit strony */
+    position: absolute; background-size: contain; background-repeat: no-repeat;
+    /* ZMIANA: Lekko zwiększona widoczność stempli (z 0.07 na 0.09) */
+    opacity: 0.09;
+    /* Filtr neonowy (błękitny) */
     filter: grayscale(1) brightness(0.5) sepia(1) hue-rotate(140deg) saturate(6);
 }
 
@@ -45,22 +41,35 @@ body {
 .s-kokon { background-image: url('kokon-stamp.svg'); width: 220px; height: 300px; }
 .s-shuffle { background-image: url('shuffle-stamp.svg'); width: 200px; height: 200px; }
 
-/* LOSOWE POZYCJE I OBROTY (STICKER BOMB STYLE) */
-.s-pos-1 { top: 5%; left: -5%; transform: rotate(-15deg); }
-.s-pos-2 { top: 10%; right: -2%; transform: rotate(20deg); width: 350px; }
-.s-pos-3 { top: 40%; left: 45%; transform: rotate(45deg); opacity: 0.04; }
-.s-pos-4 { bottom: 15%; left: 2%; transform: rotate(-25deg); width: 300px; }
-.s-pos-5 { bottom: 5%; right: 5%; transform: rotate(10deg); }
-.s-pos-6 { top: 50%; right: 15%; transform: rotate(-10deg); width: 150px; }
-.s-pos-7 { top: 70%; left: 20%; transform: rotate(35deg); width: 280px; }
-.s-pos-8 { bottom: 40%; right: 40%; transform: rotate(-40deg); opacity: 0.03; }
+/* --- LOSOWE POZYCJE I OBROTY (Stare + Nowe) --- */
+/* Istniejące */
+.s-pos-1 { top: -5%; left: -5%; transform: rotate(-25deg); }
+.s-pos-2 { top: 5%; right: -8%; transform: rotate(30deg); width: 380px; }
+.s-pos-3 { top: 35%; left: 40%; transform: rotate(55deg); opacity: 0.05; }
+.s-pos-4 { bottom: 10%; left: -2%; transform: rotate(-35deg); width: 320px; }
+.s-pos-5 { bottom: -5%; right: 2%; transform: rotate(15deg); }
+.s-pos-6 { top: 55%; right: 10%; transform: rotate(-15deg); width: 180px; }
+.s-pos-7 { top: 65%; left: 15%; transform: rotate(45deg); width: 300px; }
+.s-pos-8 { bottom: 35%; right: 35%; transform: rotate(-50deg); opacity: 0.04; }
 
-/* --- NAWIGACJA --- */
+/* NOWE NAKLEJKI (Dla zagęszczenia) */
+.s-pos-9  { top: 20%; left: 25%; transform: rotate(-10deg); width: 150px; }
+.s-pos-10 { top: 15%; right: 30%; transform: rotate(20deg); width: 280px; }
+.s-pos-11 { top: 45%; left: 5%; transform: rotate(-60deg); width: 220px; }
+.s-pos-12 { bottom: 50%; right: 5%; transform: rotate(5deg); width: 260px; }
+.s-pos-13 { bottom: 25%; left: 35%; transform: rotate(-30deg); opacity: 0.06; }
+.s-pos-14 { top: -2%; left: 40%; transform: rotate(180deg); width: 190px; }
+.s-pos-15 { bottom: -10%; left: 50%; transform: rotate(90deg); width: 350px; }
+.s-pos-16 { top: 30%; right: -5%; transform: rotate(-45deg); }
+.s-pos-17 { bottom: 5%; left: -10%; transform: rotate(70deg); width: 200px;}
+.s-pos-18 { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(15deg); width: 400px; opacity: 0.03; }
+
+
+/* --- RESZTA STYLI (Bez zmian) --- */
 header {
     position: sticky; top: 0; z-index: 1000; padding: 15px 0;
-    background: rgba(8, 8, 14, 0.9);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+    background: rgba(18, 18, 32, 0.85); /* Dopasowane do nowego tła */
+    backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 229, 255, 0.1);
 }
 
 nav {
@@ -84,7 +93,6 @@ nav ul li a:hover, nav ul li a.active {
     color: var(--neon-cyan); background: rgba(0, 229, 255, 0.08);
 }
 
-/* --- HERO --- */
 .hero-section { text-align: center; padding: 100px 20px 60px; }
 .hero-logo-img {
     max-width: 280px; margin-bottom: 25px;
@@ -103,7 +111,6 @@ nav ul li a:hover, nav ul li a.active {
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
-/* --- PRZYCISKI --- */
 .btn {
     display: inline-block; margin-top: 35px;
     background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
@@ -115,7 +122,6 @@ nav ul li a:hover, nav ul li a.active {
 .btn-glow { box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); }
 .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
 
-/* --- KARTY --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
 
