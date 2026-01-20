@@ -1,4 +1,4 @@
-/* --- 1. IMPORT CZCIONEK (Pełne wsparcie PL znaków) --- */
+/* --- 1. IMPORT CZCIONEK --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
 /* --- 2. ZMIENNE --- */
@@ -11,7 +11,7 @@
     --text-main: #e2e8f0;
 }
 
-/* --- 3. TŁO ZE STEMPLAMI (Użycie bilard-stamp.svg) --- */
+/* --- 3. TŁO ZE STEMPLAMI (Wersja zagęszczona) --- */
 body {
     margin: 0;
     font-family: 'Outfit', sans-serif;
@@ -20,32 +20,33 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     
-    /* Nakładamy plik bilard-stamp.svg wielokrotnie w różnych miejscach */
+    /* Wiele warstw teł dla efektu "dużo i losowo" */
     background-image: 
         url('bilard-stamp.svg'), 
         url('shuffle-stamp.svg'), 
-        url('kokon-stamp.svg'), 
-        url('bilard-stamp.svg');
+        url('kokon-stamp.svg'),
+        url('bilard-stamp.svg'),
+        url('shuffle-stamp.svg'),
+        url('kokon-stamp.svg');
     
-    /* Różne rozmiary dla efektu głębi */
-    background-size: 180px, 120px, 250px, 150px;
+    /* Różne rozmiary dla dynamiki */
+    background-size: 150px, 120px, 200px, 100px, 180px, 130px;
     
-    /* Różne pozycje (losowy układ) */
+    /* Rozmieszczenie po całej stronie */
     background-position: 
-        10% 15%, 
-        85% 10%, 
-        30% 80%, 
-        90% 70%;
+        5% 15%,   /* Bilard lewa góra */
+        90% 10%,  /* Shuffle prawa góra */
+        15% 85%,  /* Kokon lewy dół */
+        85% 90%,  /* Bilard prawy dół */
+        50% 50%,  /* Shuffle środek */
+        75% 45%;  /* Kokon prawy środek */
         
     background-repeat: no-repeat;
     background-attachment: fixed;
-    
-    /* Subtelność stempli - żeby nie zasłaniały tekstu */
-    /* Jeśli plik SVG jest zbyt jaskrawy, filtr go przyciemni */
-    filter: none; 
+    filter: none;
 }
 
-/* --- 4. NAWIGACJA (Szklany pasek) --- */
+/* --- 4. NAWIGACJA --- */
 header {
     position: sticky;
     top: 0;
@@ -93,23 +94,30 @@ nav ul li a:hover {
     color: var(--neon-cyan);
 }
 
-/* --- 5. SEKCJA HERO (Główne uderzenie) --- */
+/* --- 5. SEKCJA HERO --- */
 .hero-section {
     text-align: center;
-    padding: 100px 20px;
-    position: relative;
+    padding: 80px 20px;
 }
 
-/* Duże logo na środku strony */
 .hero-logo-img {
-    height: 120px;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 20px var(--neon-cyan));
+    height: 140px; /* Nieco większe logo */
+    width: auto;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
+}
+
+.hero-logo {
+    font-family: 'Baloo 2', cursive;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--neon-cyan);
+    margin-bottom: 5px;
 }
 
 .hero-section h1 {
     font-family: 'Baloo 2', cursive;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-size: clamp(2rem, 6vw, 3.5rem);
     background: linear-gradient(to right, #fff, var(--neon-cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -121,7 +129,7 @@ nav ul li a:hover {
     display: inline-block;
     background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
     color: white !important;
-    padding: 18px 40px;
+    padding: 16px 40px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 800;
@@ -135,7 +143,7 @@ nav ul li a:hover {
     box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
 }
 
-/* --- 7. SZKLANE KARTY --- */
+/* --- 7. SIATKA I KARTY --- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -169,7 +177,7 @@ nav ul li a:hover {
 
 .offer-item h2 {
     font-family: 'Baloo 2', cursive;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 15px;
 }
 
@@ -178,13 +186,14 @@ nav ul li a:hover {
     text-decoration: none;
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    margin-top: 15px;
 }
 
 /* --- 8. STOPKA --- */
 footer {
     text-align: center;
-    padding: 40px;
+    padding: 60px;
     opacity: 0.6;
     font-size: 0.9rem;
 }
@@ -192,5 +201,6 @@ footer {
 /* --- 9. MOBILE --- */
 @media (max-width: 768px) {
     nav { flex-direction: column; gap: 15px; }
-    .hero-section { padding: 60px 20px; }
+    .hero-logo { font-size: 2.5rem; }
+    .hero-logo-img { height: 100px; }
 }
