@@ -1,61 +1,95 @@
 /* --- 1. IMPORT CZCIONEK --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- 2. ZMIENNE --- */
+/* --- 2. NOWA PALETA KOLORÓW (Inspirowana logo) --- */
 :root {
-    --bg-dark: #05070a;
-    --neon-cyan: #00f2ff;
-    --neon-purple: #7000ff;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-main: #e2e8f0;
+    --bg-dark: #0a0a12; /* Głęboka, chłodna czerń */
+    --bg-darker: #050508;
+    
+    /* Główne neony */
+    --neon-cyan: #00e5ff; /* Intensywny błękit z logo */
+    --neon-pink: #ff00cc; /* Magenta do akcentów */
+    
+    /* Szkło */
+    --glass-bg: rgba(20, 20, 35, 0.7); /* Ciemniejsze szkło */
+    --glass-border: rgba(0, 229, 255, 0.15); /* Subtelna błękitna ramka */
+    
+    /* Tekst */
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0b0;
 }
 
-/* --- 3. TŁO ZE STEMPLAMI (Wersja zagęszczona) --- */
-body {
+/* --- 3. RESET I BAZA --- */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
-    
-    /* Wiele warstw teł dla efektu "dużo i losowo" */
-    background-image: 
-        url('bilard-stamp.svg'), 
-        url('shuffle-stamp.svg'), 
-        url('kokon-stamp.svg'),
-        url('bilard-stamp.svg'),
-        url('shuffle-stamp.svg'),
-        url('kokon-stamp.svg');
-    
-    /* Różne rozmiary dla dynamiki */
-    background-size: 150px, 120px, 200px, 100px, 180px, 130px;
-    
-    /* Rozmieszczenie po całej stronie */
-    background-position: 
-        5% 15%,   /* Bilard lewa góra */
-        90% 10%,  /* Shuffle prawa góra */
-        15% 85%,  /* Kokon lewy dół */
-        85% 90%,  /* Bilard prawy dół */
-        50% 50%,  /* Shuffle środek */
-        75% 45%;  /* Kokon prawy środek */
-        
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    filter: none;
+    position: relative;
+    /* Subtelny gradient w tle głównym */
+    background: radial-gradient(circle at top center, #1a1a2e 0%, var(--bg-dark) 60%);
 }
 
-/* --- 4. NAWIGACJA --- */
+/* --- 4. TŁO ZE STEMPLAMI (WATERMARKS) - POPRAWIONE --- */
+/* Używamy pseudoelementu ::before, aby oddzielić tło od treści */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Musi być pod treścią */
+    pointer-events: none;
+
+    /* DUŻO STEMPLI rozmieszczonych losowo */
+    background-image: 
+        url('bilard-stamp.svg'), url('kokon-stamp.svg'), url('shuffle-stamp.svg'),
+        url('bilard-stamp.svg'), url('kokon-stamp.svg'), url('shuffle-stamp.svg'),
+        url('bilard-stamp.svg'), url('kokon-stamp.svg');
+        
+    /* Różne rozmiary dla efektu głębi */
+    background-size: 
+        300px, 250px, 280px,
+        180px, 220px, 150px,
+        400px, 350px;
+        
+    /* Losowe pozycje */
+    background-position: 
+        -5% 5%, 105% 10%, 50% -5%,
+        10% 80%, 90% 75%, 45% 95%,
+        -10% 40%, 110% 50%;
+        
+    background-repeat: no-repeat;
+    
+    /* KLUCZOWE: Filtry zmieniające kolorowe SVG w subtelny, błękitny znak wodny */
+    filter: grayscale(100%) brightness(0.4) sepia(1) hue-rotate(130deg) saturate(5);
+    opacity: 0.15; /* Bardzo niska przezroczystość */
+    mix-blend-mode: screen; /* Ładne wtapianie w ciemne tło */
+}
+
+
+/* --- 5. NAWIGACJA --- */
 header {
     position: sticky;
     top: 0;
-    background: rgba(5, 7, 10, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--glass-border);
+    background: rgba(10, 10, 18, 0.9); /* Ciemniejsze tło nawigacji */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
     z-index: 1000;
-    padding: 12px 0;
+    padding: 15px 0;
 }
 
 nav {
@@ -69,139 +103,212 @@ nav {
 
 .logo a {
     font-family: 'Baloo 2', cursive;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 800;
     color: var(--neon-cyan) !important;
     text-decoration: none;
-    text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+    /* Mocniejszy, podwójny cień dla efektu neonu */
+    text-shadow: 
+        0 0 5px rgba(0, 229, 255, 0.8),
+        0 0 20px rgba(0, 229, 255, 0.4);
+    transition: 0.3s;
+}
+
+.logo a:hover {
+    text-shadow: 0 0 30px var(--neon-cyan);
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: white;
-    font-weight: 600;
-    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 15px;
+    border-radius: 8px;
     transition: 0.3s;
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active {
     color: var(--neon-cyan);
+    background: rgba(0, 229, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
 }
 
-/* --- 5. SEKCJA HERO --- */
+/* --- 6. SEKCJA HERO --- */
 .hero-section {
     text-align: center;
-    padding: 80px 20px;
+    padding: 120px 20px 80px;
+    position: relative;
 }
 
+/* Główne logo obrazkowe */
 .hero-logo-img {
-    height: 140px; /* Nieco większe logo */
-    width: auto;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
+    max-width: 280px; /* Optymalny rozmiar */
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    /* Neonowa poświata wokół obrazka */
+    filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.5));
+    animation: float 6s ease-in-out infinite;
 }
 
-.hero-logo {
-    font-family: 'Baloo 2', cursive;
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--neon-cyan);
-    margin-bottom: 5px;
+/* Animacja pływania logo */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .hero-section h1 {
     font-family: 'Baloo 2', cursive;
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 15px;
+    /* Gradientowy tekst */
     background: linear-gradient(to right, #fff, var(--neon-cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
+    line-height: 1.2;
 }
 
-/* --- 6. PRZYCISKI --- */
+.hero-section p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+/* --- 7. PRZYCISKI (Nowy gradient) --- */
 .btn {
     display: inline-block;
-    background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
-    color: white !important;
-    padding: 16px 40px;
+    /* Gradient z nowych kolorów (cyjan -> róż) */
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+    color: #fff !important;
+    padding: 18px 45px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 800;
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
-    transition: 0.3s;
-    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-glow {
+    box-shadow: 
+        0 0 20px rgba(0, 229, 255, 0.4),
+        0 0 40px rgba(255, 0, 204, 0.2);
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 0 30px rgba(0, 229, 255, 0.6),
+        0 0 60px rgba(255, 0, 204, 0.4);
 }
 
-/* --- 7. SIATKA I KARTY --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+/* --- 8. KARTY (Poprawione szkło) --- */
+.section-offers {
+    padding-bottom: 80px;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
 }
 
 .offer-item {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 40px;
+    backdrop-filter: blur(25px); /* Mocniejsze rozmycie */
+    -webkit-backdrop-filter: blur(25px);
+    padding: 50px 40px;
     border-radius: 30px;
-    transition: 0.4s;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
 }
 
-.offer-item:hover {
+/* Efekt poświaty po najechaniu na kartę */
+.box-glow:hover {
     transform: translateY(-10px);
     border-color: var(--neon-cyan);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 40px -15px rgba(0, 229, 255, 0.3);
+}
+
+/* Ozdobny gradient na górze karty */
+.box-glow::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--neon-cyan), var(--neon-pink));
+    opacity: 0.7;
 }
 
 .offer-item h2 {
     font-family: 'Baloo 2', cursive;
     font-size: 2.2rem;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.offer-item p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
 }
 
 .more-link {
+    margin-top: 30px;
     color: var(--neon-cyan);
     text-decoration: none;
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    margin-top: 15px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    transition: 0.3s;
 }
 
-/* --- 8. STOPKA --- */
+.more-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* --- 9. STOPKA --- */
 footer {
     text-align: center;
-    padding: 60px;
-    opacity: 0.6;
+    padding: 60px 20px;
+    color: var(--text-muted);
     font-size: 0.9rem;
+    background: var(--bg-darker);
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-/* --- 9. MOBILE --- */
+/* --- 10. MOBILE --- */
 @media (max-width: 768px) {
-    nav { flex-direction: column; gap: 15px; }
-    .hero-logo { font-size: 2.5rem; }
-    .hero-logo-img { height: 100px; }
+    nav { flex-direction: column; gap: 20px; padding: 20px; }
+    nav ul { flex-wrap: wrap; justify-content: center; }
+    .hero-section { padding: 80px 20px 40px; }
+    .hero-logo-img { max-width: 220px; }
+    .grid { grid-template-columns: 1fr; }
 }
-
