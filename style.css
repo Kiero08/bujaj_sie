@@ -3,11 +3,11 @@
 
 /* --- 2. PALETA KOLORÓW --- */
 :root {
-    --deep-teal: #006064;     /* Rozjaśniony morski */
-    --gold: #ffcc00;          /* Złoto */
+    --deep-teal: #006064;     /* Baza tła */
+    --gold: #ffcc00;          /* Podstawowe złoto */
     --neon-cyan: #00e5ff;     /* Cyjan */
-    --nav-dark: #001a1d;      /* Ciemny pasek nawigacji */
-    --glass-bg: rgba(0, 70, 75, 0.7); /* Bardziej kryjące tło boksu */
+    --nav-dark: #001a1d;      /* Ciemny pasek */
+    --card-dark: #002529;     /* Bardzo ciemne tło kart */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,10 +19,10 @@ body {
     background-color: var(--deep-teal);
     overflow-x: hidden;
     
-    /* --- CZYSTE, JAŚNIEJSZE TŁO (Bez kratki) --- */
+    /* TŁO: Czysty gradient */
     background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.2) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.15) 0px, transparent 50%),
         linear-gradient(180deg, #00838f 0%, #004d50 100%);
     background-attachment: fixed;
 }
@@ -42,8 +42,14 @@ nav {
 
 .logo a {
     font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800;
-    color: var(--gold) !important; text-decoration: none;
-    text-shadow: 1px 1px 0 #000;
+    text-decoration: none;
+    /* EFEKT METALICZNEGO ZŁOTA */
+    background: linear-gradient(to bottom, #cfc09f 22%, #ffecb3 24%, #3a2c0f 26%, #997f43 27%, #ffcc00 40%, #f7f0c6 78%); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #ffcc00;
+    text-shadow: 0px 0px 0px rgba(255,255,255,0); /* Reset cienia dla clip-text */
+    filter: drop-shadow(1px 1px 0 #000); /* Cień zewnętrzny */
 }
 
 nav ul { list-style: none; display: flex; gap: 20px; }
@@ -51,123 +57,140 @@ nav ul li a {
     text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem;
     padding: 8px 12px; transition: 0.3s; border-radius: 4px;
 }
-
 nav ul li a:hover {
     background: rgba(0, 229, 255, 0.15); color: var(--gold);
 }
 
-/* --- HERO SECTION (NAPRAWA) --- */
+/* --- WSPÓLNY STYL DLA ZŁOTYCH OKUĆ (Narożników) --- */
+.gold-corner-box {
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.15); /* Subtelna ramka reszty */
+}
+
+/* To tworzy "Okucie" w lewym górnym rogu */
+.gold-corner-box::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px; /* Pozycjonowanie na krawędzi */
+    width: 40px; height: 40px; /* Wielkość okucia */
+    border-top: 4px solid var(--gold);
+    border-left: 4px solid var(--gold);
+    z-index: 5;
+    box-shadow: -2px -2px 10px rgba(255, 204, 0, 0.3); /* Złota poświata rogu */
+}
+
+/* --- HERO SECTION --- */
 .hero-section { 
-    padding: 60px 20px; /* Zmniejszony padding */
-    display: flex; justify-content: center;
-    align-items: center;
+    padding: 60px 20px; display: flex; justify-content: center; align-items: center;
 }
 
 .hero-glass-box {
-    background: var(--glass-bg);
-    /* Asymetryczne cięcie */
-    clip-path: polygon(4% 0%, 100% 0%, 100% 92%, 96% 100%, 0% 100%, 0% 8%);
-    border: 2px solid var(--neon-cyan);
-    /* Ważne: Flexbox układa elementy pionowo i centruje */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
+    /* Zastosowanie klasy okucia w HTML, tutaj style bazowe */
+    background: rgba(0, 40, 45, 0.6); /* Ciemniejsze szkło */
     padding: 50px 30px;
-    width: 100%;
-    max-width: 900px;
-    position: relative;
+    width: 100%; max-width: 900px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     backdrop-filter: blur(15px);
+    border-radius: 4px; /* Lekkie zaokrąglenie, ale rogi ostre dla okucia */
 }
 
-/* Celowniki */
-.hero-glass-box::before {
-    content: '['; position: absolute; top: 10px; left: 10px; color: var(--gold); font-size: 2rem; line-height: 1;
-}
-.hero-glass-box::after {
-    content: ']'; position: absolute; bottom: 10px; right: 10px; color: var(--gold); font-size: 2rem; line-height: 1;
-}
-
-/* --- KLUCZOWA POPRAWKA OBRAZKA --- */
 .hero-logo-img {
-    /* Ograniczenie wielkości */
-    max-width: 350px; 
-    width: 100%; 
-    height: auto;
-    margin-bottom: 20px;
-    
-    /* Zabezpieczenie przed wychodzeniem */
-    object-fit: contain; 
-    
+    max-width: 350px; width: 100%; height: auto; margin-bottom: 20px;
+    object-fit: contain;
     filter: drop-shadow(0 0 15px var(--neon-cyan));
-    transform-origin: top center; 
-    animation: swing 5s ease-in-out infinite;
+    transform-origin: top center; animation: swing 5s ease-in-out infinite;
 }
+@keyframes swing { 0% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-3deg); } }
 
-@keyframes swing {
-    0% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-3deg); }
-}
-
+/* H1 - METALICZNE ZŁOTO */
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(2rem, 5vw, 3.5rem);
-    color: var(--gold);
-    text-shadow: 2px 2px 0 #000;
-    margin-bottom: 10px;
-    text-align: center;
-    line-height: 1.2;
+    font-family: 'Baloo 2', cursive; font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 10px; text-align: center; line-height: 1.2;
+    
+    /* Gradient imitujący połysk metalu */
+    background: linear-gradient(45deg, #FFD700 0%, #FDB931 25%, #FFFFE0 50%, #FDB931 75%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 2px 0 #000);
 }
 
 .hero-section p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    text-align: center;
-    letter-spacing: 2px;
+    font-size: 1.1rem; margin-bottom: 30px; text-align: center; letter-spacing: 2px;
 }
 
-/* --- KARTY --- */
+/* --- KARTY OFERTY --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .offer-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 229, 255, 0.3);
-    padding: 40px; position: relative; transition: 0.4s; overflow: hidden;
+    /* CIEMNIEJSZE TŁO KART */
+    background-color: var(--card-dark);
+    padding: 40px; 
+    transition: 0.3s; 
+    overflow: hidden; /* Ważne dla przelatującego krążka */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .offer-item:hover {
-    background: rgba(0, 229, 255, 0.1); transform: translateY(-5px); border-color: var(--gold);
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
+/* ANIMACJA: PRZELATUJĄCY KRĄŻEK (PUCK) */
+.offer-item::after {
+    content: '';
+    position: absolute;
+    top: 50%; 
+    left: -100px; /* Start poza ekranem z lewej */
+    width: 60px; height: 10px; /* Spłaszczony krążek w ruchu */
+    background: radial-gradient(circle, #fff, var(--neon-cyan));
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--neon-cyan);
+    opacity: 0.8;
+    transform: translateY(-50%);
+    transition: none; /* Reset tranzycji dla animacji */
+}
+
+/* Wyzwolenie animacji po najechaniu */
 .offer-item:hover::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-    background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan);
-    animation: scan 2s linear infinite;
+    animation: shootPuck 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+@keyframes shootPuck {
+    0% { left: -100px; opacity: 0; width: 100px; }
+    10% { opacity: 1; }
+    100% { left: 120%; opacity: 0; width: 60px; } /* Wylatuje na prawo */
+}
 
+/* H2 - METALICZNE ZŁOTO */
 .offer-item h2 { 
-    font-family: 'Baloo 2', cursive; font-size: 2rem; color: var(--gold);
-    text-shadow: 1px 1px 0 #000; margin-bottom: 15px;
+    font-family: 'Baloo 2', cursive; font-size: 2rem; 
+    margin-bottom: 15px;
+    
+    background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 0 #000);
 }
+
+.offer-item p { color: #ccc; line-height: 1.6; }
 
 /* --- PRZYCISK --- */
 .btn {
     display: inline-block; padding: 16px 45px;
     background: transparent; border: 2px solid var(--neon-cyan);
     color: var(--gold) !important; font-weight: 800; text-transform: uppercase;
-    transition: 0.3s; text-shadow: 1px 1px 0 #000; text-decoration: none;
+    transition: 0.3s; text-decoration: none;
+    text-shadow: 1px 1px 0 #000;
 }
-
 .btn:hover {
-    background: var(--neon-cyan); color: var(--nav-dark) !important;
+    background: var(--neon-cyan); color: #000 !important;
     text-shadow: none; box-shadow: 0 0 25px var(--neon-cyan);
 }
 
 /* --- MOBILE --- */
 @media (max-width: 768px) {
-    .logo a { font-size: 1.5rem; } /* Mniejsze logo w menu */
-    .hero-glass-box { clip-path: none; border-radius: 20px; padding: 30px 15px; }
-    .hero-logo-img { max-width: 250px; } /* Jeszcze mniejszy obrazek na telefonie */
+    .logo a { font-size: 1.5rem; }
+    .hero-logo-img { max-width: 250px; }
 }
