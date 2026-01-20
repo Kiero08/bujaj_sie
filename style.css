@@ -1,12 +1,14 @@
 /* --- 1. IMPORT CZCIONEK --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- 2. ZMIENNE KOLORYSTYCZNE --- */
+/* --- 2. NOWA PALETA KOLORÓW (Żółty, Cyjan, Niebieski) --- */
 :root {
-    --bg-dark-overlay: rgba(10, 10, 20, 0.88);
+    --neon-yellow: #fff000;
     --neon-cyan: #00e5ff;
-    --neon-pink: #ff00cc;
-    --glass-bg: rgba(25, 25, 40, 0.65);
+    --neon-blue: #0044ff;
+    
+    --bg-dark: #0a0a14;
+    --glass-bg: rgba(15, 15, 25, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
     --text-main: #f0f0f5;
     --text-muted: #aab0c0;
@@ -20,20 +22,19 @@ body {
     font-family: 'Outfit', sans-serif;
     color: var(--text-main);
     min-height: 100vh;
-    background-color: #0a0a14;
+    background-color: var(--bg-dark);
     overflow-x: hidden;
 
-    /* --- SKALOWALNE TŁO --- */
+    /* --- NOWOCZESNY MESH GRADIENT (Żółty + Cyjan + Niebieski) --- */
+    /* Tworzymy "plamy" światła w różnych rogach strony */
     background-image: 
-        radial-gradient(circle at 90% 90%, rgba(255, 0, 204, 0.15), transparent 50%),
-        radial-gradient(circle at 10% 10%, rgba(0, 229, 255, 0.15), transparent 50%),
-        linear-gradient(var(--bg-dark-overlay), var(--bg-dark-overlay)),
-        url('tlo.png');
+        radial-gradient(at 0% 0%, rgba(255, 240, 0, 0.15) 0px, transparent 50%),  /* Żółty lewy górny */
+        radial-gradient(at 100% 0%, rgba(0, 229, 255, 0.15) 0px, transparent 50%), /* Cyjan prawy górny */
+        radial-gradient(at 100% 100%, rgba(0, 68, 255, 0.2) 0px, transparent 50%), /* Niebieski prawy dolny */
+        radial-gradient(at 0% 100%, rgba(255, 240, 0, 0.1) 0px, transparent 50%),  /* Żółty lewy dolny */
+        linear-gradient(180deg, #0a0a14 0%, #12122b 100%); /* Baza: głęboki granat */
     
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed; /* Paralaksa na desktopie */
+    background-attachment: fixed;
 }
 
 /* --- NAWIGACJA --- */
@@ -41,7 +42,7 @@ header {
     position: sticky; top: 0; z-index: 1000; padding: 15px 0;
     background: rgba(10, 10, 20, 0.85);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
 }
 
 nav {
@@ -52,7 +53,8 @@ nav {
 .logo a {
     font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800;
     color: var(--neon-cyan) !important; text-decoration: none;
-    text-shadow: 0 0 10px rgba(0, 225, 255, 0.6), 0 0 30px rgba(255, 0, 204, 0.3);
+    /* Neonowa poświata łącząca kolory */
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-blue);
 }
 
 nav ul { list-style: none; display: flex; gap: 10px; }
@@ -62,43 +64,43 @@ nav ul li a {
     padding: 8px 12px; border-radius: 8px; transition: 0.3s;
 }
 
-nav ul li a:hover, nav ul li a.active {
-    color: var(--neon-cyan); background: rgba(0, 229, 255, 0.1);
-}
+nav ul li a:hover { color: var(--neon-yellow); background: rgba(255, 240, 0, 0.05); }
 
 /* --- HERO SECTION --- */
-.hero-section { text-align: center; padding: 100px 20px 60px; }
+.hero-section { text-align: center; padding: 80px 20px 40px; }
 
 .hero-logo-img {
-    max-width: 560px; width: 90%; margin-bottom: 30px;
-    filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.4)) drop-shadow(0 0 40px rgba(255, 0, 204, 0.2));
+    max-width: 560px; width: 95%; margin-bottom: 30px;
+    filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3)) drop-shadow(0 0 40px rgba(255, 240, 0, 0.2));
     transform-origin: top center; animation: swing 4s ease-in-out infinite;
 }
 
 @keyframes swing {
-    0% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } 100% { transform: rotate(-5deg); }
+    0% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); }
 }
 
 .hero-section h1 {
     font-family: 'Baloo 2', cursive; font-size: clamp(2.5rem, 6vw, 4.5rem);
     margin-bottom: 15px;
-    background: linear-gradient(to right, var(--neon-cyan), var(--neon-pink));
+    /* GRADIENT NA TEKŚCIE: Żółty -> Cyjan */
+    background: linear-gradient(to right, var(--neon-yellow), var(--neon-cyan));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
 /* --- PRZYCISKI --- */
 .btn {
     display: inline-block; margin-top: 40px;
-    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+    /* Przycisk w kolorach Cyjan -> Niebieski */
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
     color: #fff !important; padding: 18px 50px; border-radius: 50px;
     text-decoration: none; font-weight: 800; text-transform: uppercase; 
-    letter-spacing: 1px; transition: all 0.3s ease; border: none;
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 40px rgba(255, 0, 204, 0.3);
+    transition: all 0.3s ease; border: none;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
 }
 
 .btn:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 229, 255, 0.7), 0 0 80px rgba(255, 0, 204, 0.5);
+    box-shadow: 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-blue);
 }
 
 /* --- GRID I KARTY --- */
@@ -107,43 +109,35 @@ nav ul li a:hover, nav ul li a.active {
 
 .offer-item {
     background: var(--glass-bg); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-    padding: 50px 40px; border-radius: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+    padding: 50px 40px; border-radius: 40px;
     transition: all 0.4s ease;
-    position: relative; overflow: hidden;
 }
 
 .offer-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px -10px rgba(0, 229, 255, 0.4), 0 30px 70px -20px rgba(255, 0, 204, 0.3);
+    transform: translateY(-12px);
+    /* Poświata karty w kolorze żółtym i niebieskim */
+    box-shadow: 0 20px 50px -10px rgba(255, 240, 0, 0.2), 0 30px 60px -20px rgba(0, 68, 255, 0.3);
     border-color: var(--neon-cyan);
 }
 
 .offer-item h2 {
     font-family: 'Baloo 2', cursive; font-size: 2.2rem; margin-bottom: 15px;
-    background: linear-gradient(to right, #fff, var(--neon-cyan));
+    background: linear-gradient(to right, var(--neon-yellow), #fff);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
 /* --- STOPKA --- */
-footer { text-align: center; padding: 60px; color: var(--text-muted); font-size: 0.9rem; }
+footer { text-align: center; padding: 80px 20px; color: var(--text-muted); font-size: 0.9rem; }
 
-/* --- 10. MOBILNA OPTYMALIZACJA TŁA I INTERFEJSU --- */
+/* --- MOBILNA OPTYMALIZACJA --- */
 @media (max-width: 768px) {
     body {
-        /* Wyłączenie fixed na mobile zapobiega błędom renderowania i zoomowania */
+        /* Uproszczenie gradientu na mobile dla płynności */
         background-attachment: scroll;
-        /* Upewnienie się, że środek zdjęcia jest zawsze widoczny */
-        background-position: center top;
+        background-image: linear-gradient(180deg, #12122b 0%, #0a0a14 100%);
     }
-
     nav { flex-direction: column; gap: 15px; }
-    nav ul { flex-wrap: wrap; justify-content: center; }
-    
-    .hero-section { padding: 60px 20px; }
-    .hero-logo-img { max-width: 420px; } /* Rozmiar dopasowany do telefonów */
-
-    .grid { gap: 25px; }
-    .offer-item { padding: 35px 25px; }
+    .hero-logo-img { max-width: 440px; }
 }
