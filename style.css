@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
 :root {
-    /* ZMIANA: Tło rozjaśnione z #08080e na #121220 (głębszy, jaśniejszy granat) */
     --bg-dark: #121220;
     --neon-cyan: #00e5ff;
     --neon-pink: #ff00cc;
     --glass-bg: rgba(20, 20, 35, 0.75);
     --glass-border: rgba(0, 229, 255, 0.15);
     --text-main: #f0f0f5;
-    --text-muted: #a0a0b0; /* Lekko jaśniejszy kolor wyciszony */
+    --text-muted: #a0a0b0;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,30 +18,25 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
-    /* ZMIANA: Jaśniejszy i szerszy gradient w tle dla lepszej widoczności stempli */
     background: radial-gradient(circle at 50% 0%, #1f1f3d 0%, var(--bg-dark) 80%);
 }
 
-/* --- SYSTEM STICKER BOMB (GĘSTY) --- */
+/* --- SYSTEM STICKER BOMB --- */
 .sticker-bomb {
     position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
 }
 
 .sticker {
     position: absolute; background-size: contain; background-repeat: no-repeat;
-    /* ZMIANA: Lekko zwiększona widoczność stempli (z 0.07 na 0.09) */
     opacity: 0.09;
-    /* Filtr neonowy (błękitny) */
     filter: grayscale(1) brightness(0.5) sepia(1) hue-rotate(140deg) saturate(6);
 }
 
-/* Typy naklejek */
 .s-bilard { background-image: url('bilard-stamp.svg'); width: 250px; height: 250px; }
 .s-kokon { background-image: url('kokon-stamp.svg'); width: 220px; height: 300px; }
 .s-shuffle { background-image: url('shuffle-stamp.svg'); width: 200px; height: 200px; }
 
-/* --- LOSOWE POZYCJE I OBROTY (Stare + Nowe) --- */
-/* Istniejące */
+/* Pozycje stempli (bez zmian) */
 .s-pos-1 { top: -5%; left: -5%; transform: rotate(-25deg); }
 .s-pos-2 { top: 5%; right: -8%; transform: rotate(30deg); width: 380px; }
 .s-pos-3 { top: 35%; left: 40%; transform: rotate(55deg); opacity: 0.05; }
@@ -51,8 +45,6 @@ body {
 .s-pos-6 { top: 55%; right: 10%; transform: rotate(-15deg); width: 180px; }
 .s-pos-7 { top: 65%; left: 15%; transform: rotate(45deg); width: 300px; }
 .s-pos-8 { bottom: 35%; right: 35%; transform: rotate(-50deg); opacity: 0.04; }
-
-/* NOWE NAKLEJKI (Dla zagęszczenia) */
 .s-pos-9  { top: 20%; left: 25%; transform: rotate(-10deg); width: 150px; }
 .s-pos-10 { top: 15%; right: 30%; transform: rotate(20deg); width: 280px; }
 .s-pos-11 { top: 45%; left: 5%; transform: rotate(-60deg); width: 220px; }
@@ -64,11 +56,10 @@ body {
 .s-pos-17 { bottom: 5%; left: -10%; transform: rotate(70deg); width: 200px;}
 .s-pos-18 { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(15deg); width: 400px; opacity: 0.03; }
 
-
-/* --- RESZTA STYLI (Bez zmian) --- */
+/* --- NAWIGACJA --- */
 header {
     position: sticky; top: 0; z-index: 1000; padding: 15px 0;
-    background: rgba(18, 18, 32, 0.85); /* Dopasowane do nowego tła */
+    background: rgba(18, 18, 32, 0.85);
     backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 229, 255, 0.1);
 }
 
@@ -93,20 +84,30 @@ nav ul li a:hover, nav ul li a.active {
     color: var(--neon-cyan); background: rgba(0, 229, 255, 0.08);
 }
 
+/* --- HERO (ZAKTUALIZOWANE LOGO) --- */
 .hero-section { text-align: center; padding: 100px 20px 60px; }
+
 .hero-logo-img {
-    max-width: 280px; margin-bottom: 25px;
-    filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.4));
-    animation: float 5s ease-in-out infinite;
+    /* ZMIANA: 2x większe (z 280px na 560px) */
+    max-width: 560px; 
+    width: 90%; /* Zapewnia responsywność na małych ekranach */
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.5));
+    
+    /* ZMIANA: Animacja huśtania */
+    transform-origin: top center; /* Punkt obrotu na górze obrazka */
+    animation: swing 4s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+/* NOWA ANIMACJA: Huśtanie (jak wiszący fotel) */
+@keyframes swing {
+    0% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+    100% { transform: rotate(-6deg); }
 }
 
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(2rem, 5vw, 3.5rem);
+    font-family: 'Baloo 2', cursive; font-size: clamp(2.2rem, 6vw, 4rem);
     background: linear-gradient(to right, #fff, var(--neon-cyan));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
@@ -147,5 +148,6 @@ footer { text-align: center; padding: 60px; opacity: 0.5; font-size: 0.9rem; }
 
 @media (max-width: 768px) {
     nav { flex-direction: column; }
-    .hero-logo-img { max-width: 200px; }
+    /* ZMIANA: Na telefonach max 400px (2x więcej niż poprzednie 200px) */
+    .hero-logo-img { max-width: 400px; } 
 }
