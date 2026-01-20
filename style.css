@@ -110,28 +110,29 @@ nav ul li a:hover {
 
 .offer-item {
     background: rgba(0, 30, 35, 0.85);
-    border: 1px solid rgba(0, 229, 255, 0.3);
+    /* Zwiększamy lekko ramkę kontenera, żeby kieszenie lepiej pasowały */
+    border: 3px solid #001a1d; 
     padding: 40px; position: relative; transition: 0.4s; 
-    /* Box shadow dla głębi stołu */
     box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.4);
     border-radius: 20px;
 }
 
 .offer-item:hover {
-    transform: translateY(-5px); border-color: var(--gold-border);
+    transform: translateY(-5px); 
+    /* Po najechaniu ramka stołu robi się złota */
+    border-color: var(--gold-border);
 }
 
 
-/* --- STYL KIESZENI BILARDOWYCH (POPRAWIONY) --- */
-/* Wspólny styl */
+/* --- STYL KIESZENI BILARDOWYCH --- */
 .offer-item .pocket-tl, .offer-item .pocket-tr,
 .offer-item .pocket-bl, .offer-item .pocket-br,
 .offer-item .pocket-mt, .offer-item .pocket-mb {
     position: absolute;
     border: 4px solid var(--gold-border);
-    background-color: #000; /* Ciemne wnętrze kieszeni */
+    background-color: #000;
     z-index: 5;
-    box-shadow: inset 0 0 10px rgba(0,0,0,1), 0 0 5px rgba(255, 204, 0, 0.4);
+    box-shadow: inset 0 0 10px rgba(0,0,0,1);
     pointer-events: none;
 }
 
@@ -139,81 +140,89 @@ nav ul li a:hover {
 .pocket-tl {
     top: -6px; left: -6px; width: 50px; height: 50px;
     border-right: none !important; border-bottom: none !important;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 40px; /* Łuk wewnętrzny */
+    border-top-left-radius: 25px; border-bottom-right-radius: 40px;
 }
 .pocket-tr {
     top: -6px; right: -6px; width: 50px; height: 50px;
     border-left: none !important; border-bottom: none !important;
-    border-top-right-radius: 25px;
-    border-bottom-left-radius: 40px;
+    border-top-right-radius: 25px; border-bottom-left-radius: 40px;
 }
 .pocket-bl {
     bottom: -6px; left: -6px; width: 50px; height: 50px;
     border-right: none !important; border-top: none !important;
-    border-bottom-left-radius: 25px;
-    border-top-right-radius: 40px;
+    border-bottom-left-radius: 25px; border-top-right-radius: 40px;
 }
 .pocket-br {
     bottom: -6px; right: -6px; width: 50px; height: 50px;
     border-left: none !important; border-top: none !important;
-    border-bottom-right-radius: 25px;
-    border-top-left-radius: 40px;
+    border-bottom-right-radius: 25px; border-top-left-radius: 40px;
 }
 
-/* Środkowe kieszenie (Poprawione) */
+/* --- ŚRODKOWE KIESZENI (POPRAWIONE) --- */
+/* Są teraz bliżej środka (-2px zamiast -6px) i wyglądają jak zewnętrzne okucie */
 .pocket-mt {
-    top: -6px; left: 50%; transform: translateX(-50%);
-    width: 70px; height: 35px;
-    border-top: none !important;
-    border-bottom-left-radius: 35px; border-bottom-right-radius: 35px;
+    top: -2px; /* Bliżej środka */
+    left: 50%; transform: translateX(-50%);
+    width: 64px; height: 32px;
+    border-top: none !important; /* Zewnętrzne wykończenie */
+    border-bottom-left-radius: 32px; 
+    border-bottom-right-radius: 32px;
 }
 .pocket-mb {
-    bottom: -6px; left: 50%; transform: translateX(-50%);
-    width: 70px; height: 35px;
-    border-bottom: none !important;
-    border-top-left-radius: 35px; border-top-right-radius: 35px;
+    bottom: -2px; /* Bliżej środka */
+    left: 50%; transform: translateX(-50%);
+    width: 64px; height: 32px;
+    border-bottom: none !important; /* Zewnętrzne wykończenie */
+    border-top-left-radius: 32px; 
+    border-top-right-radius: 32px;
 }
 
-/* --- NOWA ANIMACJA: WPADANIE DO PRAWEGO DOLNEGO ROGU --- */
+/* --- NOWA ANIMACJA: START NA STOLE --- */
 .offer-item::after {
     content: '8'; 
     position: absolute;
-    top: 20%; left: -60px; /* Start z lewej */
+    /* STARTOWA POZYCJA: Środek-lewo NA stole */
+    top: 50%; left: 10%;
+    transform: translateY(-50%) scale(1);
+    
     width: 44px; height: 44px; border-radius: 50%;
     color: #000; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.3rem;
     display: flex; align-items: center; justify-content: center;
     background-color: #000;
     background-image: radial-gradient(circle at center, #fff 45%, #000 46%);
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    opacity: 0; pointer-events: none; z-index: 10;
+    
+    /* Domyślnie niewidoczna */
+    opacity: 0;
+    pointer-events: none; z-index: 10;
 }
 
 .offer-item:hover::after { 
-    /* Czas: 2.5s - szybciej */
+    /* Czas: 2.5s */
     animation: pocketEightBall 2.5s ease-in-out forwards; 
 }
 
 @keyframes pocketEightBall {
     0% { 
-        top: 20%; left: -60px; 
-        opacity: 0; transform: scale(1);
+        /* Start na stole, pojawia się */
+        top: 50%; left: 10%;
+        opacity: 0; transform: translateY(-50%) scale(1);
     }
-    10% { 
-        opacity: 1; 
-    }
+    5% { opacity: 1; } /* Szybkie pojawienie się */
+    
     30% { 
-        top: 80%; left: 30%; /* Odbicie od dolnej bandy */
+        top: 85%; left: 30%; /* Odbicie dolna banda */
+        transform: translateY(0) scale(1);
     }
     60% { 
-        top: 15%; left: 60%; /* Odbicie od górnej bandy */
+        top: 15%; left: 60%; /* Odbicie górna banda */
     }
-    90% {
-        top: 88%; left: 92%; /* Dolot do prawego dolnego rogu */
+    85% {
+        top: 88%; left: 88%; /* Dolot do łuzy */
         opacity: 1; transform: scale(1);
     }
     100% { 
-        top: 92%; left: 95%; /* Wpadnięcie */
+        top: 92%; left: 92%; /* Wpadnięcie */
         opacity: 0; transform: scale(0.2); /* Zmniejszenie i zniknięcie */
     }
 }
