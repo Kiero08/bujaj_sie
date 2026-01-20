@@ -8,6 +8,7 @@
     --nav-dark: #001a1d;
     --glass-bg: rgba(0, 70, 75, 0.7);
     --gold-border: #ffcc00;
+    --card-dark: #002529;
 
     --text-yellow-top: #ffe552;
     --text-orange-bottom: #ffb300;
@@ -104,146 +105,26 @@ nav ul li a:hover {
     font-size: 1.1rem; margin-bottom: 35px; text-align: center; letter-spacing: 2px;
 }
 
-/* --- KARTY OFERTY --- */
+/* --- KARTY OFERTY (Ogólny styl) --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .offer-item {
-    background: rgba(0, 30, 35, 0.85);
-    border: 3px solid #001a1d; 
+    /* Baza dla wszystkich kart */
+    background-color: var(--card-dark);
+    border: 3px solid #001a1d;
     padding: 40px; position: relative; transition: 0.4s; 
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.4);
     border-radius: 20px;
+    overflow: hidden; /* Ważne, żeby animacje nie wychodziły poza stół */
 }
 
 .offer-item:hover {
     transform: translateY(-5px); 
-    border-color: var(--gold-border);
+    border-color: var(--gold-border); /* Złota ramka po najechaniu */
 }
 
-
-/* --- STYL KIESZENI BILARDOWYCH --- */
-
-/* Wspólny styl bazowy (czarne tło, cień wewnątrz) */
-.offer-item .pocket-tl, .offer-item .pocket-tr,
-.offer-item .pocket-bl, .offer-item .pocket-br,
-.offer-item .pocket-mt, .offer-item .pocket-mb {
-    position: absolute;
-    background-color: #000;
-    z-index: 5;
-    box-shadow: inset 0 0 10px rgba(0,0,0,1);
-    pointer-events: none;
-}
-
-/* --- NAROŻNIKI (Te były dobre - przywracamy wersję z ramkami) --- */
-.pocket-tl {
-    top: -6px; left: -6px; width: 50px; height: 50px;
-    border: 4px solid var(--gold-border); /* Pełna ramka */
-    border-right: none !important; border-bottom: none !important; /* Usuwamy wewnętrzne */
-    border-top-left-radius: 25px; 
-    border-bottom-right-radius: 40px; /* Wewnętrzny łuk */
-}
-.pocket-tr {
-    top: -6px; right: -6px; width: 50px; height: 50px;
-    border: 4px solid var(--gold-border);
-    border-left: none !important; border-bottom: none !important;
-    border-top-right-radius: 25px; 
-    border-bottom-left-radius: 40px;
-}
-.pocket-bl {
-    bottom: -6px; left: -6px; width: 50px; height: 50px;
-    border: 4px solid var(--gold-border);
-    border-right: none !important; border-top: none !important;
-    border-bottom-left-radius: 25px; 
-    border-top-right-radius: 40px;
-}
-.pocket-br {
-    bottom: -6px; right: -6px; width: 50px; height: 50px;
-    border: 4px solid var(--gold-border);
-    border-left: none !important; border-top: none !important;
-    border-bottom-right-radius: 25px; 
-    border-top-left-radius: 40px;
-}
-
-/* --- ŚRODKOWE KIESZENIE (NAPRAWA) --- */
-/* Złoty kolor TYLKO na prostej krawędzi przy bandzie */
-
-.pocket-mt {
-    top: -3px; /* Pozycjonowanie na krawędzi */
-    left: 50%; transform: translateX(-50%);
-    width: 64px; height: 32px;
-    
-    /* Złota linia TYLKO na górze */
-    border-top: 4px solid var(--gold-border);
-    /* Reszta bez ramki (czarny łuk) */
-    border-right: none; border-bottom: none; border-left: none;
-    
-    border-bottom-left-radius: 32px; 
-    border-bottom-right-radius: 32px;
-}
-
-.pocket-mb {
-    bottom: -3px; /* Pozycjonowanie na krawędzi */
-    left: 50%; transform: translateX(-50%);
-    width: 64px; height: 32px;
-    
-    /* Złota linia TYLKO na dole */
-    border-bottom: 4px solid var(--gold-border);
-    /* Reszta bez ramki */
-    border-right: none; border-top: none; border-left: none;
-    
-    border-top-left-radius: 32px; 
-    border-top-right-radius: 32px;
-}
-
-/* --- ANIMACJA: WPADANIE DO PRAWEGO DOLNEGO ROGU --- */
-.offer-item::after {
-    content: '8'; 
-    position: absolute;
-    /* STARTOWA POZYCJA: Środek-lewo NA stole */
-    top: 50%; left: 10%;
-    transform: translateY(-50%) scale(1);
-    
-    width: 44px; height: 44px; border-radius: 50%;
-    color: #000; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.3rem;
-    display: flex; align-items: center; justify-content: center;
-    background-color: #000;
-    background-image: radial-gradient(circle at center, #fff 45%, #000 46%);
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    
-    opacity: 0; pointer-events: none; z-index: 10;
-}
-
-.offer-item:hover::after { 
-    /* Czas: 2.5s */
-    animation: pocketEightBall 2.5s ease-in-out forwards; 
-}
-
-@keyframes pocketEightBall {
-    0% { 
-        /* Start na stole */
-        top: 50%; left: 10%;
-        opacity: 0; transform: translateY(-50%) scale(1);
-    }
-    5% { opacity: 1; }
-    
-    30% { 
-        top: 85%; left: 30%; /* Odbicie dolna banda */
-        transform: translateY(0) scale(1);
-    }
-    60% { 
-        top: 15%; left: 60%; /* Odbicie górna banda */
-    }
-    85% {
-        top: 88%; left: 88%; /* Dolot do łuzy */
-        opacity: 1; transform: scale(1);
-    }
-    100% { 
-        top: 92%; left: 92%; /* Wpadnięcie */
-        opacity: 0; transform: scale(0.2); /* Zmniejszenie i zniknięcie */
-    }
-}
-
+/* Wspólny styl nagłówków */
 .offer-item h2 { 
     font-family: 'Baloo 2', cursive; font-size: 1.8rem; 
     margin-bottom: 15px; line-height: 1.2; min-height: 2.4em; 
@@ -256,7 +137,150 @@ nav ul li a:hover {
         drop-shadow(1.5px -1.5px 0 var(--text-outline)) 
         drop-shadow(-1.5px 1.5px 0 var(--text-outline))
         drop-shadow(3px 3px 0 var(--text-outline));
+    position: relative; z-index: 20; /* Napisy zawsze na wierzchu */
 }
+.offer-item p { position: relative; z-index: 20; }
+
+
+/* =========================================
+   STYLIZACJA KONKRETNYCH STOŁÓW
+========================================= */
+
+/* --- 1. BILARD (Card Bilard) --- */
+/* Kieszenie są widoczne TYLKO tutaj */
+.card-bilard .pocket-tl, .card-bilard .pocket-tr,
+.card-bilard .pocket-bl, .card-bilard .pocket-br,
+.card-bilard .pocket-mt, .card-bilard .pocket-mb {
+    position: absolute; background-color: #000; z-index: 5;
+    box-shadow: inset 0 0 10px rgba(0,0,0,1); pointer-events: none;
+}
+.card-bilard .pocket-tl { top: -6px; left: -6px; width: 50px; height: 50px; border: 4px solid var(--gold-border); border-right: none !important; border-bottom: none !important; border-top-left-radius: 25px; border-bottom-right-radius: 40px; }
+.card-bilard .pocket-tr { top: -6px; right: -6px; width: 50px; height: 50px; border: 4px solid var(--gold-border); border-left: none !important; border-bottom: none !important; border-top-right-radius: 25px; border-bottom-left-radius: 40px; }
+.card-bilard .pocket-bl { bottom: -6px; left: -6px; width: 50px; height: 50px; border: 4px solid var(--gold-border); border-right: none !important; border-top: none !important; border-bottom-left-radius: 25px; border-top-right-radius: 40px; }
+.card-bilard .pocket-br { bottom: -6px; right: -6px; width: 50px; height: 50px; border: 4px solid var(--gold-border); border-left: none !important; border-top: none !important; border-bottom-right-radius: 25px; border-top-left-radius: 40px; }
+.card-bilard .pocket-mt { top: -2px; left: 50%; transform: translateX(-50%); width: 64px; height: 32px; border-top: 4px solid var(--gold-border); border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; }
+.card-bilard .pocket-mb { bottom: -2px; left: 50%; transform: translateX(-50%); width: 64px; height: 32px; border-bottom: 4px solid var(--gold-border); border-top-left-radius: 32px; border-top-right-radius: 32px; }
+
+/* Animacja Ósemki (Stara, szybka) */
+.card-bilard::after {
+    content: '8'; position: absolute; top: 50%; left: 10%; transform: translateY(-50%) scale(1);
+    width: 44px; height: 44px; border-radius: 50%; color: #000; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center; background-color: #000;
+    background-image: radial-gradient(circle at center, #fff 45%, #000 46%); box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    opacity: 0; pointer-events: none; z-index: 10;
+}
+.card-bilard:hover::after { animation: pocketEightBall 2.5s ease-in-out forwards; }
+@keyframes pocketEightBall {
+    0% { top: 50%; left: 10%; opacity: 0; transform: translateY(-50%) scale(1); }
+    5% { opacity: 1; } 30% { top: 85%; left: 30%; transform: translateY(0) scale(1); }
+    60% { top: 15%; left: 60%; } 85% { top: 88%; left: 88%; opacity: 1; transform: scale(1); }
+    100% { top: 92%; left: 92%; opacity: 0; transform: scale(0.2); }
+}
+
+
+/* --- 2. SHUFFLEBOARD (Card Shuffle) --- */
+.card-shuffle {
+    /* Tło imitujące drewno w morskim kolorze z liniami punktowymi */
+    background-image: 
+        linear-gradient(90deg, transparent 60%, rgba(0, 229, 255, 0.05) 60%, rgba(0, 229, 255, 0.05) 80%, rgba(255, 204, 0, 0.05) 80%),
+        repeating-linear-gradient(90deg, #002529, #002529 5px, #002a2e 5px, #002a2e 10px);
+}
+/* Ukrywamy kieszenie bilardowe */
+.card-shuffle .pocket-tl, .card-shuffle .pocket-tr, .card-shuffle .pocket-bl, .card-shuffle .pocket-br, .card-shuffle .pocket-mt, .card-shuffle .pocket-mb { display: none; }
+
+/* Animacja Krążka (Czerwony ze srebrnym środkiem, wolniejszy) */
+.card-shuffle::after {
+    content: ''; position: absolute; top: 50%; left: 10%;
+    width: 50px; height: 30px; /* Spłaszczony */
+    border-radius: 50%;
+    /* Czerwony obrys, srebrny środek z metalicznym połyskiem */
+    background: radial-gradient(circle at 50% 30%, #e0e0e0 10%, #a0a0a0 40%, #ff0000 50%, #8b0000 100%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transform: translateY(-50%);
+    opacity: 0; pointer-events: none; z-index: 10;
+}
+.card-shuffle:hover::after { animation: slidePuck 4s ease-out forwards; }
+@keyframes slidePuck {
+    0% { left: 10%; opacity: 0; }
+    10% { opacity: 1; }
+    100% { left: 85%; opacity: 1; } /* Zatrzymuje się na końcu w strefie punktowej */
+}
+
+
+/* --- 3. PLANSZÓWKI (Card Chińczyk/Ludo) --- */
+.card-ludo {
+    /* Tło imitujące planszę z krzyżem */
+    background-color: #001a1d;
+    background-image: 
+        /* Środek (Baza) */
+        radial-gradient(circle at center, rgba(255, 204, 0, 0.2) 0%, rgba(255, 204, 0, 0.1) 15%, transparent 16%),
+        /* Pionowa ścieżka */
+        linear-gradient(90deg, transparent 40%, rgba(0,229,255,0.08) 40%, rgba(0,229,255,0.08) 60%, transparent 60%),
+        /* Pozioma ścieżka */
+        linear-gradient(0deg, transparent 40%, rgba(0,229,255,0.08) 40%, rgba(0,229,255,0.08) 60%, transparent 60%);
+}
+.card-ludo .pocket-tl, .card-ludo .pocket-tr, .card-ludo .pocket-bl, .card-ludo .pocket-br, .card-ludo .pocket-mt, .card-ludo .pocket-mb { display: none; }
+
+/* Animacja Pionka (Wchodzi do bazy) */
+.card-ludo::after {
+    content: ''; position: absolute; bottom: 10%; left: 50%;
+    width: 30px; height: 45px;
+    /* Kształt pionka (prosty) */
+    background: radial-gradient(circle at 50% 30%, var(--gold-border) 30%, var(--text-orange-bottom) 60%);
+    border-radius: 50% 50% 10% 10%;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    transform: translateX(-50%);
+    opacity: 0; pointer-events: none; z-index: 10;
+}
+.card-ludo:hover::after { animation: movePawn 3s ease-in-out forwards; }
+@keyframes movePawn {
+    0% { bottom: 5%; opacity: 0; }
+    10% { opacity: 1; }
+    25% { bottom: 20%; }
+    50% { bottom: 35%; }
+    75% { bottom: 45%; }
+    100% { bottom: 55%; opacity: 1; transform: translateX(-50%) scale(1.2); /* Powiększa się w bazie */ }
+}
+
+
+/* --- 4. PIŁKARZYKI (Card Foosball) --- */
+.card-foosball {
+    background-color: #003336; /* Ciemniejsza "murawa" */
+    /* Linie boiska */
+    background-image: 
+        linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px), /* Środek */
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); /* Środek */
+    background-size: 100% 50%, 50% 100%;
+    background-position: center; background-repeat: no-repeat;
+}
+.card-foosball .pocket-tl, .card-foosball .pocket-tr, .card-foosball .pocket-bl, .card-foosball .pocket-br, .card-foosball .pocket-mt, .card-foosball .pocket-mb { display: none; }
+
+/* Drążki i piłkarzyki (Symulacja za pomocą cieni) */
+.card-foosball::before {
+    content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 100%;
+    /* Drążki (poziome linie) */
+    background: repeating-linear-gradient(0deg, transparent, transparent 15%, rgba(255,255,255,0.2) 15%, rgba(255,255,255,0.2) 16%, transparent 16%, transparent 30%);
+    z-index: 1; pointer-events: none;
+}
+
+/* Animacja Piłki (Odbija się) */
+.card-foosball::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 20px; height: 20px; border-radius: 50%;
+    /* Mała biało-czarna piłka */
+    background: radial-gradient(circle at 30% 30%, #fff 40%, #333 80%);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    opacity: 0; pointer-events: none; z-index: 10;
+}
+.card-foosball:hover::after { animation: bounceFoosball 3s linear infinite; }
+@keyframes bounceFoosball {
+    0% { top: 50%; left: 50%; opacity: 1; }
+    25% { top: 20%; left: 70%; }
+    50% { top: 80%; left: 30%; }
+    75% { top: 30%; left: 80%; }
+    100% { top: 60%; left: 20%; }
+}
+
 
 /* --- PRZYCISK --- */
 .btn {
