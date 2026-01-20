@@ -1,13 +1,13 @@
 /* --- 1. IMPORT CZCIONEK --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- 2. PALETA KOLORÓW (Twoje wybrane odcienie) --- */
+/* --- 2. PALETA KOLORÓW --- */
 :root {
-    --deep-teal: #004b54;     /* Twoja baza */
+    --deep-teal: #006064;     /* Rozjaśniony morski jako baza */
     --gold: #ffcc00;          /* Złoto */
     --neon-cyan: #00e5ff;     /* Cyjan */
-    --text-outline: #000000;
-    --glass-bg: rgba(0, 75, 84, 0.6);
+    --nav-dark: #001a1d;      /* Przyciemniony pasek nawigacyjny */
+    --glass-bg: rgba(0, 96, 100, 0.5);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,22 +18,21 @@ body {
     min-height: 100vh;
     background-color: var(--deep-teal);
     overflow-x: hidden;
-    /* TŁO: Mesh gradient z efektem siatki technicznej */
+    
+    /* --- ROZJAŚNIONE TŁO (Bez kratki) --- */
     background-image: 
-        linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-        radial-gradient(at 0% 0%, rgba(255, 204, 0, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.1) 0px, transparent 50%),
-        linear-gradient(180deg, #062b30 0%, var(--deep-teal) 100%);
-    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
+        radial-gradient(at 0% 0%, rgba(255, 240, 0, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.15) 0px, transparent 50%),
+        linear-gradient(180deg, #00838f 0%, var(--deep-teal) 100%);
     background-attachment: fixed;
 }
 
-/* --- NAWIGACJA (Minimalizm techniczny) --- */
+/* --- NAWIGACJA (Przyciemniona) --- */
 header {
-    position: sticky; top: 0; z-index: 1000; padding: 15px 0;
-    background: rgba(0, 43, 48, 0.95);
+    position: sticky; top: 0; z-index: 1000; padding: 12px 0;
+    background: var(--nav-dark); /* Przyciemnienie */
     border-bottom: 2px solid var(--gold);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
 nav {
@@ -50,43 +49,43 @@ nav {
 nav ul { list-style: none; display: flex; gap: 20px; }
 nav ul li a {
     text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem;
-    padding: 5px 10px; border-left: 0px solid var(--neon-cyan);
-    transition: 0.3s;
+    padding: 8px 12px; transition: 0.3s;
+    border-radius: 4px;
 }
 
 nav ul li a:hover {
-    border-left: 4px solid var(--neon-cyan);
-    background: rgba(0, 229, 255, 0.1);
+    background: rgba(0, 229, 255, 0.15);
     color: var(--gold);
 }
 
-/* --- HERO SECTION (Asymetryczny Kontener) --- */
+/* --- HERO SECTION (Blueprint Style) --- */
 .hero-section { 
-    padding: 100px 20px; display: flex; justify-content: center;
+    padding: 80px 20px; display: flex; justify-content: center;
 }
 
 .hero-glass-box {
     background: var(--glass-bg);
-    /* UNIKALNY KSZTAŁT: ścięte rogi */
-    clip-path: polygon(5% 0%, 100% 0%, 100% 90%, 95% 100%, 0% 100%, 0% 10%);
+    /* Asymetryczne cięcie */
+    clip-path: polygon(4% 0%, 100% 0%, 100% 92%, 96% 100%, 0% 100%, 0% 8%);
     border: 2px solid var(--neon-cyan);
     padding: 60px 40px;
     max-width: 900px;
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
-/* Dodatkowe "celowniki" w rogach */
+/* Celowniki w rogach */
 .hero-glass-box::before {
-    content: '['; position: absolute; top: 10px; left: 10px; color: var(--gold); font-size: 2rem;
+    content: '['; position: absolute; top: 15px; left: 15px; color: var(--gold); font-size: 2rem;
 }
 .hero-glass-box::after {
-    content: ']'; position: absolute; bottom: 10px; right: 10px; color: var(--gold); font-size: 2rem;
+    content: ']'; position: absolute; bottom: 15px; right: 15px; color: var(--gold); font-size: 2rem;
 }
 
 .hero-logo-img {
-    max-width: 500px; width: 90%; margin-bottom: 20px;
-    filter: drop-shadow(0 0 20px var(--neon-cyan));
-    transform-origin: top center; animation: swing 4s ease-in-out infinite;
+    max-width: 500px; width: 85%; margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px var(--neon-cyan));
+    transform-origin: top center; animation: swing 5s ease-in-out infinite;
 }
 
 @keyframes swing {
@@ -94,43 +93,37 @@ nav ul li a:hover {
 }
 
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(2.5rem, 7vw, 4rem);
+    font-family: 'Baloo 2', cursive; font-size: clamp(2.2rem, 6vw, 3.8rem);
     color: var(--gold);
-    /* Czarny obrys */
     text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-/* --- KARTY (Blueprint Style) --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+/* --- KARTY OFERTY --- */
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .offer-item {
-    background: rgba(0, 229, 255, 0.02);
-    border: 1px solid rgba(0, 229, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 229, 255, 0.3);
     padding: 40px;
     position: relative;
     transition: 0.4s;
-}
-
-/* Dekoracyjne linie w rogach kart */
-.offer-item::before {
-    content: ''; position: absolute; top: -2px; left: -2px; width: 20px; height: 20px;
-    border-top: 3px solid var(--gold); border-left: 3px solid var(--gold);
+    overflow: hidden;
 }
 
 .offer-item:hover {
-    background: rgba(0, 229, 255, 0.08);
-    transform: scale(1.02);
-    border-color: var(--neon-cyan);
+    background: rgba(0, 229, 255, 0.1);
+    transform: translateY(-5px);
+    border-color: var(--gold);
 }
 
-/* Linia skanująca na hover */
+/* Linia skanująca */
 .offer-item:hover::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
     background: var(--neon-cyan);
-    box-shadow: 0 0 15px var(--neon-cyan);
-    animation: scan 1.5s linear infinite;
+    box-shadow: 0 0 10px var(--neon-cyan);
+    animation: scan 2s linear infinite;
 }
 
 @keyframes scan {
@@ -139,29 +132,31 @@ nav ul li a:hover {
 
 .offer-item h2 { 
     font-family: 'Baloo 2', cursive; font-size: 2rem; color: var(--gold);
-    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    text-shadow: 1px 1px 0 #000;
     margin-bottom: 15px;
 }
 
+/* --- PRZYCISK --- */
 .btn {
-    display: inline-block; padding: 15px 40px;
+    display: inline-block; padding: 16px 45px;
     background: transparent;
     border: 2px solid var(--neon-cyan);
     color: var(--gold) !important;
     font-weight: 800; text-transform: uppercase;
-    text-shadow: 1px 1px 0 #000;
     transition: 0.3s;
-    cursor: pointer;
+    text-shadow: 1px 1px 0 #000;
 }
 
 .btn:hover {
     background: var(--neon-cyan);
-    color: #000 !important;
-    box-shadow: 0 0 20px var(--neon-cyan);
+    color: var(--nav-dark) !important;
     text-shadow: none;
+    box-shadow: 0 0 25px var(--neon-cyan);
 }
 
+/* --- MOBILE --- */
 @media (max-width: 768px) {
     .logo a { font-size: 1.6rem; }
-    .hero-glass-box { clip-path: none; border-radius: 20px; padding: 40px 20px; }
+    .hero-glass-box { clip-path: none; border-radius: 20px; }
+    nav ul { gap: 10px; }
 }
