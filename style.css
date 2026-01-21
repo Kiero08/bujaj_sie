@@ -39,72 +39,72 @@ nav {
     font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800;
     text-decoration: none;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text; 
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 0 var(--text-outline);
+    filter: drop-shadow(1px 1px 0 #000) drop-shadow(-1px -1px 0 #000);
 }
 nav ul { list-style: none; display: flex; gap: 15px; }
-nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0.8rem; }
+nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem; }
 
-/* --- HERO SECTION & BUJANIE --- */
+/* --- HERO SECTION --- */
 .hero-glass-box {
     background: rgba(0, 20, 25, 0.8);
     border-radius: 40px; 
     border: 3px solid var(--gold);
     padding: 30px; 
     max-width: 700px; 
-    margin: 30px auto; /* Centrowanie kontenera hero */
+    margin: 30px auto;
     text-align: center; 
     backdrop-filter: blur(20px);
 }
 
+/* BUJAJĄCE SIĘ LOGO */
 .hero-logo-img { 
     max-width: 180px; 
     width: 100%; 
     height: auto; 
     margin-bottom: 15px; 
     display: inline-block;
-    animation: swingLogo 5s ease-in-out infinite; 
+    animation: swingLogo 5s ease-in-out infinite;
 }
-
 @keyframes swingLogo {
     0%, 100% { transform: rotate(-5deg); }
     50% { transform: rotate(5deg); }
 }
 
-/* PANCERNY STYL KOMIKSOWY H1 */
+/* PRZYWRÓCONY ZŁOTY STYL H1 Z OBRYSEM */
 .hero-section h1 {
     font-family: 'Baloo 2', cursive; 
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     text-transform: uppercase;
     line-height: 1.1;
     margin-bottom: 10px;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text; 
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    /* text-shadow zamiast filtra dla pewności obrysu */
-    text-shadow: 
-        2px 2px 0px var(--text-outline),
-        -2px -2px 0px var(--text-outline),
-        2px -2px 0px var(--text-outline),
-        -2px 2px 0px var(--text-outline),
-        4px 4px 0px var(--text-outline);
+    /* Pancerny obrys komiksowy */
+    filter: 
+        drop-shadow(2px 2px 0 var(--text-outline)) 
+        drop-shadow(-2px -2px 0 var(--text-outline)) 
+        drop-shadow(2px -2px 0 var(--text-outline)) 
+        drop-shadow(-2px 2px 0 var(--text-outline))
+        drop-shadow(5px 5px 0 rgba(0,0,0,0.5));
 }
 
-/* --- GRID (CENTROWANIE 2x2 - SZTYWNE 630px) --- */
+/* --- GRID (UKŁAD 2x2, CENTROWANIE) --- */
 .container { 
     width: 100%;
-    padding: 20px;
+    margin: 0 auto; 
+    padding: 20px; 
     display: flex;
-    justify-content: center; /* Centruje grid w poziomie */
+    justify-content: center;
 }
 
 .grid { 
     display: grid;
-    grid-template-columns: 300px 300px; /* Dwie sztywne kolumny */
+    grid-template-columns: 300px 300px; 
     gap: 30px; 
-    width: 630px; /* 300 + 30 + 300 */
-    margin: 0 auto; /* Dodatkowe centrowanie */
+    justify-content: center;
 }
 
 .offer-item {
@@ -114,19 +114,18 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0
     padding: 15px;
     position: relative;
     width: 300px;
-    height: 150px;
+    height: 150px; /* TWOJA WYSOKOŚĆ */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    box-shadow: inset 0 0 30px #000, 0 10px 20px rgba(0,0,0,0.4);
-    transition: 0.3s ease;
+    box-shadow: inset 0 0 40px #000, 0 10px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
 }
+.offer-item:hover { transform: scale(1.02); }
 
-.offer-item:hover { transform: scale(1.03); }
-
-/* NAKŁADKA FOTO */
+/* NAKŁADKA DLA ZDJĘĆ */
 .photo-bg::before {
     content: '';
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -136,25 +135,28 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0
 .card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
 .card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
 
-/* STYL NAPISÓW W KARTACH */
+/* STYL NAGŁÓWKÓW W KARTACH */
 .offer-item h2 {
     font-family: 'Baloo 2', cursive; 
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text; 
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 1.5px 1.5px 0px var(--text-outline);
+    filter: drop-shadow(1.5px 1.5px 0 var(--text-outline));
     position: relative; z-index: 20; 
     margin-bottom: 2px;
 }
+
+/* STYL OPISÓW W KARTACH */
 .offer-item p { 
     position: relative; z-index: 20; 
-    font-size: 0.75rem; color: #fff; 
-    line-height: 1.2; 
+    font-size: 0.85rem; 
+    color: #fff; 
+    line-height: 1.2;
     text-shadow: 1px 1px 2px #000;
 }
 
-/* SVG BACKGROUNDS */
+/* SVG BACKGROUNDS DLA 01 i 02 */
 .table-svg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 1; opacity: 0.5; pointer-events: none;
@@ -166,34 +168,31 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0
 .p-tr { top: -3px; right: -3px; width: 35px; height: 35px; border-radius: 0 0 0 25px; }
 .p-bl { bottom: -3px; left: -3px; width: 35px; height: 35px; border-radius: 0 25px 0 0; }
 .p-br { bottom: -3px; right: -3px; width: 35px; height: 35px; border-radius: 25px 0 0 0; }
-.p-mt { top: -1px; left: 50%; transform: translateX(-50%); width: 40px; height: 18px; border-radius: 0 0 20px 20px; border-top: none; }
-.p-mb { bottom: -1px; left: 50%; transform: translateX(-50%); width: 40px; height: 18px; border-radius: 20px 20px 0 0; border-bottom: none; }
 
 /* --- ANIMACJE --- */
 .game-obj { position: absolute; z-index: 15; opacity: 0; pointer-events: none; }
 .offer-item:hover .game-obj { opacity: 1; }
 
-.ball-8 { width: 22px; height: 22px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.ball-8 { width: 22px; height: 22px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; top: 40%; left: 10%; }
 .ball-8::after { content: '8'; font-size: 0.5rem; width: 10px; height: 10px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
 .card-bilard:hover .ball-8 { animation: bAnim 2s ease-in-out forwards; }
-@keyframes bAnim { 0% { top: 40%; left: 10%; } 100% { top: 80%; left: 85%; transform: scale(0.2); opacity: 0; } }
+@keyframes bAnim { 100% { top: 80%; left: 88%; transform: scale(0.2); opacity: 0; } }
 
-.puck-shuffle { width: 24px; height: 14px; border-radius: 50%; background: radial-gradient(circle, #eee, #f00, #800); }
+.puck-shuffle { width: 24px; height: 14px; border-radius: 50%; background: radial-gradient(circle, #eee, #f00, #800); top: 50%; left: 5%; }
 .card-shuffle:hover .puck-shuffle { animation: sAnim 3s ease-out forwards; }
-@keyframes sAnim { 0% { left: 5%; top: 50%; } 100% { left: 85%; top: 50%; } }
+@keyframes sAnim { 100% { left: 85%; } }
 
-.pawn-ludo { width: 16px; height: 24px; display: flex; flex-direction: column; align-items: center; }
+.pawn-ludo { width: 16px; height: 24px; display: flex; flex-direction: column; align-items: center; bottom: 10%; left: 10%; }
 .pawn-head { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; border: 1px solid #000; margin-bottom: -2px; z-index: 2; }
 .pawn-body { width: 14px; height: 16px; background: var(--gold); border: 1px solid #000; border-radius: 50% 50% 10% 10%; }
 .card-planszowki:hover .pawn-ludo { animation: lAnim 2s ease-in-out forwards; }
-@keyframes lAnim { 0% { bottom: 10%; left: 10%; } 100% { bottom: 45%; left: 45%; transform: scale(1.2); } }
+@keyframes lAnim { 100% { bottom: 45%; left: 45%; transform: scale(1.2); } }
 
-.soccer-ball { width: 14px; height: 14px; background: #fff; border-radius: 50%; border: 1px solid #000; background-image: radial-gradient(circle at 30% 30%, #fff, #333); }
+.soccer-ball { width: 14px; height: 14px; background: #fff; border-radius: 50%; border: 1px solid #000; top: 50%; left: 50%; }
 .card-pilkarzyki:hover .soccer-ball { animation: fAnim 4s linear infinite; }
-@keyframes fAnim { 0% { top: 50%; left: 50%; } 25% { top: 20%; left: 80%; } 50% { top: 80%; left: 20%; } 100% { top: 50%; left: 50%; } }
+@keyframes fAnim { 25% { top: 20%; left: 80%; } 50% { top: 80%; left: 20%; } 100% { top: 50%; left: 50%; } }
 
 /* --- MOBILE --- */
-@media (max-width: 650px) {
-    .grid { grid-template-columns: 300px; width: 300px; }
-    .hero-section h1 { font-size: 2rem; }
+@media (max-width: 660px) {
+    .grid { grid-template-columns: 300px; }
 }
