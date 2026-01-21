@@ -11,7 +11,7 @@
     --text-yellow-top: #ffe552;
     --text-orange-bottom: #ffb300;
     --text-outline: #000000;
-    --overlay: rgba(0, 30, 35, 0.4); /* Rozjaśniony filtr dla zdjęć */
+    --overlay: rgba(0, 30, 35, 0.4); 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,11 +23,12 @@ body {
     background-color: var(--deep-teal);
     background-image: linear-gradient(180deg, #00838f 0%, #004d50 100%);
     background-attachment: fixed;
+    overflow-x: hidden; /* Zapobiega poziomemu przewijaniu */
 }
 
-/* --- NAWIGACJA --- */
+/* --- NAWIGACJA (LOGO2.PNG) --- */
 header {
-    position: sticky; top: 0; z-index: 1000; padding: 10px 0; /* Trochę mniejszy padding */
+    position: sticky; top: 0; z-index: 1000; padding: 10px 0;
     background: var(--nav-dark);
     border-bottom: 4px solid var(--gold);
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
@@ -36,26 +37,17 @@ nav {
     display: flex; justify-content: space-between; align-items: center;
     max-width: 1200px; margin: 0 auto; padding: 0 30px;
 }
-
-/* Nowe style dla linku z obrazkiem */
 .logo a {
-    display: flex;
-    align-items: center;
-    text-decoration: none; /* Na wszelki wypadek */
+    display: flex; align-items: center; text-decoration: none;
 }
-
-/* Style dla samego obrazka logo2.png */
 .logo-nav-img {
-    height: 60px; /* Wysokość dopasowana do paska */
-    width: auto;  /* Szerokość dostosuje się sama */
+    height: 60px; width: auto;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.5)); /* Lekka poświata cyjanowa */
+    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.5));
 }
-
 .logo-nav-img:hover {
-    transform: scale(1.1) rotate(-3deg); /* Fajny efekt przy najechaniu */
+    transform: scale(1.1) rotate(-3deg);
 }
-
 nav ul { list-style: none; display: flex; gap: 25px; }
 nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 1rem; transition: 0.3s; }
 nav ul li a:hover { color: var(--neon-cyan); }
@@ -66,58 +58,50 @@ nav ul li a:hover { color: var(--neon-cyan); }
     border-radius: 40px; border: 3px solid var(--gold);
     padding: 50px 40px; max-width: 900px; margin: 40px auto;
     text-align: center; backdrop-filter: blur(20px);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
 }
 
 .hero-logo-img { 
-    max-width: 550px; width: 100%; height: auto; margin-bottom: 20px; 
-    animation: swingLogo 5s ease-in-out infinite; 
-    filter: drop-shadow(0 0 15px var(--neon-cyan));
+    max-width: 350px; width: 100%; height: auto; margin-bottom: 20px; 
+    animation: swingLogo 5s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
 }
 @keyframes swingLogo { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+@keyframes glowPulse { 0%, 100% { filter: drop-shadow(0 0 10px var(--neon-cyan)); } 50% { filter: drop-shadow(0 0 25px var(--neon-cyan)) brightness(1.2); } }
 
-/* NAGŁÓWEK SEKCJI HERO */
+/* H1 - STYL "BUJAJ SIĘ" (ZŁOTY GRADIENT, BEZ CZERWIENI) */
 .hero-section h1 {
     font-family: 'Baloo 2', cursive;
     font-size: clamp(3rem, 9vw, 5.5rem);
     text-transform: uppercase;
     font-weight: 900;
     line-height: 1.1;
-    
-    /* Usunąłem to agresywne pochylenie (skew), żeby pasowało do obłości "Bujaj Się" */
     font-style: normal; 
     letter-spacing: 1px;
     margin-top: 10px;
 
-    /* GRADIENT "BUJAJ SIĘ" - OD JASNEGO ŻÓŁTEGO DO BURSZTYNU */
     background: linear-gradient(
         180deg,
-        #fff9c4 0%,    /* Góra: Bardzo jasny, maślany żółty */
-        #ffeb3b 40%,   /* Środek: Soczysta cytryna/złoto */
-        #ffc107 60%,   /* Dół środka: Ciepły żółty */
-        #ff9800 100%   /* Spód: Ciemny pomarańcz (bursztyn) - ZERO CZERWIENI */
+        #fff9c4 0%,    /* Maślany żółty */
+        #ffeb3b 40%,   /* Cytryna */
+        #ffc107 60%,   /* Ciepły żółty */
+        #ff9800 100%   /* Bursztyn */
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    /* GRUBY, MIĘKKI CZARNY OBRYS (Cartoon Style) */
     filter: 
-        /* Warstwa obrysu */
         drop-shadow(2.5px 2.5px 0px #000)
         drop-shadow(-2.5px -2.5px 0px #000)
         drop-shadow(2.5px -2.5px 0px #000)
         drop-shadow(-2.5px 2.5px 0px #000)
-        /* Cień rzucany */
         drop-shadow(5px 5px 2px rgba(0,0,0,0.6));
 
-    position: relative;
-    z-index: 20;
+    position: relative; z-index: 20;
 }
 
-/* --- KONTENERY (UKŁAD 2x2, 550x300) --- */
+/* --- GRID / KONTENERY --- */
 .container { 
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto; 
+    width: 100%; max-width: 1300px; margin: 0 auto; 
     padding: 20px 40px 80px; 
 }
 
@@ -134,52 +118,44 @@ nav ul li a:hover { color: var(--neon-cyan); }
     border-radius: 30px;
     padding: 30px;
     position: relative;
-    height: 300px;
-    width: 550px;
+    height: 300px; width: 550px; /* Bazowe wymiary desktop */
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: left;
+    display: flex; flex-direction: column; justify-content: flex-start; text-align: left;
     box-shadow: inset 0 0 40px #000, 0 10px 30px rgba(0,0,0,0.5);
     transition: 0.3s ease;
 }
-
 .offer-item:hover { transform: scale(1.02); }
 
-/* JASNIEJSZE TŁA DLA 01 I 02 */
-.card-bilard { background-color: #0a4d2e; } /* Kolor zielonego sukna */
-.card-shuffle { background-color: #2c1a0a; } /* Kolor drewna */
-
-/* ZDJĘCIA DLA 03 I 04 */
-.photo-bg::before {
-    content: '';
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.7));
-    z-index: 1;
+/* TŁA KART */
+.card-bilard { background-color: #0a4d2e; } /* Zielone sukno */
+.card-shuffle { 
+    background-image: url('shuffle_bg.png'); 
+    background-size: cover; background-position: center; 
 }
 .card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
 .card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
 
-/* SPÓJNY STYL H2 DLA WSZYSTKICH KART */
+/* GRADIENT PRZYCIEMNIAJĄCY NA TŁA Z OBRAZKAMI */
+.photo-bg::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.7));
+    z-index: 1;
+}
+
+/* TYPOGRAFIA W KARTACH */
 .offer-item h2 {
     font-family: 'Baloo 2', cursive; font-size: 2rem;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: 
-        drop-shadow(2px 2px 0 var(--text-outline)) 
-        drop-shadow(-1px -1px 0 var(--text-outline))
-        drop-shadow(3px 3px 0 rgba(0,0,0,0.4));
+    filter: drop-shadow(2px 2px 0 var(--text-outline)) drop-shadow(-1px -1px 0 var(--text-outline));
     position: relative; z-index: 20; margin-bottom: 8px;
 }
-
 .offer-item p { 
-    position: relative; z-index: 20; 
-    font-size: 1.1rem; color: #fff; 
+    position: relative; z-index: 20; font-size: 1.1rem; color: #fff; 
     line-height: 1.3; text-shadow: 1px 1px 3px #000;
 }
 
-/* --- DETALE STOŁÓW --- */
+/* --- SVG I ELEMENTY GRAFICZNE --- */
 .table-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.7; pointer-events: none; }
 
 .pocket { position: absolute; background: #000; border: 2px solid var(--gold); z-index: 10; }
@@ -188,178 +164,73 @@ nav ul li a:hover { color: var(--neon-cyan); }
 .p-bl { bottom: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 40px 0 0; }
 .p-br { bottom: -5px; right: -5px; width: 50px; height: 50px; border-radius: 40px 0 0 0; }
 
-/* --- ANIMACJE --- */
+/* --- ANIMACJE (BILARD & SHUFFLE & INNE) --- */
 .game-obj { position: absolute; z-index: 15; opacity: 0; }
-.offer-item:hover .game-obj { opacity: 1; }
 
-/* --- BILARD (WOLNIEJSZA, POPRAWIONE ZNIKANIE) --- */
+/* 1. BILARD - TRICK SHOT (WOLNIEJSZA, DOKŁADNE WPADNIĘCIE) */
 .ball-8 { 
-    width: 40px; 
-    height: 40px; 
-    background: #000; 
-    border-radius: 50%; 
+    width: 40px; height: 40px; background: #000; border-radius: 50%; 
     background-image: radial-gradient(circle at 30% 30%, #333, #000); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    top: 50%; 
-    left: 15%; 
-    z-index: 15; /* Ważne, żeby była nad stołem */
+    display: flex; align-items: center; justify-content: center; 
+    top: 50%; left: 15%; 
 }
-
-.ball-8::after { 
-    content: '8'; 
-    font-size: 0.8rem; 
-    width: 18px; 
-    height: 18px; 
-    background: #fff; 
-    border-radius: 50%; 
-    color: #000; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-weight: 900; 
-}
-
-/* ZMIANA CZASU NA 3s (wolniej) */
-.card-bilard:hover .ball-8 { 
-    animation: bAnim 2,5s linear forwards; 
-}
+.ball-8::after { content: '8'; font-size: 0.8rem; width: 18px; height: 18px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+.card-bilard:hover .ball-8 { animation: bAnim 3s linear forwards; }
 
 @keyframes bAnim {
-    /* 1. START */
-    0% {
-        top: 50%;
-        left: 15%;
-        transform: scale(1);
-        opacity: 1;
-    }
-    
-    /* 2. ODBICIE DOLNE */
-    35% {
-        top: 86%;
-        left: 45%;
-    }
-    
-    /* 3. ODBICIE GÓRNE */
-    70% {
-        top: 4%;
-        left: 75%;
-        /* Tutaj wciąż pełna widoczność */
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    /* 4. TUŻ PRZED ŁUZĄ (90%) - KLUCZOWE */
-    /* Dzięki temu bila nie znika w locie, tylko dopiero nad dziurą */
-    90% {
-        top: 75%; 
-        left: 88%;
-        opacity: 1;     /* Wciąż widoczna */
-        transform: scale(1); /* Wciąż duża */
-    }
-    
-    /* 5. WPADNIĘCIE */
-    100% {
-        top: 86%;
-        left: 90%;
-        transform: scale(0.3); /* Zmniejszenie */
-        opacity: 0;            /* Zniknięcie */
-    }
+    0% { top: 50%; left: 15%; transform: scale(1); opacity: 1; }
+    35% { top: 86%; left: 45%; } /* Banda dół */
+    70% { top: 4%; left: 75%; opacity: 1; transform: scale(1); } /* Banda góra */
+    90% { top: 75%; left: 88%; opacity: 1; transform: scale(1); } /* Tuż przed łuzą */
+    100% { top: 86%; left: 90%; transform: scale(0.3); opacity: 0; } /* Wpadnięcie */
 }
 
-/* NOWY KRĄŻEK SHUFFLEBOARD - Okrągły i czerwony */
-.puck-shuffle {
-    width: 40px;  /* Idealne koło (szerokość = wysokość) */
-    height: 40px;
-    border-radius: 50%;
-    /* Gradient tylko z odcieni czerwieni dla efektu 3D */
+/* 2. SHUFFLEBOARD - CZERWONY OKRĄGŁY DYSK */
+.puck-shuffle { 
+    width: 40px; height: 40px; border-radius: 50%; 
     background: radial-gradient(circle at 30% 30%, #ff6666 0%, #cc0000 50%, #800000 100%);
-    /* Pozycja startowa */
-    top: 45%;
-    left: 10%;
-    z-index: 15;
+    top: 45%; left: 10%; 
 }
-/* NOWA TRASA - DOJEŻDŻA DO SAMEGO KOŃCA */
+.card-shuffle:hover .puck-shuffle { animation: sAnim 3s ease-out forwards; }
 @keyframes sAnim {
-    0% {
-        left: 10%; /* Start tam gdzie stoi */
-        opacity: 1;
-    }
-    100% {
-        left: 92%; /* Koniec przy prawej krawędzi (uwzględniając szerokość krążka) */
-        opacity: 1; /* Zostaje widoczny na końcu */
-    }
+    0% { left: 10%; opacity: 1; }
+    100% { left: 92%; opacity: 1; }
 }
 
+/* 3. LUDO & PIŁKARZYKI (STANDARD) */
 .pawn-ludo { width: 30px; height: 45px; display: flex; flex-direction: column; align-items: center; bottom: 10%; left: 15%; }
 .pawn-head { width: 16px; height: 16px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -4px; z-index: 2; }
 .pawn-body { width: 24px; height: 28px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 10% 10%; }
 .card-planszowki:hover .pawn-ludo { animation: lAnim 2.5s ease-in-out forwards; }
-@keyframes lAnim { 100% { bottom: 45%; left: 50%; transform: scale(1.3); } }
+@keyframes lAnim { 100% { bottom: 45%; left: 50%; transform: scale(1.3); opacity: 1; } }
 
 .soccer-ball { width: 22px; height: 22px; background: #fff; border-radius: 50%; border: 1px solid #000; top: 50%; left: 50%; background-image: radial-gradient(circle at 30% 30%, #fff, #333); }
 .card-pilkarzyki:hover .soccer-ball { animation: fAnim 5s linear infinite; }
 @keyframes fAnim { 25% { top: 20%; left: 85%; } 50% { top: 80%; left: 15%; } 100% { top: 50%; left: 50%; } }
 
-/* --- RESPONSYWNOŚĆ (MEDIA QUERIES) --- */
+/* --- RESPANSYWNOŚĆ (MEDIA QUERIES) --- */
 
 /* 1. Laptopy i Tablety (poniżej 1200px) */
 @media (max-width: 1200px) {
-    .grid { 
-        grid-template-columns: 550px; /* Jedna kolumna */
-    }
+    .grid { grid-template-columns: 550px; }
 }
 
 /* 2. Tablety pionowo / Duże telefony (poniżej 768px) */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    header {
-        padding: 10px 0;
-    }
-    .logo-nav-img {
-        height: 50px; /* Mniejsze logo na mobilkach */
-    }
+    nav { flex-direction: column; align-items: center; gap: 15px; }
+    header { padding: 10px 0; }
+    .logo-nav-img { height: 50px; }
 }
 
-/* 3. Telefony (poniżej 600px) - TU JEST FIX NA UCINANIE TEKSTU */
+/* 3. Telefony (poniżej 600px) */
 @media (max-width: 600px) {
-    .grid { 
-        grid-template-columns: 1fr; /* Pełna szerokość */
-        gap: 20px;
-        padding: 0 15px; /* Mniejszy margines boczny siatki */
-    }
-
+    .grid { grid-template-columns: 1fr; gap: 20px; padding: 0 15px; }
     .offer-item { 
-        width: 100%; 
-        /* KLUCZOWE: height: auto pozwala kontenerowi rosnąć wraz z tekstem */
-        height: auto; 
-        min-height: 250px; 
-        padding: 20px; /* Mniejszy padding, żeby tekst miał miejsce */
+        width: 100%; height: auto; min-height: 250px; 
+        padding: 20px; 
     }
-
-    /* Zmniejszamy nagłówek w kontenerze na telefonie */
-    .offer-item h2 { 
-        font-size: 1.6rem; 
-        margin-bottom: 5px;
-    }
-
-    /* Zmniejszamy opis na telefonie */
-    .offer-item p { 
-        font-size: 0.95rem; 
-        line-height: 1.3;
-    }
-
-    /* Zmniejszamy główny nagłówek strony */
-    .hero-section h1 {
-        font-size: 2.2rem; 
-    }
-    
-    .hero-glass-box {
-        padding: 30px 20px;
-    }
+    .offer-item h2 { font-size: 1.6rem; margin-bottom: 5px; }
+    .offer-item p { font-size: 0.95rem; line-height: 1.3; }
+    .hero-section h1 { font-size: 2.2rem; }
+    .hero-glass-box { padding: 30px 20px; }
 }
