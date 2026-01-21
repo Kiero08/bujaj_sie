@@ -48,9 +48,28 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0
 /* --- HERO & BUJAJĄCE SIĘ LOGO --- */
 .hero-glass-box {
     background: rgba(0, 20, 25, 0.8);
-    border-radius: 40px; border: 3px solid var(--gold);
-    padding: 30px; max-width: 700px; margin: 20px auto;
-    text-align: center; backdrop-filter: blur(20px);
+    border-radius: 40px; 
+    border: 3px solid var(--gold);
+    padding: 30px; 
+    max-width: 700px; 
+    margin: 20px auto;
+    text-align: center; 
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+}
+
+.hero-logo-img { 
+    max-width: 180px; 
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 10px; 
+    animation: swing 5s ease-in-out infinite; 
+    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.3));
+}
+
+@keyframes swing {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
 }
 
 /* FIX: PRZYWRÓCONE BUJANIE */
@@ -63,11 +82,23 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0
     50% { transform: rotate(4deg); }
 }
 
+/* PRZYWRÓCONY PEŁNY STYL H1 */
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-family: 'Baloo 2', cursive; 
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 10px;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px 0 var(--text-outline));
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    /* Efekt komiksowego obrysu 1:1 z logiem */
+    filter: 
+        drop-shadow(1.5px 1.5px 0 var(--text-outline)) 
+        drop-shadow(-1.5px -1.5px 0 var(--text-outline)) 
+        drop-shadow(1.5px -1.5px 0 var(--text-outline)) 
+        drop-shadow(-1.5px 1.5px 0 var(--text-outline))
+        drop-shadow(4px 4px 0 var(--text-outline));
 }
 
 /* --- GRID (CENTROWANIE 2x2 DLA 300px) --- */
