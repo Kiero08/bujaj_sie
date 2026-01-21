@@ -78,18 +78,23 @@ nav ul li a:hover { color: var(--neon-cyan); }
 
 .hero-section h1 {
     font-family: 'Baloo 2', cursive; 
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    /* Zostawiamy większy rozmiar dla H1, ale styl dekoracyjny bierzemy z H2 */
+    font-size: clamp(2.5rem, 8vw, 4.5rem); 
     text-transform: uppercase;
     line-height: 1;
+    margin-bottom: 10px;
+    
+    /* Gradient identyczny jak w kartach */
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: 
-        drop-shadow(3px 3px 0 var(--text-outline)) 
-        drop-shadow(-1px -1px 0 var(--text-outline)) 
-        drop-shadow(3px -3px 0 var(--text-outline)) 
-        drop-shadow(-1px 1px 0 var(--text-outline))
-        drop-shadow(6px 6px 0 rgba(0,0,0,0.6));
+    
+    /* Cień identyczny jak w kartach (ostry i czytelny) */
+    filter: drop-shadow(2px 2px 0 var(--text-outline));
+    
+    /* Dodatkowy z-index dla pewności */
+    position: relative;
+    z-index: 20;
 }
 
 /* --- GRID (UKŁAD 2x2 - DUŻE WYPEŁNIENIE) --- */
