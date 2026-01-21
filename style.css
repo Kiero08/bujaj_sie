@@ -27,23 +27,38 @@ body {
 
 /* --- NAWIGACJA --- */
 header {
-    position: sticky; top: 0; z-index: 1000; padding: 15px 0;
+    position: sticky; top: 0; z-index: 1000; padding: 10px 0; /* Trochę mniejszy padding */
     background: var(--nav-dark);
     border-bottom: 4px solid var(--gold);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 nav {
     display: flex; justify-content: space-between; align-items: center;
     max-width: 1200px; margin: 0 auto; padding: 0 30px;
 }
+
+/* Nowe style dla linku z obrazkiem */
 .logo a {
-    font-family: 'Baloo 2', cursive; font-size: 2.2rem; font-weight: 800;
-    text-decoration: none;
-    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px 0 #000);
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Na wszelki wypadek */
 }
-nav ul { list-style: none; display: flex; gap: 20px; }
-nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
+
+/* Style dla samego obrazka logo2.png */
+.logo-nav-img {
+    height: 60px; /* Wysokość dopasowana do paska */
+    width: auto;  /* Szerokość dostosuje się sama */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.5)); /* Lekka poświata cyjanowa */
+}
+
+.logo-nav-img:hover {
+    transform: scale(1.1) rotate(-3deg); /* Fajny efekt przy najechaniu */
+}
+
+nav ul { list-style: none; display: flex; gap: 25px; }
+nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 1rem; transition: 0.3s; }
+nav ul li a:hover { color: var(--neon-cyan); }
 
 /* --- HERO SECTION --- */
 .hero-glass-box {
