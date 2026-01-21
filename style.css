@@ -219,3 +219,22 @@ nav ul li a:hover { color: var(--neon-cyan); }
     .grid { grid-template-columns: 1fr; }
     .offer-item { width: 100%; height: auto; min-height: 250px; }
 }
+/* --- RESPANSYWNOŚĆ NAWIGACJI (MOBILE) --- */
+@media (max-width: 768px) {
+    nav {
+        /* Zmieniamy układ na pionowy (kolumna) */
+        flex-direction: column; 
+        /* Centrujemy elementy */
+        align-items: center; 
+        /* Dodajemy odstęp między logiem a napisami */
+        gap: 15px; 
+    }
+
+    /* Opcjonalnie: trochę więcej miejsca w nagłówku na mobile */
+    header {
+        padding: 15px 0; 
+    }
+
+    /* Opcjonalnie: Jeśli logo wydaje się za duże na telefonie, odkomentuj linię niżej */
+    /* .logo-nav-img { height: 50px; } */
+}
