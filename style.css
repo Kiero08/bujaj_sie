@@ -63,38 +63,42 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
 /* NAGŁÓWEK SEKCJI HERO */
 .hero-section h1 {
     font-family: 'Baloo 2', cursive;
-    font-size: clamp(2.5rem, 8vw, 4.8rem); /* Trochę większy max font */
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 0.95;
     
-    /* DYNAMIKA */
+    /* Dynamika - pochylenie jak w logotypach wyścigowych */
     font-style: italic;
-    transform: skewX(-6deg); /* Lekkie pochylenie dla prędkości */
-    letter-spacing: -1px; /* Ciaśniejsze litery */
+    transform: skewX(-8deg); 
+    font-weight: 900;
+    letter-spacing: -2px;
 
-    /* ZŁOŻONY GRADIENT METALICZNO-OGNISTY */
+    /* RESTRYKCYJNY GRADIENT CHROMOWO-OGNISTY */
     background: linear-gradient(
         to bottom,
-        #6b5b50 0%,   /* Ciemny metal na górze */
-        #4a3f35 40%,  /* Ciemniejszy metal tuż nad horyzontem */
-        #fffbaa 41%,  /* Ostre, jasne odbicie horyzontu */
-        #ffe552 50%,  /* Żółte przejście */
-        #ff4e00 51%,  /* Ognisty pomarańcz */
-        #c70000 100%  /* Głęboka czerwień na dole */
+        #001517 0%,      /* Bardzo ciemny granat na samej górze */
+        #00464b 44%,     /* Chromowany błękit */
+        #ffffff 45%,     /* BIAŁA LINIA HORYZONTU (OSTRE CIĘCIE) */
+        #ffee00 48%,     /* Jaskrawy żółty zaraz pod horyzontem */
+        #ff8c00 65%,     /* Pomarańczowy środek dołu */
+        #ff0000 100%     /* Czerwień na samym dole */
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    /* PANCERNY OBRYS I CIEŃ 3D */
+    /* CIĘŻKI KOMIKSOWY OBRYS (8 warstw dla idealnej szczelności) */
     filter: 
-        /* Gruby czarny obrys */
-        drop-shadow(2px 2px 0 #000) 
-        drop-shadow(-2px -2px 0 #000) 
-        drop-shadow(2px -2px 0 #000) 
-        drop-shadow(-2px 2px 0 #000)
-        /* Głębszy cień dla efektu 3D */
-        drop-shadow(5px 5px 2px rgba(0,0,0,0.7));
-        
+        drop-shadow(3px 3px 0px #000)
+        drop-shadow(-1px -1px 0px #000)
+        drop-shadow(1px -1px 0px #000)
+        drop-shadow(-1px 1px 0px #000)
+        drop-shadow(3px 0px 0px #000)
+        drop-shadow(-3px 0px 0px #000)
+        drop-shadow(0px 3px 0px #000)
+        drop-shadow(0px -3px 0px #000)
+        /* Cień rzucany na tło */
+        drop-shadow(8px 8px 5px rgba(0,0,0,0.8));
+
     position: relative;
     z-index: 20;
 }
