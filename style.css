@@ -68,6 +68,8 @@ nav ul li a:hover { color: var(--neon-cyan); }
     margin-bottom: 20px; 
     display: inline-block;
     animation: swingLogo 5s ease-in-out infinite;
+    /* --- POŚWIATA --- */
+    filter: drop-shadow(0 0 15px var(--neon-cyan))
 }
 @keyframes swingLogo {
     0%, 100% { transform: rotate(-5deg); }
