@@ -1,7 +1,6 @@
-/* --- 1. IMPORT CZCIONEK --- */
+/* --- 1. IMPORT & CONFIG --- */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Outfit:wght@300;400;700;900&display=swap');
 
-/* --- 2. PALETA KOLORÓW --- */
 :root {
     --deep-teal: #006064;
     --neon-cyan: #00e5ff;
@@ -26,31 +25,21 @@ body {
     overflow-x: hidden;
 }
 
-/* --- NAWIGACJA (LOGO2.PNG) --- */
+/* --- NAWIGACJA --- */
 header {
     position: sticky; top: 0; z-index: 1000; padding: 10px 0;
     background: var(--nav-dark);
     border-bottom: 4px solid var(--gold);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 nav {
     display: flex; justify-content: space-between; align-items: center;
     max-width: 1200px; margin: 0 auto; padding: 0 30px;
 }
-.logo a {
-    display: flex; align-items: center; text-decoration: none;
-}
-.logo-nav-img {
-    height: 60px; width: auto;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.5));
-}
-.logo-nav-img:hover {
-    transform: scale(1.1) rotate(-3deg);
-}
+.logo-nav-img { height: 60px; transition: 0.3s; filter: drop-shadow(0 0 5px var(--neon-cyan)); }
+.logo-nav-img:hover { transform: scale(1.1) rotate(-3deg); }
 nav ul { list-style: none; display: flex; gap: 25px; }
-nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 1rem; transition: 0.3s; }
-nav ul li a:hover { color: var(--neon-cyan); }
+nav ul li a { text-decoration: none; color: #fff; font-weight: 700; transition: 0.3s; }
+nav ul li a:hover, .active-link { color: var(--gold) !important; }
 
 /* --- HERO SECTION --- */
 .hero-glass-box {
@@ -58,645 +47,125 @@ nav ul li a:hover { color: var(--neon-cyan); }
     border-radius: 40px; border: 3px solid var(--gold);
     padding: 50px 40px; max-width: 900px; margin: 40px auto;
     text-align: center; backdrop-filter: blur(20px);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
 }
-
 .hero-logo-img { 
-    max-width: 550px; 
-    width: 100%; 
-    height: auto; 
-    margin-bottom: 20px; 
-    
-    /* KLUCZ DO EFEKTU HUŚTAWKI: "Wieszamy" logo za górną krawędź */
+    max-width: 550px; width: 100%; height: auto; margin-bottom: 20px;
     transform-origin: top center;
-    
-    /* Zmieniamy czas na 3s i dodajemy 'alternate', żeby ruch był płynniejszy (lewo-prawo-lewo...) */
-    animation: swingLogo 3s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite;
+    animation: swingLogo 3s ease-in-out infinite alternate;
 }
-@keyframes swingLogo { 
-    /* Wychylenie w lewo */
-    0% { transform: rotate(10deg); } 
-    /* Wychylenie w prawo */
-    100% { transform: rotate(-10deg); } 
-}
-@keyframes glowPulse { 0%, 100% { filter: drop-shadow(0 0 10px var(--neon-cyan)); } 50% { filter: drop-shadow(0 0 25px var(--neon-cyan)) brightness(1.2); } }
+@keyframes swingLogo { 0% { transform: rotate(10deg); } 100% { transform: rotate(-10deg); } }
 
-/* H1 - STYL "BUJAJ SIĘ" (ZŁOTY GRADIENT, BEZ CZERWIENI) */
-.hero-section h1 {
+/* NAPRAWIONE H1 (BEZ NEONU, CZYSTY GRADIENT) */
+.hero-section h1, .page-title, .section-title {
     font-family: 'Baloo 2', cursive;
-    font-size: clamp(3rem, 9vw, 5.5rem);
+    font-size: clamp(2.5rem, 8vw, 5rem);
     text-transform: uppercase;
     font-weight: 900;
     line-height: 1.1;
-    font-style: normal; 
-    letter-spacing: 1px;
-    margin-top: 10px;
-
-    background: linear-gradient(
-        180deg,
-        #fff9c4 0%,    /* Maślany żółty */
-        #ffeb3b 40%,   /* Cytryna */
-        #ffc107 60%,   /* Ciepły żółty */
-        #ff9800 100%   /* Bursztyn */
-    );
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
-    filter: 
-        drop-shadow(2.5px 2.5px 0px #000)
-        drop-shadow(-2.5px -2.5px 0px #000)
-        drop-shadow(2.5px -2.5px 0px #000)
-        drop-shadow(-2.5px 2.5px 0px #000)
-        drop-shadow(5px 5px 2px rgba(0,0,0,0.6));
-
-    position: relative; z-index: 20;
-}
-
-/* --- PRZYCISK REZERWUJ (STYL CARTOON/JUICY) --- */
-.hero-btn {
+    filter: drop-shadow(3px 3px 0 var(--text-outline)) drop-shadow(-1px -1px 0 var(--text-outline));
     display: inline-block;
-    margin-top: 40px; /* Odstęp od napisu CENTRUM... */
-    padding: 15px 60px;
-    
-    font-family: 'Baloo 2', cursive;
-    font-size: 2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 1px;
-    
-    /* Kolory - ciemny tekst na złotym tle dla kontrastu */
-    color: #2c1a0a; 
+}
+.page-title { animation: floatTitle 3s ease-in-out infinite; }
+@keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* PRZYCISK REZERWUJ */
+.hero-btn {
+    display: inline-block; margin-top: 30px; padding: 15px 50px;
+    font-family: 'Baloo 2', cursive; font-size: 1.8rem; font-weight: 900;
+    color: #2c1a0a; text-decoration: none;
     background: linear-gradient(180deg, #fff9c4 0%, #ffc107 50%, #ff9800 100%);
-    
-    /* Kształt i obrys */
-    border: 3px solid #000;
-    border-radius: 50px;
-    
-    /* EFEKTY: Twardy cień 3D (czarny) + Poświata (złota) */
-    box-shadow: 
-        0 6px 0 #000,                /* Twardy spód przycisku */
-        0 0 25px rgba(255, 193, 7, 0.6); /* Neonowa poświata */
-        
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    z-index: 30;
+    border: 3px solid #000; border-radius: 50px;
+    box-shadow: 0 6px 0 #000; transition: 0.2s;
 }
+.hero-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 0 #000; }
+.hero-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #000; }
 
-/* Stan po najechaniu (Hover) - Przycisk rośnie i jaśnieje */
-.hero-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    background: linear-gradient(180deg, #ffffff 0%, #ffeb3b 50%, #ffc107 100%);
-    box-shadow: 
-        0 10px 0 #000, 
-        0 0 40px rgba(255, 193, 7, 1);
-    cursor: pointer;
-}
-
-/* Stan wciśnięcia (Active) - Przycisk się zapada */
-.hero-btn:active {
-    transform: translateY(4px) scale(0.98);
-    box-shadow: 
-        0 2px 0 #000,
-        0 0 15px rgba(255, 193, 7, 0.4);
-}
-
-/* RESPANSYWNOŚĆ: Mniejszy przycisk na telefonie */
-@media (max-width: 600px) {
-    .hero-btn {
-        padding: 12px 40px;
-        font-size: 1.5rem;
-        margin-top: 25px;
-    }
-}
-/* --- GRID / KONTENERY --- */
-.container { 
-    width: 100%; max-width: 1300px; margin: 0 auto; 
-    padding: 20px 40px 80px; 
-}
-
-.grid { 
-    display: grid;
-    grid-template-columns: repeat(2, 550px); 
-    gap: 30px; 
-    justify-content: center;
-}
-
+/* --- GRID OFERTA --- */
+.container { max-width: 1300px; margin: 0 auto; padding: 20px 40px; }
+.grid { display: grid; grid-template-columns: repeat(2, 550px); gap: 30px; justify-content: center; }
 .offer-item {
-    background-color: var(--card-dark);
-    border: 4px solid var(--gold);
-    border-radius: 30px;
-    padding: 30px;
-    position: relative;
-    height: 300px; width: 550px; /* Bazowe wymiary desktop */
-    overflow: hidden;
-    display: flex; flex-direction: column; justify-content: flex-start; text-align: left;
-    box-shadow: inset 0 0 40px #000, 0 10px 30px rgba(0,0,0,0.5);
-    transition: 0.3s ease;
+    background-color: var(--card-dark); border: 4px solid var(--gold);
+    border-radius: 30px; padding: 30px; position: relative;
+    height: 300px; overflow: hidden; transition: 0.3s;
 }
 .offer-item:hover { transform: scale(1.02); }
-
-/* TŁA KART */
-.card-bilard { background-color: #0a4d2e; } /* Zielone sukno */
-.card-shuffle { 
-    background-image: url('shuffle_bg.png'); 
-    background-size: cover; background-position: center; 
-}
-.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
-.card-pilkarzyki { 
-    background-image: url('pilkarzyki_bg.png'); 
-    /* KLUCZOWA ZMIANA: Wymuszamy rozciągnięcie na 100% szerokości i wysokości */
-    background-size: 100% 100%; 
-    background-position: center; 
-    background-repeat: no-repeat;
-}
-
-/* GRADIENT PRZYCIEMNIAJĄCY NA TŁA Z OBRAZKAMI */
-.photo-bg::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.7));
-    z-index: 1;
-}
-.card-planszowki.photo-bg::before {
-    /* Zmieniamy dolną wartość z 0.7 na 0.45, żeby odsłonić więcej zdjęcia */
-    background: linear-gradient(to bottom, var(--overlay), rgba(0, 0, 0, 0.45));
-}
-
-/* TYPOGRAFIA W KARTACH */
 .offer-item h2 {
     font-family: 'Baloo 2', cursive; font-size: 2rem;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     filter: drop-shadow(2px 2px 0 var(--text-outline)) drop-shadow(-1px -1px 0 var(--text-outline));
-    position: relative; z-index: 20; margin-bottom: 8px;
+    position: relative; z-index: 20;
 }
-.offer-item p { 
-    position: relative; z-index: 20; font-size: 1.1rem; color: #fff; 
-    line-height: 1.3; text-shadow: 1px 1px 3px #000;
+.offer-item p { position: relative; z-index: 20; color: #fff; line-height: 1.4; text-shadow: 1px 1px 3px #000; }
+
+/* TŁA I GRADIENTY */
+.photo-bg::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.7)); z-index: 1;
 }
+.card-bilard { background-color: #0a4d2e; }
+.card-shuffle { background-image: url('shuffle_bg.png'); background-size: cover; }
+.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; }
+.card-planszowki.photo-bg::before { background: linear-gradient(to bottom, var(--overlay), rgba(0, 0, 0, 0.45)); }
+.card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; }
 
-/* --- SVG I ELEMENTY GRAFICZNE --- */
-.table-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.7; pointer-events: none; }
+/* --- ANIMACJE OBIEKTÓW --- */
+.game-obj { position: absolute; z-index: 15; }
 
-.pocket { position: absolute; background: #000; border: 2px solid var(--gold); z-index: 10; }
-.p-tl { top: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 0 40px 0; }
-.p-tr { top: -5px; right: -5px; width: 50px; height: 50px; border-radius: 0 0 0 40px; }
-.p-bl { bottom: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 40px 0 0; }
-.p-br { bottom: -5px; right: -5px; width: 50px; height: 50px; border-radius: 40px 0 0 0; }
-
-/* --- ANIMACJE (BILARD & SHUFFLE & INNE) --- */
-.game-obj { position: absolute; z-index: 15; opacity: 0; }
-
-/* 1. BILARD - TRICK SHOT */
-.ball-8 { 
-    width: 40px; height: 40px; background: #000; border-radius: 50%; 
-    background-image: radial-gradient(circle at 30% 30%, #333, #000); 
-    display: flex; align-items: center; justify-content: center; 
-    top: 50%; left: 15%; 
-}
+/* 1. BILARD */
+.ball-8 { width: 40px; height: 40px; background: #000; border-radius: 50%; top: 50%; left: 15%; opacity:0; background-image: radial-gradient(circle at 30% 30%, #333, #000); display: flex; align-items: center; justify-content: center;}
 .ball-8::after { content: '8'; font-size: 0.8rem; width: 18px; height: 18px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
 .card-bilard:hover .ball-8 { animation: bAnim 3s linear forwards; }
+@keyframes bAnim { 0% { top: 50%; left: 15%; opacity: 1; } 35% { top: 86%; left: 45%; } 70% { top: 4%; left: 75%; } 100% { top: 86%; left: 90%; transform: scale(0.3); opacity: 0; } }
 
-@keyframes bAnim {
-    0% { top: 50%; left: 15%; transform: scale(1); opacity: 1; }
-    35% { top: 86%; left: 45%; } /* Banda dół */
-    70% { top: 4%; left: 75%; opacity: 1; transform: scale(1); } /* Banda góra */
-    90% { top: 75%; left: 88%; opacity: 1; transform: scale(1); } /* Tuż przed łuzą (widoczna) */
-    100% { top: 86%; left: 90%; transform: scale(0.3); opacity: 0; } /* Wpadnięcie */
-}
-
-/* 2. SHUFFLEBOARD - CZERWONY KORPUS KRĄŻKA Z METALOWYM ŚRODKIEM */
-.puck-shuffle { 
-    width: 40px; height: 40px; border-radius: 50%; 
-    background: radial-gradient(circle at 30% 30%, #ff6666 0%, #cc0000 50%, #800000 100%);
-    top: 45%; left: 10%; 
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-/* METALOWY KAPSEL W ŚRODKU */
-.puck-shuffle::after {
-    content: ''; width: 22px; height: 22px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #fff 0%, #e0e0e0 30%, #a0a0a0 60%, #505050 100%);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
-    border: 1px solid #b0b0b0;
-}
-
+/* 2. SHUFFLEBOARD */
+.puck-shuffle { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff6666, #800000); top: 45%; left: 10%; opacity: 0; display: flex; align-items: center; justify-content: center; }
+.puck-shuffle::after { content: ''; width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, #505050); border: 1px solid #b0b0b0; }
 .card-shuffle:hover .puck-shuffle { animation: sAnim 3s ease-out forwards; }
-@keyframes sAnim {
-    0% { left: 10%; opacity: 1; }
-    100% { left: 92%; opacity: 1; }
-}
+@keyframes sAnim { 0% { left: 10%; opacity: 1; } 100% { left: 92%; opacity: 1; } }
 
-/* 3. LUDO - USTAWIENIA OGÓLNE */
-.pawn-ludo {
-    width: 30px; height: 45px; display: flex; flex-direction: column; align-items: center;
-    bottom: 5%; left: 50%; transform: translateX(-50%); /* Start na środku dołu */
-}
-.pawn-head { width: 16px; height: 16px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -4px; z-index: 2; }
+/* 3. LUDO (PIONEK) */
+.pawn-ludo { width: 30px; height: 45px; bottom: 5%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+.pawn-head { width: 16px; height: 16px; background: var(--gold); border: 2px solid #000; border-radius: 50%; }
 .pawn-body { width: 24px; height: 28px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 10% 10%; }
+.card-planszowki:hover .pawn-ludo { animation: lAnimDesktop 2.2s ease-in-out forwards; }
+@keyframes lAnimDesktop { 0% { bottom: 5%; } 35% { bottom: 20%; } 55% { bottom: 8%; } 100% { bottom: 42%; transform: translateX(-50%) scale(1.3); } }
 
-/* --- WERSJA DESKTOP (DOMYŚLNA): 2 SKOKI, LĄDOWANIE NA 42% --- */
-.card-planszowki:hover .pawn-ludo { 
-    /* Czas 2.2s jest optymalny dla 2 skoków */
-    animation: lAnimDesktop 2.2s ease-in-out forwards; 
-}
+/* 4. PIŁKARZYKI */
+.soccer-ball { width: 22px; height: 22px; background: #fff; border-radius: 50%; top: 50%; left: 50%; z-index: 15; border: 1px solid #000; }
+.card-pilkarzyki:hover .soccer-ball { animation: fAnim 7s linear forwards; }
+@keyframes fAnim { 0% { top: 50%; left: 50%; opacity: 1; } 50% { top: 10%; left: 20%; } 80% { top: 50%; left: 85%; opacity: 1; } 95% { top: 50%; left: 98%; opacity: 1; } 100% { top: 50%; left: 105%; opacity: 0; } }
 
-@keyframes lAnimDesktop {
-    0% { bottom: 5%; transform: translateX(-50%) scale(1); opacity: 1; }
-    
-    /* Skok 1 */
-    35% { bottom: 20%; transform: translateX(-50%) scale(1.1) translateY(-5px); }
-    55% { bottom: 8%; transform: translateX(-50%) scale(1); } /* Lądowanie */
-
-    /* Skok 2 (Finał na 42%) */
-    80% { bottom: 50%; transform: translateX(-50%) scale(1.2) translateY(-10px); } /* Wyskakuje trochę wyżej */
-    100% {
-        bottom: 40%; /* Stop tuż pod środkiem */
-        transform: translateX(-50%) scale(1.3);
-        opacity: 1;
-    }
-}
-
-/* --- WERSJA MOBILNA: 3 SKOKI (ZDEFINIOWANA OSOBNO) --- */
-@keyframes lAnimMobile {
-    0% { bottom: 5%; transform: translateX(-50%) scale(1); opacity: 1; }
-    
-    /* Skok 1 */
-    15% { bottom: 18%; transform: translateX(-50%) scale(1.1) translateY(-5px); }
-    30% { bottom: 15%; transform: translateX(-50%) scale(1); }
-
-    /* Skok 2 */
-    45% { bottom: 30%; transform: translateX(-50%) scale(1.1) translateY(-5px); }
-    60% { bottom: 27%; transform: translateX(-50%) scale(1); }
-
-    /* Skok 3 (Finał) */
-    80% { bottom: 50%; transform: translateX(-50%) scale(1.2) translateY(-10px); }
-    100% {
-        bottom: 40%; /* Stop pod środkiem */
-        transform: translateX(-50%) scale(1.3);
-        opacity: 1;
-    }
-}
-
-/* 4. PIŁKARZYKI (CHAOS I GOL) */
-.soccer-ball {
-    width: 22px; height: 22px;
-    background: #fff; border-radius: 50%; border: 1px solid #000;
-    /* Start na środku */
-    top: 50%; left: 50%;
-    /* Tekstura piłki, żeby było widać obrót */
-    background-image: radial-gradient(circle at 30% 30%, #fff 40%, #222 60%, #fff 70%);
-    background-size: 150% 150%;
-    z-index: 15;
-}
-
-/* Wyzwalacz: 7 sekund, ruch liniowy (stała prędkość), zatrzymuje się na końcu (forwards) */
-.card-pilkarzyki:hover .soccer-ball {
-    animation: fAnim 7s linear forwards;
-}
-
-/* NOWA ŚCIEŻKA: Długie ruchy, nagłe zwroty, finał w bramce */
-@keyframes fAnim {
-    0% { top: 50%; left: 50%; opacity: 1; transform: scale(1) rotate(0deg); }
-
-    /* --- FAZA CHAOSU --- */
-    10% { top: 15%; left: 20%; }
-    22% { top: 85%; left: 80%; }
-    35% { top: 50%; left: 5%;  }
-    48% { top: 10%; left: 60%; }
-    60% { top: 90%; left: 30%; }
-    75% { top: 25%; left: 90%; }
-
-    /* --- FAZA STRZAŁU --- */
-    88% { 
-        top: 50%; left: 85%; 
-        opacity: 1; /* Wciąż widoczna */
-        transform: scale(1) rotate(720deg); 
-    }
-
-    /* --- NOWA KLATKA (95%) - TU JEST ZMIANA --- */
-    /* Utrzymujemy widoczność prawie do samego końca (ok. 0.5s dłużej niż wcześniej) */
-    95% {
-        top: 50%; 
-        left: 98%; /* Już w świetle bramki */
-        opacity: 1; /* NADAL 100% WIDOCZNA */
-        transform: scale(0.8) rotate(900deg);
-    }
-
-    /* --- KONIEC (100%) --- */
-    100% {
-        top: 50%;
-        left: 105%;     /* Głęboko w siatce */
-        opacity: 0;     /* Dopiero teraz znika (szybki fade-out) */
-        transform: scale(0.5) rotate(1080deg);
-    }
-}
-
-/* --- RESPANSYWNOŚĆ (MEDIA QUERIES) --- */
-
-/* 1. Laptopy i Tablety (poniżej 1200px) */
-@media (max-width: 1200px) {
-    .grid { grid-template-columns: 550px; }
-}
-
-/* 2. Tablety pionowo / Duże telefony (poniżej 768px) */
-@media (max-width: 768px) {
-    nav { flex-direction: column; align-items: center; gap: 15px; }
-    header { padding: 10px 0; }
-    .logo-nav-img { height: 50px; }
-}
-
-/* 3. Telefony (poniżej 600px) */
-@media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; gap: 20px; padding: 0 15px; }
-    .offer-item { 
-        width: 100%; height: auto; min-height: 250px; 
-        padding: 20px; 
-    }
-    .offer-item h2 { font-size: 1.6rem; margin-bottom: 5px; }
-    .offer-item p { font-size: 0.95rem; line-height: 1.3; }
-    .hero-section h1 { font-size: 2.2rem; }
-    .hero-glass-box { padding: 30px 20px; }
-}
-
-/* --- ZMIANA ANIMACJI DLA LUDO NA MOBILE (3 SKOKI) --- */
-    .card-planszowki:hover .pawn-ludo {
-        /* Nadpisujemy nazwę animacji na wersję mobilną i wydłużamy czas do 3s */
-        animation: lAnimMobile 3s ease-in-out forwards;
-    }
-/* --- STYLE DLA PODSTRONY WYDARZENIA --- */
-
-/* 1. Mniejszy nagłówek dla podstron */
-.small-hero {
-    padding: 30px 40px;
-    margin-bottom: 50px;
-}
-.page-title {
-    font-family: 'Baloo 2', cursive;
-    font-size: 3.5rem;
-    text-transform: uppercase;
-    color: #fff;
-    margin: 0;
-    line-height: 1;
-    text-shadow: 3px 3px 0 #000;
-}
-.neon-text {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 15px var(--neon-cyan);
-}
-.subtitle {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    letter-spacing: 1px;
-    color: var(--gold);
-}
-
-/* 2. Lista wydarzeń (Pionowa) */
-.events-list {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* 3. Karta wydarzenia (Wygląd biletu) */
+/* --- WYDARZENIA & KARTY --- */
+.latest-event-section { margin-top: 80px; text-align: center; }
+.events-list { display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 0 auto; }
 .event-card {
-    display: flex;
-    align-items: center;
-    background-color: var(--card-dark);
-    border: 2px solid var(--gold);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: 0.3s transform;
-    position: relative;
-    overflow: hidden;
+    display: flex; align-items: center; background: var(--card-dark);
+    border: 2px solid var(--gold); border-radius: 20px; padding: 20px; text-align: left;
 }
-
-.event-card:hover {
-    transform: translateX(10px); /* Efekt wsunięcia przy najechaniu */
-    border-color: var(--neon-cyan);
-    box-shadow: 0 5px 25px rgba(0, 229, 255, 0.2);
-}
-
-/* Wyróżniona karta (np. Walentynki) */
-.highlight-card {
-    border: 2px solid #ff4081; /* Różowy border */
-    background: linear-gradient(90deg, var(--card-dark) 60%, rgba(255, 64, 129, 0.1) 100%);
-}
-.highlight-card:hover {
-    border-color: #ff80ab;
-    box-shadow: 0 5px 25px rgba(255, 64, 129, 0.3);
-}
-
-/* 4. Sekcja Daty (Lewa strona) */
-.event-date {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    padding: 15px;
-    border-radius: 15px;
-    min-width: 90px;
-    border: 1px solid #333;
-    margin-right: 25px;
-}
-.event-date .day {
-    font-family: 'Baloo 2', cursive;
-    font-size: 2.2rem;
-    line-height: 1;
-    color: #fff;
-    font-weight: 900;
-}
-.event-date .month {
-    font-size: 1rem;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-.highlight-card .event-date .month { color: #ff4081; }
-
-/* 5. Treść wydarzenia (Środek) */
-.event-content {
-    flex-grow: 1; /* Zajmuje resztę miejsca */
-}
-.event-content h3 {
-    font-family: 'Baloo 2', cursive;
-    font-size: 1.8rem;
-    color: #fff;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-.event-content .time {
-    color: var(--neon-cyan);
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-.event-content .desc {
-    font-size: 1rem;
-    color: #ddd;
-    line-height: 1.4;
-    max-width: 90%;
-}
-
-/* 6. Przycisk w karcie (Prawa strona) */
+.highlight-card { border-color: #ff4081; background: linear-gradient(90deg, var(--card-dark) 60%, rgba(255,64,129,0.1)); }
+.event-date { background: #000; padding: 15px; border-radius: 15px; margin-right: 20px; text-align: center; min-width: 90px; }
+.event-date .day { font-size: 2rem; font-weight: 900; font-family: 'Baloo 2'; display: block; }
+.event-date .month { color: var(--gold); font-weight: 700; }
+.event-content { flex-grow: 1; }
 .small-btn {
-    display: inline-block;
-    padding: 10px 25px;
-    font-family: 'Baloo 2', cursive;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #000;
-    background: var(--gold);
-    border-radius: 30px;
-    border: 2px solid #000;
-    box-shadow: 3px 3px 0 #000;
-    transition: 0.2s;
-    white-space: nowrap; /* Tekst się nie łamie */
-}
-.small-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 0 #000;
-    background: #fff;
-}
-.small-btn:active {
-    transform: translateY(2px);
-    box-shadow: 1px 1px 0 #000;
+    padding: 10px 20px; background: var(--gold); color: #000; text-decoration: none;
+    font-weight: 800; border-radius: 20px; border: 2px solid #000; box-shadow: 3px 3px 0 #000;
 }
 
-/* Wyróżnienie aktywnego linku w menu */
-.active-link {
-    color: var(--gold) !important;
-    border-bottom: 2px solid var(--gold);
-}
-
-/* RESPANSYWNOŚĆ WYDARZEŃ */
-@media (max-width: 768px) {
-    .event-card {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
-    .event-date {
-        flex-direction: row; /* Data poziomo na telefonie */
-        gap: 10px;
-        min-width: 100%;
-        margin-right: 0;
-        margin-bottom: 15px;
-        padding: 10px;
-    }
-    .event-date .day { font-size: 1.8rem; }
-    .event-content h3 { font-size: 1.5rem; }
-    .event-action {
-        width: 100%;
-        text-align: right;
-        margin-top: 15px;
-    }
-    .page-title { font-size: 2.2rem; }
-}
-
-/* --- ANIMOWANY NAGŁÓWEK PODSTRONY --- */
-
-/* Zaktualizowana klasa nagłówka */
-.page-title {
-    font-family: 'Baloo 2', cursive;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1.1;
-    /* Gradient żółto-pomarańczowy */
-    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    /* Ważne dla płynności animacji */
-    display: inline-block;
-    position: relative;
-
-    /* PRZYPISANIE DWÓCH ANIMACJI JEDNOCZEŚNIE:
-       1. floatTitle: Wolne unoszenie (3s)
-       2. pulseTitleGlow: Szybsze pulsowanie neonem (2s)
-    */
-    animation:
-        floatTitle 3s ease-in-out infinite,
-        pulseTitleGlow 2s ease-in-out infinite;
-}
-
-/* Animacja 1: Delikatne unoszenie góra/dół */
-@keyframes floatTitle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); } /* Lekkie uniesienie */
-}
-
-/* --- FIX NA WYSTAJĄCY TEKST W WERSJI MOBILNEJ --- */
+/* --- MOBILE FIXES --- */
+@media (max-width: 1200px) { .grid { grid-template-columns: 550px; } }
+@media (max-width: 768px) { nav { flex-direction: column; gap: 10px; } }
 @media (max-width: 600px) {
-    
-    /* 1. Zmniejszamy nagłówek na telefonie */
-    .page-title {
-        /* Było clamp(...), ale na mobile ustawiamy sztywno mniej */
-        font-size: 2rem; 
-        
-        /* KLUCZOWE: Pozwala przełamać słowo w połowie, jeśli się nie mieści */
-        overflow-wrap: break-word; 
-        word-wrap: break-word;
-        hyphens: auto;
-    }
-
-    /* 2. Dajemy więcej miejsca wewnątrz ramki */
-    .hero-glass-box.small-hero {
-        padding: 30px 15px; /* Zmniejszamy boczny padding z 40px na 15px */
-        width: 100%;        /* Upewniamy się, że box nie wychodzi poza ekran */
-    }
-    
-    /* Opcjonalnie: poprawiamy też podtytuł */
-    .subtitle {
-        font-size: 1rem;
-    }
+    .grid { grid-template-columns: 1fr; padding: 0 15px; }
+    .offer-item { width: 100%; }
+    .hero-glass-box { padding: 30px 15px; }
+    .event-card { flex-direction: column; gap: 15px; }
+    .event-date { width: 100%; flex-direction: row; display: flex; justify-content: center; gap: 10px; }
+    /* Mobile jumps for pawn */
+    .card-planszowki:hover .pawn-ludo { animation: lAnimMobile 3s ease-in-out forwards; }
 }
-
-/* --- SEKCJA "NAJBLIŻSZE WYDARZENIE" NA STRONIE GŁÓWNEJ --- */
-
-.latest-event-section {
-    margin-top: 80px;      /* Wyraźny odstęp od kafelków oferty */
-    margin-bottom: 60px;   /* Odstęp od stopki */
-    padding: 0 20px;       /* Margines boczny na wypadek wąskich ekranów */
-}
-
-/* Styl nagłówka sekcji - identyczny jak h2 w kafelkach */
-.section-title {
-    text-align: center;
-    font-family: 'Baloo 2', cursive;
-    font-size: 2.8rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    
-    /* Złoty gradient */
-    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-    /* Twardy obrys */
-    filter: 
-        drop-shadow(3px 3px 0 var(--text-outline)) 
-        drop-shadow(-1px -1px 0 var(--text-outline));
-}
-
-/* Responsywność nagłówka dla mniejszych ekranów */
-@media (max-width: 600px) {
-    .latest-event-section {
-        margin-top: 50px;
-    }
-    .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
-    }
-}
+@keyframes lAnimMobile { 0% { bottom: 5%; } 30% { bottom: 20%; } 60% { bottom: 35%; } 100% { bottom: 40%; transform: translateX(-50%) scale(1.3); } }
