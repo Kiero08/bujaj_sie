@@ -54,20 +54,24 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
 }
 .hero-logo-img { max-width: 200px; width: 100%; height: auto; margin-bottom: 15px; }
 
-/* --- SIATKA KART (UKŁAD 2x2) --- */
+/* --- SIATKA KART (UKŁAD 2x2 - ZWARTY) --- */
 .container { 
-    max-width: 1300px; /* Miejsce na 2x600px + odstęp */
+    width: 100%;
+    max-width: 1300px; /* Kontener zewnętrzny */
     margin: 0 auto; 
     padding: 20px; 
 }
 
 .grid { 
     display: grid;
-    /* TYLKO 2 KOLUMNY - 03 i 04 spadną pod spód */
-    grid-template-columns: repeat(2, 1fr); 
+    /* Wymuszamy 2 kolumny o szerokości 600px */
+    grid-template-columns: repeat(2, 600px); 
+    /* Dystans dokładnie 30px między lewą a prawą kolumną */
     gap: 30px; 
-    justify-items: center;
+    /* Wyśrodkowanie całego bloku 2x2 na stronie */
+    justify-content: center; 
     align-items: stretch;
+    margin: 0 auto;
 }
 
 .offer-item {
@@ -76,13 +80,12 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
     border-radius: 25px;
     padding: 25px;
     position: relative;
-    min-height: 300px;
-    width: 100%;
-    max-width: 450px; /* TWOJA SZEROKOŚĆ */
+    min-height: 150px;
+    width: 300px; /* Twoja szerokość */
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* NAPISY NA GÓRZE */
+    justify-content: flex-start;
     text-align: left;
     box-shadow: inset 0 0 50px #000, 0 10px 20px rgba(0,0,0,0.5);
     transition: 0.4s;
@@ -97,6 +100,7 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
     background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.85));
     z-index: 1;
 }
+/* Pamiętaj o rozszerzeniach plików: .png lub .jpg */
 .card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
 .card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
 
@@ -149,12 +153,12 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
 @keyframes ludoAnim { 0% { top: 70%; left: 10%; opacity: 0; } 100% { top: 45%; left: 45%; opacity: 1; transform: scale(1.2); } }
 @keyframes foosAnim { 0% { top: 50%; left: 50%; } 25% { top: 20%; left: 75%; } 50% { top: 80%; left: 25%; } 75% { top: 30%; left: 85%; } 100% { top: 50%; left: 50%; } }
 
-/* --- RESPANSYWNOŚĆ (UKŁAD PIONOWY) --- */
-@media (max-width: 1280px) {
-    .grid { grid-template-columns: 1fr; }
-    .container { max-width: 640px; }
+/* --- RESPANSYWNOŚĆ --- */
+@media (max-width: 1250px) {
+    /* Gdy ekran jest węższy niż cały blok 2x2, przechodzimy w pion */
+    .grid { grid-template-columns: 1fr; width: 100%; max-width: 600px; }
 }
-@media (max-width: 768px) {
-    .offer-item { max-width: 100%; min-height: 350px; }
+@media (max-width: 640px) {
+    .offer-item { width: 100%; max-width: 100%; min-height: 350px; }
     .logo a { font-size: 1.8rem; }
 }
