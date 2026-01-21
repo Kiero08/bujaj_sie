@@ -133,8 +133,13 @@ nav ul li a:hover { color: var(--neon-cyan); }
     background-size: cover; background-position: center; 
 }
 .card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
-.card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
-
+.card-pilkarzyki { 
+    background-image: url('pilkarzyki_bg.png'); 
+    /* KLUCZOWA ZMIANA: Wymuszamy rozciągnięcie na 100% szerokości i wysokości */
+    background-size: 100% 100%; 
+    background-position: center; 
+    background-repeat: no-repeat;
+}
 
 /* GRADIENT PRZYCIEMNIAJĄCY NA TŁA Z OBRAZKAMI */
 .photo-bg::before {
