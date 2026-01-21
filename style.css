@@ -434,25 +434,17 @@ nav ul li a:hover { color: var(--neon-cyan); }
 }
 .page-title {
     font-family: 'Baloo 2', cursive;
-    /* Duży rozmiar, ale responsywny */
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 900;
+    font-size: 3.5rem;
     text-transform: uppercase;
+    color: #fff;
     margin: 0;
-    line-height: 1.1;
-
-    /* GRADIENT (Góra jasna, dół ciemny) */
-    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    /* TWARDY OBRYS (Symulowany filtrami drop-shadow) */
-    filter: 
-        drop-shadow(3px 3px 0 var(--text-outline)) 
-        drop-shadow(-1px -1px 0 var(--text-outline));
-        
-    /* Usunąłem stare text-shadow, bo gryzie się z gradientem */
-
+    line-height: 1;
+    text-shadow: 3px 3px 0 #000;
+}
+.neon-text {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 15px var(--neon-cyan);
+}
 .subtitle {
     font-size: 1.2rem;
     margin-top: 10px;
@@ -642,23 +634,6 @@ nav ul li a:hover { color: var(--neon-cyan); }
 @keyframes floatTitle {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); } /* Lekkie uniesienie */
-}
-
-/* Animacja 2: Pulsowanie neonowego obrysu */
-@keyframes pulseTitleGlow {
-    0%, 100% {
-        /* Stan bazowy: tylko twardy czarny obrys */
-        filter:
-            drop-shadow(3px 3px 0 var(--text-outline))
-            drop-shadow(-1px -1px 0 var(--text-outline));
-    }
-    50% {
-        /* Stan "włączony": obrys + cyjanowa poświata */
-        filter:
-            drop-shadow(3px 3px 0 var(--text-outline))
-            drop-shadow(-1px -1px 0 var(--text-outline))
-            drop-shadow(0 0 20px var(--neon-cyan)); /* Dodatkowy glow */
-    }
 }
 
 /* --- FIX NA WYSTAJĄCY TEKST W WERSJI MOBILNEJ --- */
