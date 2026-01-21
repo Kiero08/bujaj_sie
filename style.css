@@ -85,8 +85,8 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
     background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.85));
     z-index: 1;
 }
-.card-planszowki { background-image: url('planszowki_bg.jpg'); background-size: cover; background-position: center; }
-.card-pilkarzyki { background-image: url('pilkarzyki_bg.jpg'); background-size: cover; background-position: center; }
+.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
+.card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
 
 .offer-item h2 {
     font-family: 'Baloo 2', cursive; font-size: 1.8rem;
