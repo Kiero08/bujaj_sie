@@ -31,7 +31,6 @@ header {
     position: sticky; top: 0; z-index: 1000; padding: 15px 0;
     background: var(--nav-dark);
     border-bottom: 4px solid var(--gold);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 nav {
     display: flex; justify-content: space-between; align-items: center;
@@ -45,66 +44,49 @@ nav {
     filter: drop-shadow(2px 2px 0 #000);
 }
 nav ul { list-style: none; display: flex; gap: 25px; }
-nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 1rem; transition: 0.3s; }
-nav ul li a:hover { color: var(--neon-cyan); }
+nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 1rem; }
 
 /* --- HERO SECTION --- */
 .hero-glass-box {
     background: rgba(0, 20, 25, 0.85);
-    border-radius: 50px; 
-    border: 4px solid var(--gold);
-    padding: 60px 40px; 
-    max-width: 1000px; 
-    margin: 50px auto;
-    text-align: center; 
-    backdrop-filter: blur(25px);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    border-radius: 50px; border: 4px solid var(--gold);
+    padding: 60px 40px; max-width: 1000px; margin: 50px auto;
+    text-align: center; backdrop-filter: blur(25px);
 }
 
 .hero-logo-img { 
-    max-width: 350px; 
-    width: 100%; 
-    height: auto; 
-    margin-bottom: 20px; 
+    max-width: 350px; width: 100%; height: auto; margin-bottom: 25px; 
     display: inline-block;
-    animation: swingLogo 5s ease-in-out infinite;
-    /* --- POŚWIATA --- */
-    filter: drop-shadow(0 0 15px var(--neon-cyan))
-}
-@keyframes swingLogo {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
+    animation: swingLogo 5s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
 }
 
-.hero-section h1 {
-    font-family: 'Baloo 2', cursive; 
-    /* Zostawiamy większy rozmiar dla H1, ale styl dekoracyjny bierzemy z H2 */
-    font-size: clamp(2.5rem, 8vw, 4.5rem); 
+@keyframes swingLogo { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+@keyframes glowPulse { 0%, 100% { filter: drop-shadow(0 0 10px var(--neon-cyan)); } 50% { filter: drop-shadow(0 0 25px var(--neon-cyan)) brightness(1.2); } }
+
+/* --- WSPÓLNY STYL DLA H1 I H2 --- */
+.hero-section h1, .offer-item h2 {
+    font-family: 'Baloo 2', cursive;
     text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 10px;
-    
-    /* Gradient identyczny jak w kartach */
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
-    /* Cień identyczny jak w kartach (ostry i czytelny) */
-    filter: drop-shadow(2px 2px 0 var(--text-outline));
-    
-    /* Dodatkowy z-index dla pewności */
-    position: relative;
-    z-index: 20;
+    /* Identyczny, gruby obrys komiksowy */
+    filter: 
+        drop-shadow(2px 2px 0 var(--text-outline)) 
+        drop-shadow(-1px -1px 0 var(--text-outline)) 
+        drop-shadow(2px -1px 0 var(--text-outline)) 
+        drop-shadow(-1px 2px 0 var(--text-outline))
+        drop-shadow(4px 4px 0 rgba(0,0,0,0.5));
 }
 
-/* --- GRID (UKŁAD 2x2 - DUŻE WYPEŁNIENIE) --- */
-.container { 
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto; 
-    padding: 20px 40px 80px; 
+.hero-section h1 {
+    font-size: clamp(2.5rem, 8vw, 4.2rem);
+    line-height: 1.1;
+    margin-bottom: 10px;
 }
 
+/* --- GRID (2x2) --- */
+.container { max-width: 1400px; margin: 0 auto; padding: 20px 40px 80px; }
 .grid { 
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 550px)); 
@@ -118,62 +100,46 @@ nav ul li a:hover { color: var(--neon-cyan); }
     border-radius: 35px;
     padding: 35px;
     position: relative;
-    /* NOWE MASYWNE WYMIARY */
-    height: 300px;
-    width: 100%;
+    height: 300px; width: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: left;
+    display: flex; flex-direction: column;
+    justify-content: flex-start; text-align: left;
     box-shadow: inset 0 0 60px #000, 0 20px 40px rgba(0,0,0,0.5);
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: 0.4s;
 }
-.offer-item:hover { transform: scale(1.03) translateY(-5px); }
+.offer-item:hover { transform: scale(1.03); }
 
-/* NAKŁADKI FOTO */
-.photo-bg::before {
-    content: '';
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.9));
-    z-index: 1;
-}
-.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
-.card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
-
-/* WIĘKSZE NAPISY W KARTACH */
 .offer-item h2 {
-    font-family: 'Baloo 2', cursive; 
     font-size: 2.2rem;
-    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px 0 var(--text-outline));
-    position: relative; z-index: 20; 
+    line-height: 1;
     margin-bottom: 10px;
 }
+
 .offer-item p { 
-    position: relative; z-index: 20; 
-    font-size: 1.15rem; color: #fff; 
-    line-height: 1.4; 
+    position: relative; z-index: 20; font-size: 1.15rem; color: #fff; line-height: 1.4; 
     text-shadow: 1px 1px 3px #000;
 }
 
-/* SVG BACKGROUNDS DLA 01 i 02 */
-.table-svg {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1; opacity: 0.55; pointer-events: none;
+/* NAKŁADKI FOTO */
+.photo-bg::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.9)); z-index: 1;
 }
+.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; }
+.card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; }
 
-/* --- BILARD POCKETS (DOPASOWANE) --- */
+/* SVG */
+.table-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.55; }
+
+/* --- BILARD POCKETS --- */
 .pocket { position: absolute; background: #000; border: 3px solid var(--gold); z-index: 10; }
 .p-tl { top: -5px; left: -5px; width: 60px; height: 60px; border-radius: 0 0 45px 0; }
 .p-tr { top: -5px; right: -5px; width: 60px; height: 60px; border-radius: 0 0 0 45px; }
 .p-bl { bottom: -5px; left: -5px; width: 60px; height: 60px; border-radius: 0 45px 0 0; }
 .p-br { bottom: -5px; right: -5px; width: 60px; height: 60px; border-radius: 45px 0 0 0; }
 
-/* --- ANIMACJE (SKALOWANE) --- */
-.game-obj { position: absolute; z-index: 15; opacity: 0; pointer-events: none; }
+/* --- ANIMACJE --- */
+.game-obj { position: absolute; z-index: 15; opacity: 0; }
 .offer-item:hover .game-obj { opacity: 1; }
 
 .ball-8 { width: 45px; height: 45px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; top: 40%; left: 15%; }
@@ -186,7 +152,7 @@ nav ul li a:hover { color: var(--neon-cyan); }
 @keyframes sAnim { 100% { left: 85%; } }
 
 .pawn-ludo { width: 35px; height: 55px; display: flex; flex-direction: column; align-items: center; bottom: 10%; left: 15%; }
-.pawn-head { width: 18px; height: 18px; background: var(--gold); border-radius: 50%; border: 2px solid #000; margin-bottom: -5px; z-index: 2; }
+.pawn-head { width: 18px; height: 18px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -5px; z-index: 2; }
 .pawn-body { width: 30px; height: 35px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 10% 10%; }
 .card-planszowki:hover .pawn-ludo { animation: lAnim 2.5s ease-in-out forwards; }
 @keyframes lAnim { 100% { bottom: 45%; left: 50%; transform: scale(1.3); } }
@@ -198,5 +164,4 @@ nav ul li a:hover { color: var(--neon-cyan); }
 /* --- RESPANSYWNOŚĆ --- */
 @media (max-width: 1200px) {
     .grid { grid-template-columns: 1fr; max-width: 600px; }
-    .hero-glass-box { margin: 20px; }
 }
