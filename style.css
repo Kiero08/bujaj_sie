@@ -613,3 +613,54 @@ nav ul li a:hover { color: var(--neon-cyan); }
     }
     .page-title { font-size: 2.2rem; }
 }
+
+/* --- ANIMOWANY NAGŁÓWEK PODSTRONY --- */
+
+/* Zaktualizowana klasa nagłówka */
+.page-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.1;
+    /* Gradient żółto-pomarańczowy */
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Ważne dla płynności animacji */
+    display: inline-block;
+    position: relative;
+
+    /* PRZYPISANIE DWÓCH ANIMACJI JEDNOCZEŚNIE:
+       1. floatTitle: Wolne unoszenie (3s)
+       2. pulseTitleGlow: Szybsze pulsowanie neonem (2s)
+    */
+    animation:
+        floatTitle 3s ease-in-out infinite,
+        pulseTitleGlow 2s ease-in-out infinite;
+}
+
+/* Animacja 1: Delikatne unoszenie góra/dół */
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); } /* Lekkie uniesienie */
+}
+
+/* Animacja 2: Pulsowanie neonowego obrysu */
+@keyframes pulseTitleGlow {
+    0%, 100% {
+        /* Stan bazowy: tylko twardy czarny obrys */
+        filter:
+            drop-shadow(3px 3px 0 var(--text-outline))
+            drop-shadow(-1px -1px 0 var(--text-outline));
+    }
+    50% {
+        /* Stan "włączony": obrys + cyjanowa poświata */
+        filter:
+            drop-shadow(3px 3px 0 var(--text-outline))
+            drop-shadow(-1px -1px 0 var(--text-outline))
+            drop-shadow(0 0 20px var(--neon-cyan)); /* Dodatkowy glow */
+    }
+}
