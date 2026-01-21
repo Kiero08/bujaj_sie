@@ -6,8 +6,7 @@
     --deep-teal: #006064;
     --neon-cyan: #00e5ff;
     --nav-dark: #001a1d;
-    --glass-bg: rgba(0, 70, 75, 0.7);
-    --gold-border: #ffcc00;
+    --gold: #ffcc00;
     --card-dark: #002529;
 
     --text-yellow-top: #ffe552;
@@ -31,7 +30,7 @@ body {
 header {
     position: sticky; top: 0; z-index: 1000; padding: 12px 0;
     background: var(--nav-dark);
-    border-bottom: 2px solid var(--gold-border);
+    border-bottom: 2px solid var(--gold);
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
@@ -45,275 +44,114 @@ nav {
     text-decoration: none;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: 
-        drop-shadow(1.5px 1.5px 0 var(--text-outline)) 
-        drop-shadow(-1.5px -1.5px 0 var(--text-outline)) 
-        drop-shadow(1.5px -1.5px 0 var(--text-outline)) 
-        drop-shadow(-1.5px 1.5px 0 var(--text-outline))
-        drop-shadow(3px 3px 0 var(--text-outline));
+    filter: drop-shadow(1.5px 1.5px 0 var(--text-outline)) drop-shadow(3px 3px 0 var(--text-outline));
 }
 
 nav ul { list-style: none; display: flex; gap: 20px; }
 nav ul li a {
     text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem;
-    padding: 8px 12px; transition: 0.3s; border-radius: 4px;
-}
-
-nav ul li a:hover {
-    background: rgba(0, 229, 255, 0.15); color: var(--text-yellow-top);
+    padding: 8px 12px; transition: 0.3s;
 }
 
 /* --- HERO SECTION --- */
-.hero-section { 
-    padding: 60px 20px; display: flex; justify-content: center; align-items: center;
-}
-
 .hero-glass-box {
     background: rgba(0, 20, 25, 0.8);
     border-radius: 40px;
-    border: 3px solid var(--gold-border);
+    border: 3px solid var(--gold);
     box-shadow: 0 0 50px rgba(0, 229, 255, 0.1);
-    background-image: none; 
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 60px 40px;
-    width: 100%; max-width: 900px;
-    position: relative; backdrop-filter: blur(20px);
+    max-width: 900px; margin: 60px auto;
+    text-align: center; backdrop-filter: blur(20px);
 }
 
-.hero-logo-img {
-    max-width: 350px; width: 100%; height: auto; margin-bottom: 20px;
-    object-fit: contain; 
-    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.5));
-    transform-origin: top center; animation: swing 5s ease-in-out infinite;
-}
-@keyframes swing { 0% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-3deg); } }
+.hero-logo-img { max-width: 350px; width: 100%; height: auto; margin-bottom: 20px; animation: swing 5s ease-in-out infinite; }
+@keyframes swing { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 
 .hero-section h1 {
-    font-family: 'Baloo 2', cursive; font-size: clamp(2.5rem, 6vw, 4.5rem);
-    margin-bottom: 10px; text-align: center; line-height: 1.1;
+    font-family: 'Baloo 2', cursive; font-size: clamp(2.5rem, 6vw, 4rem);
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: 
-        drop-shadow(2px 2px 0 var(--text-outline)) 
-        drop-shadow(-2px -2px 0 var(--text-outline)) 
-        drop-shadow(2px -2px 0 var(--text-outline)) 
-        drop-shadow(-2px 2px 0 var(--text-outline))
-        drop-shadow(5px 5px 0 var(--text-outline));
+    filter: drop-shadow(2px 2px 0 var(--text-outline)) drop-shadow(5px 5px 0 var(--text-outline));
 }
 
-.hero-section p {
-    font-size: 1.1rem; margin-bottom: 35px; text-align: center; letter-spacing: 2px;
-}
-
-/* --- KARTY OFERTY (Ogólny styl stołów) --- */
+/* --- STOŁY (KARTY) --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
 
 .offer-item {
     background-color: var(--card-dark);
-    border: 4px solid var(--gold-border);
+    border: 4px solid var(--gold);
     padding: 40px; position: relative; transition: 0.4s; 
     box-shadow: inset 0 0 50px rgba(0,0,0,0.9), 0 15px 30px rgba(0,0,0,0.5);
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
+    min-height: 400px;
 }
 
-.offer-item:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 0 20px var(--gold-border), inset 0 0 30px rgba(0,0,0,0.8);
+.offer-item h2, .offer-item p, .offer-item .btn-wrap { position: relative; z-index: 10; }
+
+/* SVG Background Overlay */
+.table-svg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1; opacity: 0.4; pointer-events: none;
 }
 
-/* Wspólny styl nagłówków */
-.offer-item h2 { 
-    font-family: 'Baloo 2', cursive; font-size: 1.8rem; 
-    margin-bottom: 15px; line-height: 1.2; min-height: 2.4em; 
-    display: flex; align-items: center;
-    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: 
-        drop-shadow(1.5px 1.5px 0 var(--text-outline)) 
-        drop-shadow(-1.5px -1.5px 0 var(--text-outline)) 
-        drop-shadow(1.5px -1.5px 0 var(--text-outline)) 
-        drop-shadow(-1.5px 1.5px 0 var(--text-outline))
-        drop-shadow(3px 3px 0 var(--text-outline));
-    position: relative; z-index: 20; 
+/* --- 1. BILARD KIESZENIE --- */
+.pocket { position: absolute; background: #000; border: 3px solid var(--gold); z-index: 5; box-shadow: inset 0 0 10px #000; }
+.p-tl { top: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 0 40px 0; }
+.p-tr { top: -5px; right: -5px; width: 50px; height: 50px; border-radius: 0 0 0 40px; }
+.p-bl { bottom: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 40px 0 0; }
+.p-br { bottom: -5px; right: -5px; width: 50px; height: 50px; border-radius: 40px 0 0 0; }
+.p-mt { top: -2px; left: 50%; transform: translateX(-50%); width: 60px; height: 30px; border-top: none; border-radius: 0 0 30px 30px; }
+.p-mb { bottom: -2px; left: 50%; transform: translateX(-50%); width: 60px; height: 30px; border-bottom: none; border-radius: 30px 30px 0 0; }
+
+/* --- ANIMACJE ELEMENTÓW --- */
+.game-obj { position: absolute; z-index: 8; opacity: 0; pointer-events: none; }
+.offer-item:hover .game-obj, .offer-item:active .game-obj { opacity: 1; }
+
+/* Ósemka */
+.ball-8 {
+    width: 40px; height: 40px; background: #000; border-radius: 50%;
+    background-image: radial-gradient(circle at center, #fff 40%, #000 42%);
+    display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800;
 }
-.offer-item p { position: relative; z-index: 20; }
-
-
-/* =========================================
-   STYLIZACJA KONKRETNYCH STOŁÓW
-========================================= */
-
-/* --- 1. BILARD --- */
-.card-bilard .pocket-tl, .card-bilard .pocket-tr,
-.card-bilard .pocket-bl, .card-bilard .pocket-br,
-.card-bilard .pocket-mt, .card-bilard .pocket-mb {
-    position: absolute; background-color: #000; z-index: 5;
-    box-shadow: inset 0 0 10px rgba(0,0,0,1); pointer-events: none;
-}
-.card-bilard .pocket-tl { top: -4px; left: -4px; width: 50px; height: 50px; border-top: 4px solid var(--gold-border); border-left: 4px solid var(--gold-border); border-top-left-radius: 20px; border-bottom-right-radius: 40px; }
-.card-bilard .pocket-tr { top: -4px; right: -4px; width: 50px; height: 50px; border-top: 4px solid var(--gold-border); border-right: 4px solid var(--gold-border); border-top-right-radius: 20px; border-bottom-left-radius: 40px; }
-.card-bilard .pocket-bl { bottom: -4px; left: -4px; width: 50px; height: 50px; border-bottom: 4px solid var(--gold-border); border-left: 4px solid var(--gold-border); border-bottom-left-radius: 20px; border-top-right-radius: 40px; }
-.card-bilard .pocket-br { bottom: -4px; right: -4px; width: 50px; height: 50px; border-bottom: 4px solid var(--gold-border); border-right: 4px solid var(--gold-border); border-bottom-right-radius: 20px; border-top-left-radius: 40px; }
-.card-bilard .pocket-mt { top: -4px; left: 50%; transform: translateX(-50%); width: 64px; height: 32px; border-top: 4px solid var(--gold-border); border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; }
-.card-bilard .pocket-mb { bottom: -4px; left: 50%; transform: translateX(-50%); width: 64px; height: 32px; border-bottom: 4px solid var(--gold-border); border-top-left-radius: 32px; border-top-right-radius: 32px; }
-
-.card-bilard::after {
-    content: '8'; position: absolute; top: 50%; left: 10%; transform: translateY(-50%) scale(1);
-    width: 44px; height: 44px; border-radius: 50%; color: #000; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.3rem;
-    display: flex; align-items: center; justify-content: center; background-color: #000;
-    background-image: radial-gradient(circle at center, #fff 45%, #000 46%); box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    opacity: 0; pointer-events: none; z-index: 10;
-}
-.card-bilard:hover::after, .card-bilard:active::after { animation: pocketEightBall 2.5s ease-in-out forwards; }
-@keyframes pocketEightBall {
-    0% { top: 50%; left: 10%; opacity: 0; transform: translateY(-50%) scale(1); }
-    5% { opacity: 1; } 30% { top: 85%; left: 30%; transform: translateY(0) scale(1); }
-    60% { top: 15%; left: 60%; } 85% { top: 88%; left: 88%; opacity: 1; transform: scale(1); }
+.offer-item:hover .ball-8 { animation: pocketEight 2.5s ease-in-out forwards; }
+@keyframes pocketEight {
+    0% { top: 40%; left: 10%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { top: 85%; left: 85%; transform: scale(1); }
     100% { top: 92%; left: 92%; opacity: 0; transform: scale(0.2); }
 }
 
-/* --- 2. SHUFFLEBOARD --- */
-.card-shuffle {
-    background-image: 
-        linear-gradient(90deg, transparent 60%, rgba(255, 255, 255, 0.07) 60%, rgba(255, 255, 255, 0.07) 80%, rgba(255, 204, 0, 0.07) 80%),
-        repeating-linear-gradient(90deg, #002225, #002225 15px, #001a1d 15px, #001a1d 30px);
+/* Krążek Shuffleboard */
+.puck-shuffle {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: radial-gradient(circle at center, #e0e0e0 0%, #a0a0a0 35%, #cc0000 36%, #8b0000 100%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
-.card-shuffle .pocket-tl, .card-shuffle .pocket-tr, .card-shuffle .pocket-bl, .card-shuffle .pocket-br, .card-shuffle .pocket-mt, .card-shuffle .pocket-mb { display: none; }
+.offer-item:hover .puck-shuffle { animation: slidePuck 3s ease-out forwards; }
+@keyframes slidePuck { 0% { left: 5%; top: 50%; opacity: 0; } 10% { opacity: 1; } 100% { left: 82%; top: 50%; opacity: 1; } }
 
-.card-shuffle::after {
-    content: ''; position: absolute; top: 50%; left: 10%;
-    width: 50px; height: 30px; border-radius: 50%;
-    background: radial-gradient(circle at center, #e0e0e0 0%, #c0c0c0 35%, #cc0000 36%, #8b0000 100%);
-    box-shadow: inset 0 2px 5px rgba(255,255,255,0.7), 0 5px 15px rgba(0,0,0,0.5);
-    transform: translateY(-50%); opacity: 0; pointer-events: none; z-index: 10;
+/* KLASYCZNY GRZYBEK (Chińczyk) */
+.pawn-ludo {
+    width: 30px; height: 45px;
+    display: flex; flex-direction: column; align-items: center;
 }
-.card-shuffle:hover::after, .card-shuffle:active::after { animation: slidePuck 4s ease-out forwards; }
-@keyframes slidePuck { 0% { left: 10%; opacity: 0; } 10% { opacity: 1; } 100% { left: 85%; opacity: 1; } }
-
-/* --- 3. PLANSZÓWKI (Chińczyk 1:1 - Dark Theme) --- */
-/* ODWZOROWANIE GEOMETRII PLANSZY LUDO ZA POMOCĄ GRADIENTÓW */
-.card-ludo {
-    background-color: #001a1d; /* Ciemne tło */
-    background-image: 
-        /* --- WARSTWA 1: SIATKA 15x15 (Cienkie linie) --- */
-        repeating-linear-gradient(0deg, rgba(0,229,255,0.1) 0px, rgba(0,229,255,0.1) 1px, transparent 1px, transparent 6.66%),
-        repeating-linear-gradient(90deg, rgba(0,229,255,0.1) 0px, rgba(0,229,255,0.1) 1px, transparent 1px, transparent 6.66%),
-
-        /* --- WARSTWA 2: KOLOROWE ŚCIEŻKI DOMOWE (Krzyż) --- */
-        /* Góra (Żółta) */ linear-gradient(to bottom, var(--text-yellow-top) 40%, transparent 40%),
-        /* Dół (Pomarańcz) */ linear-gradient(to top, var(--text-orange-bottom) 40%, transparent 40%),
-        /* Lewo (Turkus) */ linear-gradient(to right, var(--deep-teal) 40%, transparent 40%),
-        /* Prawo (Cyjan) */ linear-gradient(to left, var(--neon-cyan) 40%, transparent 40%),
-
-        /* --- WARSTWA 3: ŚRODEK (Meta - Trójkąty) --- */
-        conic-gradient(from 45deg, var(--neon-cyan) 0deg 90deg, var(--text-orange-bottom) 90deg 180deg, var(--deep-teal) 180deg 270deg, var(--text-yellow-top) 270deg 360deg),
-
-        /* --- WARSTWA 4: BAZY NAROŻNE (Duże koła) --- */
-        radial-gradient(circle at 20% 20%, var(--text-yellow-top) 18%, transparent 18.5%), /* LG */
-        radial-gradient(circle at 80% 20%, var(--neon-cyan) 18%, transparent 18.5%), /* PG */
-        radial-gradient(circle at 20% 80%, var(--deep-teal) 18%, transparent 18.5%), /* LD */
-        radial-gradient(circle at 80% 80%, var(--text-orange-bottom) 18%, transparent 18.5%), /* PD */
-
-        /* --- WARSTWA 5: POLA STARTOWE (Małe kółka w bazach - uproszczone) --- */
-        radial-gradient(circle at 13% 13%, #fff 5%, transparent 5.5%), radial-gradient(circle at 27% 13%, #fff 5%, transparent 5.5%),
-        radial-gradient(circle at 13% 27%, #fff 5%, transparent 5.5%), radial-gradient(circle at 27% 27%, #fff 5%, transparent 5.5%),
-        /* (Powtórzenie dla pozostałych rogów - uproszczone dla czytelności kodu, ale daje efekt) */
-        radial-gradient(circle at 73% 13%, #fff 5%, transparent 5.5%), radial-gradient(circle at 87% 13%, #fff 5%, transparent 5.5%),
-        radial-gradient(circle at 13% 73%, #fff 5%, transparent 5.5%), radial-gradient(circle at 27% 73%, #fff 5%, transparent 5.5%),
-        radial-gradient(circle at 73% 73%, #fff 5%, transparent 5.5%), radial-gradient(circle at 87% 73%, #fff 5%, transparent 5.5%);
-
-    /* Pozycjonowanie i maskowanie warstw ścieżek */
-    background-size: 
-        100% 100%, 100% 100%, /* Siatka */
-        20% 100%, 20% 100%, 100% 20%, 100% 20%, /* Ścieżki (szerokość 3 pól = 20%) */
-        20% 20%, /* Środek */
-        100% 100%, 100% 100%, 100% 100%, 100% 100%, /* Bazy */
-        100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%; /* Małe kółka */
-    background-position: 
-        0 0, 0 0, /* Siatka */
-        50% 0, 50% 100%, 0 50%, 100% 50%, /* Ścieżki (wycentrowane) */
-        50% 50%, /* Środek */
-        0 0, 0 0, 0 0, 0 0, /* Bazy */
-        0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; /* Małe kółka */
-    background-repeat: no-repeat;
+.pawn-head { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; border: 2px solid #000; margin-bottom: -4px; z-index: 2; }
+.pawn-body { 
+    width: 24px; height: 28px; background: var(--gold); border: 2px solid #000;
+    border-radius: 50% 50% 15% 15% / 100% 100% 10% 10%;
 }
-.card-ludo .pocket-tl, .card-ludo .pocket-tr, .card-ludo .pocket-bl, .card-ludo .pocket-br, .card-ludo .pocket-mt, .card-ludo .pocket-mb { display: none; }
+.offer-item:hover .pawn-ludo { animation: ludoMove 3s ease-in-out forwards; }
+@keyframes ludoMove { 0% { bottom: 10%; left: 45%; opacity: 0; } 10% { opacity: 1; } 100% { bottom: 42%; left: 45%; opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 10px gold); } }
 
-/* Pionek - Prosty kształt stożka */
-.card-ludo::after {
-    content: '';
-    position: absolute; bottom: 15%; left: 50%;
-    width: 30px; height: 40px;
-    /* Kształt pionka */
-    background: linear-gradient(to bottom, var(--text-yellow-top), var(--text-orange-bottom));
-    border-radius: 50% 50% 10% 10% / 70% 70% 10% 10%; /* Stożek z zaokrągloną górą */
-    box-shadow: 0 5px 10px rgba(0,0,0,0.8);
-    
-    transform: translateX(-50%);
-    opacity: 0; pointer-events: none; z-index: 10;
-}
-.card-ludo:hover::after, .card-ludo:active::after { animation: movePawn 3s ease-in-out forwards; }
-@keyframes movePawn {
-    0% { bottom: 5%; opacity: 0; transform: translateX(-50%) scale(0.5); }
-    10% { opacity: 1; }
-    25% { bottom: 25%; transform: translateX(-50%) scale(0.8); }
-    50% { bottom: 40%; transform: translateX(-50%) scale(1); }
-    75% { bottom: 45%; opacity: 1; transform: translateX(-50%) scale(1.2); }
-    100% { bottom: 45%; opacity: 1; transform: translateX(-50%) scale(1.5); box-shadow: 0 0 20px gold; }
-}
-
-/* --- 4. PIŁKARZYKI --- */
-.card-foosball {
-    background-color: #1e5936;
-    background-image:
-        linear-gradient(90deg, transparent 20%, var(--text-orange-bottom) 20%, var(--text-yellow-top) 25%, transparent 25%, transparent 60%, var(--text-orange-bottom) 60%, var(--text-yellow-top) 65%, transparent 65%),
-        linear-gradient(90deg, transparent 40%, var(--deep-teal) 40%, var(--neon-cyan) 45%, transparent 45%, transparent 80%, var(--deep-teal) 80%, var(--neon-cyan) 85%, transparent 85%),
-        repeating-linear-gradient(180deg, transparent, transparent 20%, #ccc 20%, #999 21%, #ccc 22%, transparent 22%, transparent 40%),
-        radial-gradient(circle at 50% 50%, transparent 8%, rgba(255,255,255,0.6) 8%, rgba(255,255,255,0.6) 9%, transparent 9%),
-        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.6) 49.5%, rgba(255,255,255,0.6) 50.5%, transparent 50.5%);
-    background-size: 100% 40%, 100% 40%, 100% 100%, 100% 100%, 100% 100%;
-    background-position: 0 21%, 0 61%, 0 0, 0 0, 0 0;
-    background-repeat: repeat-x, repeat-x, no-repeat, no-repeat, no-repeat;
-}
-.card-foosball .pocket-tl, .card-foosball .pocket-tr, .card-foosball .pocket-bl, .card-foosball .pocket-br, .card-foosball .pocket-mt, .card-foosball .pocket-mb { display: none; }
-
-.card-foosball::after {
-    content: ''; position: absolute; top: 50%; left: 50%;
-    width: 16px; height: 16px; border-radius: 50%;
-    background: radial-gradient(circle at 40% 40%, #fff 30%, #333 80%);
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    opacity: 0; pointer-events: none; z-index: 10;
-}
-.card-foosball:hover::after, .card-foosball:active::after { animation: bounceFoosball 8s linear infinite; }
-@keyframes bounceFoosball {
-    0% { top: 50%; left: 50%; opacity: 1; }
-    10% { top: 15%; left: 25%; } 25% { top: 85%; left: 40%; } 40% { top: 35%; left: 90%; }
-    55% { top: 90%; left: 65%; } 70% { top: 25%; left: 85%; } 85% { top: 65%; left: 15%; }
-    100% { top: 50%; left: 50%; opacity: 1; }
-}
-
-
-/* --- PRZYCISK --- */
-.btn {
-    display: inline-block; padding: 16px 45px;
-    background: linear-gradient(to bottom, var(--text-yellow-top), var(--text-orange-bottom));
-    border: 2px solid #000;
-    color: #000 !important; font-weight: 800; text-transform: uppercase;
-    transition: 0.3s; text-decoration: none; border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-.btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--gold-border); }
+/* Piłka Nożna */
+.soccer-ball { width: 20px; height: 20px; background: radial-gradient(circle at 30% 30%, #fff 40%, #111 90%); border-radius: 50%; }
+.offer-item:hover .soccer-ball { animation: foosBounce 6s linear infinite; }
+@keyframes foosBounce { 0% { top: 50%; left: 50%; opacity: 1; } 20% { top: 20%; left: 80%; } 40% { top: 80%; left: 20%; } 60% { top: 30%; left: 40%; } 80% { top: 70%; left: 90%; } 100% { top: 50%; left: 50%; } }
 
 /* --- MOBILE --- */
 @media (max-width: 768px) {
-    nav { flex-direction: column; gap: 15px; padding: 15px; }
-    .logo { width: 100%; text-align: center; }
-    .logo a { font-size: 2.2rem; display: block; }
-    nav ul { width: 100%; justify-content: center; gap: 15px; flex-wrap: wrap; }
-    .hero-glass-box { padding: 30px 20px; }
-    .hero-logo-img { max-width: 250px; }
-    .hero-section h1 { font-size: 2.5rem; }
-    .offer-item h2 { min-height: auto; }
+    nav { flex-direction: column; gap: 15px; }
+    .offer-item { min-height: 350px; }
 }
