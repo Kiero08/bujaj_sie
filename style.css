@@ -201,10 +201,54 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 }
 
 /* 4. PIŁKARZYKI */
-.soccer-ball { width: 22px; height: 22px; background: #fff; border-radius: 50%; top: 50%; left: 50%; z-index: 15; border: 1px solid #000; }
-.card-pilkarzyki:hover .soccer-ball { animation: fAnim 7s linear forwards; }
-@keyframes fAnim { 0% { top: 50%; left: 50%; opacity: 1; } 50% { top: 10%; left: 20%; } 80% { top: 50%; left: 85%; opacity: 1; } 95% { top: 50%; left: 98%; opacity: 1; } 100% { top: 50%; left: 105%; opacity: 0; } }
+.soccer-ball { 
+    width: 22px; height: 22px; 
+    background: #fff; border-radius: 50%; 
+    top: 50%; left: 50%; 
+    z-index: 15; border: 1px solid #000;
+    /* Tekstura piłki dla lepszego efektu obrotu */
+    background-image: radial-gradient(circle at 30% 30%, #fff 40%, #222 60%, #fff 70%);
+    background-size: 150% 150%;
+}
 
+/* Wyzwalacz na 7 sekund */
+.card-pilkarzyki:hover .soccer-ball { 
+    animation: fAnim 7s linear forwards; 
+}
+@keyframes fAnim {
+    0% { top: 50%; left: 50%; opacity: 1; transform: scale(1) rotate(0deg); }
+
+    /* --- FAZA CHAOSU (PIŁKA KRĄŻY PO STOLE) --- */
+    10% { top: 15%; left: 20%; }
+    22% { top: 85%; left: 80%; }
+    35% { top: 50%; left: 5%;  }
+    48% { top: 10%; left: 60%; }
+    60% { top: 90%; left: 30%; }
+    75% { top: 25%; left: 90%; }
+
+    /* --- FAZA STRZAŁU --- */
+    88% { 
+        top: 50%; left: 85%; 
+        opacity: 1; 
+        transform: scale(1) rotate(720deg); 
+    }
+
+    /* --- GOL (PIŁKA W BRAMCE, WCIĄŻ WIDOCZNA) --- */
+    95% {
+        top: 50%; 
+        left: 98%; 
+        opacity: 1; 
+        transform: scale(0.8) rotate(900deg);
+    }
+
+    /* --- KONIEC (ZNIKNIĘCIE ZA SIATKĄ) --- */
+    100% {
+        top: 50%;
+        left: 105%; 
+        opacity: 0; 
+        transform: scale(0.5) rotate(1080deg);
+    }
+}
 /* --- WYDARZENIA & KARTY --- */
 .latest-event-section { margin-top: 80px; text-align: center; margin-bottom: 60px; }
 .events-list { display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 0 auto; }
