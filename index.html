@@ -4,78 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bujaj Się Lębork | Centrum Rozrywki</title>
-    <link rel="stylesheet" href="style.css?v=36.0">
+    <link rel="stylesheet" href="style.css?v=37.0">
 </head>
 <body>
 
     <header>
         <nav>
-            <div class="logo"><a href="index.html">Bujaj Się Lębork</a></div>
+            <div class="logo"><a href="#">Bujaj Się Lębork</a></div>
             <ul>
-                <li><a href="index.html">Start</a></li>
-                <li><a href="oferta.html">Oferta</a></li>
-                <li><a href="wydarzenia.html">Wydarzenia</a></li>
-                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="#">Start</a></li>
+                <li><a href="#">Oferta</a></li>
+                <li><a href="#">Kontakt</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-glass-box">
-                <img src="logo.png" alt="Bujaj Się Lębork" class="hero-logo-img">
-                <h1>CENTRUM NOWOCZESNEJ ROZRYWKI</h1>
-                <p>BILARD // SHUFFLEBOARD // PLANSZÓWKI // PIŁKARZYKI</p>
-                <div class="hero-actions">
-                    <a href="tel:+48791700777" class="btn">INICJUJ REZERWACJĘ</a>
+    <main class="container">
+        <div class="grid">
+            
+            <article class="offer-item">
+                <div class="pocket p-tl"></div><div class="pocket p-tr"></div>
+                <div class="pocket p-bl"></div><div class="pocket p-br"></div>
+                <div class="pocket p-mt"></div><div class="pocket p-mb"></div>
+                <div class="game-obj ball-8">8</div>
+                <h2>01. BILARD</h2>
+                <p>Profesjonalne stoły 9ft i klimat, którego nie zapomnisz.</p>
+            </article>
+
+            <article class="offer-item">
+                <svg class="table-svg" viewBox="0 0 200 300" preserveAspectRatio="none">
+                    <rect width="200" height="300" fill="rgba(0,37,41,0.5)"/>
+                    <line x1="0" y1="60" x2="200" y2="60" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                    <line x1="0" y1="240" x2="200" y2="240" stroke="rgba(255,204,0,0.3)" stroke-width="4"/>
+                    <text x="90" y="275" fill="rgba(255,204,0,0.4)" font-size="20">3</text>
+                </svg>
+                <div class="game-obj puck-shuffle"></div>
+                <h2>02. SHUFFLEBOARD</h2>
+                <p>Emocjonująca gra zręcznościowa rodem z amerykańskich barów.</p>
+            </article>
+
+            <article class="offer-item">
+                <svg class="table-svg" viewBox="0 0 150 150">
+                    <rect width="150" height="150" fill="#001a1d"/>
+                    <rect x="60" y="0" width="30" height="150" fill="rgba(255,255,255,0.05)"/>
+                    <rect x="0" y="60" width="150" height="30" fill="rgba(255,255,255,0.05)"/>
+                    <circle cx="25" cy="25" r="18" fill="#ffcc00" opacity="0.3"/>
+                    <circle cx="125" cy="25" r="18" fill="#00e5ff" opacity="0.3"/>
+                    <circle cx="25" cy="125" r="18" fill="#00e5ff" opacity="0.3"/>
+                    <circle cx="125" cy="125" r="18" fill="#ffcc00" opacity="0.3"/>
+                    <path d="M75,75 L60,60 L90,60 Z" fill="#ffcc00" opacity="0.6"/>
+                    <path d="M75,75 L60,90 L90,90 Z" fill="#ffcc00" opacity="0.6"/>
+                </svg>
+                <div class="game-obj pawn-ludo">
+                    <div class="pawn-head"></div>
+                    <div class="pawn-body"></div>
                 </div>
-            </div>
-        </section>
+                <h2>03. PLANSZÓWKI</h2>
+                <p>Ponad 50 tytułów gier. Od klasyków po najnowsze hity.</p>
+            </article>
 
-        <div class="container">
-            <div class="grid">
-                <article class="offer-item card-bilard">
-                    <div class="pocket-tl"></div><div class="pocket-tr"></div>
-                    <div class="pocket-bl"></div><div class="pocket-br"></div>
-                    <div class="pocket-mt"></div><div class="pocket-mb"></div>
+            <article class="offer-item">
+                <svg class="table-svg" viewBox="0 0 200 300" preserveAspectRatio="none">
+                    <rect width="200" height="300" fill="#1a472a"/>
+                    <circle cx="100" cy="150" r="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                    <line x1="0" y1="150" x2="200" y2="150" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                    <line x1="0" y1="60" x2="200" y2="60" stroke="silver" stroke-width="3"/>
+                    <rect x="40" y="55" width="10" height="15" fill="#ffcc00"/>
+                    <rect x="150" y="55" width="10" height="15" fill="#ffcc00"/>
                     
-                    <h2>01. BILARD</h2>
-                    <p>Cztery profesjonalne jednostki 9ft gotowe do Twoich mistrzowskich uderzeń.</p>
-                </article>
+                    <line x1="0" y1="240" x2="200" y2="240" stroke="silver" stroke-width="3"/>
+                    <rect x="95" y="235" width="10" height="15" fill="#00e5ff"/>
+                </svg>
+                <div class="game-obj soccer-ball"></div>
+                <h2>04. PIŁKARZYKI</h2>
+                <p>Szybka akcja i sportowe emocje na profesjonalnym stole.</p>
+            </article>
 
-                <article class="offer-item card-shuffle">
-                    <div class="pocket-tl"></div><div class="pocket-tr"></div>
-                    <div class="pocket-bl"></div><div class="pocket-br"></div>
-                    <div class="pocket-mt"></div><div class="pocket-mb"></div>
-
-                    <h2>02. SHUFFLEBOARD</h2>
-                    <p>Poczuj emocje na jedynych takich stołach w regionie. Rywalizacja na najwyższym poziomie.</p>
-                </article>
-
-                <article class="offer-item card-ludo">
-                    <div class="pocket-tl"></div><div class="pocket-tr"></div>
-                    <div class="pocket-bl"></div><div class="pocket-br"></div>
-                    <div class="pocket-mt"></div><div class="pocket-mb"></div>
-
-                    <h2>03. PLANSZÓWKI</h2>
-                    <p>Ponad 50 tytułów – od szybkich gier imprezowych po rozbudowane strategie.</p>
-                </article>
-
-                <article class="offer-item card-foosball">
-                    <div class="pocket-tl"></div><div class="pocket-tr"></div>
-                    <div class="pocket-bl"></div><div class="pocket-br"></div>
-                    <div class="pocket-mt"></div><div class="pocket-mb"></div>
-
-                    <h2>04. PIŁKARZYKI</h2>
-                    <p>Klasyczna rywalizacja przy stole. Zbierz ekipę i rozegrajcie turniej życia!</p>
-                </article>
-            </div>
         </div>
     </main>
-
-    <footer style="text-align: center; padding: 40px; font-size: 0.8rem; letter-spacing: 2px; opacity: 0.6;">
-        &copy; 2026 BUJAJ SIĘ LĘBORK // STATUS: ONLINE
-    </footer>
 
 </body>
 </html>
