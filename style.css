@@ -425,3 +425,179 @@ nav ul li a:hover { color: var(--neon-cyan); }
         /* Nadpisujemy nazwę animacji na wersję mobilną i wydłużamy czas do 3s */
         animation: lAnimMobile 3s ease-in-out forwards;
     }
+/* --- STYLE DLA PODSTRONY WYDARZENIA --- */
+
+/* 1. Mniejszy nagłówek dla podstron */
+.small-hero {
+    padding: 30px 40px;
+    margin-bottom: 50px;
+}
+.page-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 3px 3px 0 #000;
+}
+.neon-text {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 15px var(--neon-cyan);
+}
+.subtitle {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    color: var(--gold);
+}
+
+/* 2. Lista wydarzeń (Pionowa) */
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 3. Karta wydarzenia (Wygląd biletu) */
+.event-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-dark);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: 0.3s transform;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card:hover {
+    transform: translateX(10px); /* Efekt wsunięcia przy najechaniu */
+    border-color: var(--neon-cyan);
+    box-shadow: 0 5px 25px rgba(0, 229, 255, 0.2);
+}
+
+/* Wyróżniona karta (np. Walentynki) */
+.highlight-card {
+    border: 2px solid #ff4081; /* Różowy border */
+    background: linear-gradient(90deg, var(--card-dark) 60%, rgba(255, 64, 129, 0.1) 100%);
+}
+.highlight-card:hover {
+    border-color: #ff80ab;
+    box-shadow: 0 5px 25px rgba(255, 64, 129, 0.3);
+}
+
+/* 4. Sekcja Daty (Lewa strona) */
+.event-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    padding: 15px;
+    border-radius: 15px;
+    min-width: 90px;
+    border: 1px solid #333;
+    margin-right: 25px;
+}
+.event-date .day {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: #fff;
+    font-weight: 900;
+}
+.event-date .month {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.highlight-card .event-date .month { color: #ff4081; }
+
+/* 5. Treść wydarzenia (Środek) */
+.event-content {
+    flex-grow: 1; /* Zajmuje resztę miejsca */
+}
+.event-content h3 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+.event-content .time {
+    color: var(--neon-cyan);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+.event-content .desc {
+    font-size: 1rem;
+    color: #ddd;
+    line-height: 1.4;
+    max-width: 90%;
+}
+
+/* 6. Przycisk w karcie (Prawa strona) */
+.small-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    background: var(--gold);
+    border-radius: 30px;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0 #000;
+    transition: 0.2s;
+    white-space: nowrap; /* Tekst się nie łamie */
+}
+.small-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 #000;
+    background: #fff;
+}
+.small-btn:active {
+    transform: translateY(2px);
+    box-shadow: 1px 1px 0 #000;
+}
+
+/* Wyróżnienie aktywnego linku w menu */
+.active-link {
+    color: var(--gold) !important;
+    border-bottom: 2px solid var(--gold);
+}
+
+/* RESPANSYWNOŚĆ WYDARZEŃ */
+@media (max-width: 768px) {
+    .event-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .event-date {
+        flex-direction: row; /* Data poziomo na telefonie */
+        gap: 10px;
+        min-width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        padding: 10px;
+    }
+    .event-date .day { font-size: 1.8rem; }
+    .event-content h3 { font-size: 1.5rem; }
+    .event-action {
+        width: 100%;
+        text-align: right;
+        margin-top: 15px;
+    }
+    .page-title { font-size: 2.2rem; }
+}
