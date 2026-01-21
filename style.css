@@ -169,3 +169,4 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
     .card-planszowki:hover .pawn-ludo { animation: lAnimMobile 3s ease-in-out forwards; }
 }
 @keyframes lAnimMobile { 0% { bottom: 5%; } 30% { bottom: 20%; } 60% { bottom: 35%; } 100% { bottom: 40%; transform: translateX(-50%) scale(1.3); } }
+
