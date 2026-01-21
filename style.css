@@ -177,8 +177,28 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 .pawn-ludo { width: 30px; height: 45px; bottom: 5%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; opacity: 1; }
 .pawn-head { width: 16px; height: 16px; background: var(--gold); border: 2px solid #000; border-radius: 50%; }
 .pawn-body { width: 24px; height: 28px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 10% 10%; }
-.card-planszowki:hover .pawn-ludo { animation: lAnimDesktop 2.2s ease-in-out forwards; }
-@keyframes lAnimDesktop { 0% { bottom: 5%; } 35% { bottom: 20%; } 55% { bottom: 8%; } 100% { bottom: 42%; transform: translateX(-50%) scale(1.3); } }
+.card-planszowki:hover .pawn-ludo { 
+    /* 3 równe skoki zajmą 2.4 sekundy */
+    animation: lAnimDesktop 2.4s ease-in-out forwards; 
+}
+@keyframes lAnimDesktop {
+    0% { bottom: 5%; transform: translateX(-50%) scale(1); }
+    
+    /* Skok 1 (0% - 33%) */
+    16% { bottom: 25%; }
+    33% { bottom: 5%; }
+    
+    /* Skok 2 (33% - 66%) */
+    50% { bottom: 25%; }
+    66% { bottom: 5%; }
+    
+    /* Skok 3 (66% - 100%) */
+    83% { bottom: 55%; } /* Peak ostatniego skoku */
+    100% { 
+        bottom: 42%; /* Pozycja końcowa */
+        transform: translateX(-50%) scale(1.3); 
+    }
+}
 
 /* 4. PIŁKARZYKI */
 .soccer-ball { width: 22px; height: 22px; background: #fff; border-radius: 50%; top: 50%; left: 50%; z-index: 15; border: 1px solid #000; }
