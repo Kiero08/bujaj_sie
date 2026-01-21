@@ -36,129 +36,141 @@ nav {
     max-width: 1200px; margin: 0 auto; padding: 0 20px;
 }
 .logo a {
-    font-family: 'Baloo 2', cursive; font-size: 2.2rem; font-weight: 800;
+    font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800;
     text-decoration: none;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(1.5px 1.5px 0 var(--text-outline)) drop-shadow(3px 3px 0 var(--text-outline));
+    filter: drop-shadow(1px 1px 0 var(--text-outline)) drop-shadow(2px 2px 0 var(--text-outline));
 }
-nav ul { list-style: none; display: flex; gap: 20px; }
-nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
+nav ul { list-style: none; display: flex; gap: 15px; }
+nav ul li a { text-decoration: none; color: #fff; font-weight: 700; font-size: 0.8rem; }
 
-/* --- HERO --- */
+/* --- HERO & BUJAJĄCE SIĘ LOGO --- */
 .hero-glass-box {
     background: rgba(0, 20, 25, 0.8);
     border-radius: 40px; border: 3px solid var(--gold);
-    padding: 50px 40px; max-width: 800px; margin: 30px auto;
+    padding: 30px; max-width: 700px; margin: 20px auto;
     text-align: center; backdrop-filter: blur(20px);
 }
-.hero-logo-img { max-width: 200px; width: 100%; height: auto; margin-bottom: 15px; }
 
-/* --- SIATKA KART (UKŁAD 2x2 - ZWARTY) --- */
+/* FIX: PRZYWRÓCONE BUJANIE */
+.hero-logo-img { 
+    max-width: 180px; width: 100%; height: auto; margin-bottom: 10px; 
+    animation: swing 5s ease-in-out infinite; 
+}
+@keyframes swing {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+}
+
+.hero-section h1 {
+    font-family: 'Baloo 2', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem);
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 2px 0 var(--text-outline));
+}
+
+/* --- GRID (CENTROWANIE 2x2 DLA 300px) --- */
 .container { 
     width: 100%;
-    max-width: 1300px; /* Kontener zewnętrzny */
     margin: 0 auto; 
     padding: 20px; 
+    display: flex;
+    justify-content: center;
 }
 
 .grid { 
     display: grid;
-    /* Wymuszamy 2 kolumny o szerokości 600px */
-    grid-template-columns: repeat(2, 600px); 
-    /* Dystans dokładnie 30px między lewą a prawą kolumną */
-    gap: 30px; 
-    /* Wyśrodkowanie całego bloku 2x2 na stronie */
-    justify-content: center; 
-    align-items: stretch;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 300px); /* 2 kolumny po 300px */
+    gap: 30px; /* Przerwa 30px */
+    justify-content: center;
+    align-items: center;
 }
 
 .offer-item {
     background-color: var(--card-dark);
-    border: 4px solid var(--gold);
-    border-radius: 25px;
-    padding: 25px;
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    padding: 15px;
     position: relative;
-    min-height: 150px;
-    width: 300px; /* Twoja szerokość */
+    /* TWOJE WYMIARY */
+    width: 300px;
+    height: 150px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    box-shadow: inset 0 0 50px #000, 0 10px 20px rgba(0,0,0,0.5);
-    transition: 0.4s;
+    box-shadow: inset 0 0 30px #000, 0 5px 15px rgba(0,0,0,0.5);
+    transition: 0.3s;
 }
 
-.offer-item:hover { transform: translateY(-8px); }
+.offer-item:hover { transform: scale(1.02); }
 
-/* NAKŁADKA NA ZDJĘCIA (Karty 03 i 04) */
+/* ZDJĘCIA DLA 03 i 04 */
 .photo-bg::before {
     content: '';
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.85));
+    background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.8));
     z-index: 1;
 }
-/* Pamiętaj o rozszerzeniach plików: .png lub .jpg */
 .card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
 .card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
 
-/* NAPISY WYRÓWNANE DO LEWEJ NA GÓRZE */
+/* SKALOWANIE TEKSTU DLA MAŁYCH KONTENERÓW */
 .offer-item h2 {
-    font-family: 'Baloo 2', cursive; font-size: 2rem;
+    font-family: 'Baloo 2', cursive; 
+    font-size: 1.2rem; /* Zmniejszone, żeby pasowało do 150px wysokości */
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(1.5px 1.5px 0 var(--text-outline)) drop-shadow(3px 3px 0 var(--text-outline));
-    position: relative; z-index: 20; margin-bottom: 8px; line-height: 1.1;
+    filter: drop-shadow(1px 1px 0 var(--text-outline)) drop-shadow(2px 2px 0 var(--text-outline));
+    position: relative; z-index: 20; margin-bottom: 4px; line-height: 1;
 }
-.offer-item p { position: relative; z-index: 20; font-size: 1rem; color: #fff; line-height: 1.3; font-weight: 400; max-width: 90%; }
+.offer-item p { 
+    position: relative; z-index: 20; 
+    font-size: 0.75rem; color: #fff; 
+    line-height: 1.2; max-width: 95%; 
+}
 
-/* SVG Background dla Kart 01 i 02 */
+/* SVG */
 .table-svg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1; opacity: 0.6; pointer-events: none;
+    z-index: 1; opacity: 0.5;
 }
 
-/* --- BILARD POCKETS --- */
+/* --- BILARD POCKETS (SKALOWANE) --- */
 .pocket { position: absolute; background: #000; border: 2px solid var(--gold); z-index: 10; }
-.p-tl { top: -4px; left: -4px; width: 45px; height: 45px; border-radius: 0 0 35px 0; }
-.p-tr { top: -4px; right: -4px; width: 45px; height: 45px; border-radius: 0 0 0 35px; }
-.p-bl { bottom: -4px; left: -4px; width: 45px; height: 45px; border-radius: 0 35px 0 0; }
-.p-br { bottom: -4px; right: -4px; width: 45px; height: 45px; border-radius: 35px 0 0 0; }
-.p-mt { top: -2px; left: 50%; transform: translateX(-50%); width: 55px; height: 25px; border-radius: 0 0 25px 25px; border-top: none; }
-.p-mb { bottom: -2px; left: 50%; transform: translateX(-50%); width: 55px; height: 25px; border-radius: 25px 25px 0 0; border-bottom: none; }
+.p-tl { top: -3px; left: -3px; width: 30px; height: 30px; border-radius: 0 0 20px 0; }
+.p-tr { top: -3px; right: -3px; width: 30px; height: 30px; border-radius: 0 0 0 20px; }
+.p-bl { bottom: -3px; left: -3px; width: 30px; height: 30px; border-radius: 0 20px 0 0; }
+.p-br { bottom: -3px; right: -3px; width: 30px; height: 30px; border-radius: 20px 0 0 0; }
+.p-mt { top: -1px; left: 50%; transform: translateX(-50%); width: 35px; height: 15px; border-radius: 0 0 15px 15px; border-top: none; }
+.p-mb { bottom: -1px; left: 50%; transform: translateX(-50%); width: 35px; height: 15px; border-radius: 15px 15px 0 0; border-bottom: none; }
 
-/* --- ANIMACJE --- */
-.game-obj { position: absolute; z-index: 15; opacity: 0; pointer-events: none; }
-.offer-item:hover .game-obj, .offer-item:active .game-obj { opacity: 1; }
+/* --- ANIMACJE (DOSTOSOWANE DO 300x150) --- */
+.game-obj { position: absolute; z-index: 15; opacity: 0; }
+.offer-item:hover .game-obj { opacity: 1; }
 
-.ball-8 { width: 36px; height: 36px; background: #000; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #444, #000); display: flex; align-items: center; justify-content: center; }
-.ball-8::after { content: '8'; width: 16px; height: 16px; background: #fff; border-radius: 50%; color: #000; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
-.card-bilard:hover .ball-8 { animation: billardAnim 2.5s ease-in-out forwards; }
+.ball-8 { width: 24px; height: 24px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.ball-8::after { content: '8'; font-size: 0.5rem; width: 12px; height: 12px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+.card-bilard:hover .ball-8 { animation: bAnim 2s ease-in-out forwards; }
+@keyframes bAnim { 0% { top: 40%; left: 10%; } 100% { top: 80%; left: 90%; transform: scale(0.2); opacity: 0; } }
 
-.puck-shuffle { width: 36px; height: 22px; border-radius: 50%; background: radial-gradient(circle at center, #eee 0%, #c0c0c0 35%, #ff0000 36%, #8b0000 100%); }
-.card-shuffle:hover .puck-shuffle { animation: shuffleAnim 4s ease-out forwards; }
+.puck-shuffle { width: 24px; height: 14px; border-radius: 50%; background: radial-gradient(circle, #eee, #f00, #800); }
+.card-shuffle:hover .puck-shuffle { animation: sAnim 3s ease-out forwards; }
+@keyframes sAnim { 0% { left: 5%; top: 50%; } 100% { left: 85%; top: 50%; } }
 
-.pawn-ludo { width: 28px; height: 40px; display: flex; flex-direction: column; align-items: center; }
-.pawn-head { width: 14px; height: 14px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -4px; z-index: 2; }
-.pawn-body { width: 22px; height: 26px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 15% 15% / 100% 100% 10% 10%; }
-.card-planszowki:hover .pawn-ludo { animation: ludoAnim 3s ease-in-out forwards; }
+.pawn-ludo { width: 18px; height: 26px; display: flex; flex-direction: column; align-items: center; }
+.pawn-head { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; border: 1px solid #000; margin-bottom: -2px; z-index: 2; }
+.pawn-body { width: 16px; height: 18px; background: var(--gold); border: 1px solid #000; border-radius: 50% 50% 10% 10%; }
+.card-planszowki:hover .pawn-ludo { animation: lAnim 2s ease-in-out forwards; }
+@keyframes lAnim { 0% { bottom: 10%; left: 45%; } 100% { bottom: 40%; left: 45%; transform: scale(1.2); } }
 
-.soccer-ball { width: 18px; height: 18px; background: #fff; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #fff, #111); border: 1px solid #000; }
-.card-pilkarzyki:hover .soccer-ball { animation: foosAnim 6s linear infinite; }
-
-@keyframes billardAnim { 0% { top: 40%; left: 10%; opacity: 0; } 10% { opacity: 1; } 100% { top: 85%; left: 85%; transform: scale(0.2); opacity: 0; } }
-@keyframes shuffleAnim { 0% { left: 5%; top: 55%; opacity: 0; } 10% { opacity: 1; } 100% { left: 80%; top: 55%; opacity: 1; } }
-@keyframes ludoAnim { 0% { top: 70%; left: 10%; opacity: 0; } 100% { top: 45%; left: 45%; opacity: 1; transform: scale(1.2); } }
-@keyframes foosAnim { 0% { top: 50%; left: 50%; } 25% { top: 20%; left: 75%; } 50% { top: 80%; left: 25%; } 75% { top: 30%; left: 85%; } 100% { top: 50%; left: 50%; } }
+.soccer-ball { width: 14px; height: 14px; background: #fff; border-radius: 50%; border: 1px solid #000; }
+.card-pilkarzyki:hover .soccer-ball { animation: fAnim 4s linear infinite; }
+@keyframes fAnim { 0% { top: 50%; left: 50%; } 25% { top: 20%; left: 80%; } 50% { top: 80%; left: 20%; } 100% { top: 50%; left: 50%; } }
 
 /* --- RESPANSYWNOŚĆ --- */
-@media (max-width: 1250px) {
-    /* Gdy ekran jest węższy niż cały blok 2x2, przechodzimy w pion */
-    .grid { grid-template-columns: 1fr; width: 100%; max-width: 600px; }
-}
-@media (max-width: 640px) {
-    .offer-item { width: 100%; max-width: 100%; min-height: 350px; }
-    .logo a { font-size: 1.8rem; }
+@media (max-width: 660px) {
+    .grid { grid-template-columns: 300px; }
 }
