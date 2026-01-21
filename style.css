@@ -283,24 +283,38 @@ nav ul li a:hover { color: var(--neon-cyan); }
 
 /* NOWA ŚCIEŻKA: Długie ruchy, nagłe zwroty, finał w bramce */
 @keyframes fAnim {
-    0% { top: 50%; left: 50%; opacity: 1; transform: scale(1) rotate(0deg); } /* Start */
+    0% { top: 50%; left: 50%; opacity: 1; transform: scale(1) rotate(0deg); }
 
     /* --- FAZA CHAOSU --- */
-    10% { top: 15%; left: 20%; } /* Strzał w lewy górny róg */
-    22% { top: 85%; left: 80%; } /* Długa piłka na prawy dół */
-    35% { top: 50%; left: 5%;  } /* Odbicie od lewej bandy */
-    48% { top: 10%; left: 60%; } /* Szybka kontra górą */
-    60% { top: 90%; left: 30%; } /* Dolny róg */
-    75% { top: 25%; left: 90%; } /* Prawy górny róg */
+    10% { top: 15%; left: 20%; }
+    22% { top: 85%; left: 80%; }
+    35% { top: 50%; left: 5%;  }
+    48% { top: 10%; left: 60%; }
+    60% { top: 90%; left: 30%; }
+    75% { top: 25%; left: 90%; }
 
-    /* --- FAZA STRZAŁU NA BRAMKĘ --- */
-    88% { top: 50%; left: 85%; opacity: 1; transform: scale(1) rotate(720deg); } /* Ustawienie przed prawą bramką */
+    /* --- FAZA STRZAŁU --- */
+    88% { 
+        top: 50%; left: 85%; 
+        opacity: 1; /* Wciąż widoczna */
+        transform: scale(1) rotate(720deg); 
+    }
 
+    /* --- NOWA KLATKA (95%) - TU JEST ZMIANA --- */
+    /* Utrzymujemy widoczność prawie do samego końca (ok. 0.5s dłużej niż wcześniej) */
+    95% {
+        top: 50%; 
+        left: 98%; /* Już w świetle bramki */
+        opacity: 1; /* NADAL 100% WIDOCZNA */
+        transform: scale(0.8) rotate(900deg);
+    }
+
+    /* --- KONIEC (100%) --- */
     100% {
-        top: 50%;       /* Środek wysokości (bramka) */
-        left: 105%;     /* Wpada za linię końcową */
-        opacity: 0;     /* Znika */
-        transform: scale(0.5) rotate(1080deg); /* Zmniejsza się i kręci wpadając */
+        top: 50%;
+        left: 105%;     /* Głęboko w siatce */
+        opacity: 0;     /* Dopiero teraz znika (szybki fade-out) */
+        transform: scale(0.5) rotate(1080deg);
     }
 }
 
