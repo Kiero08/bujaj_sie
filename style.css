@@ -76,9 +76,9 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
     border-radius: 25px;
     padding: 25px;
     position: relative;
-    min-height: 400px;
+    min-height: 300px;
     width: 100%;
-    max-width: 600px; /* TWOJA SZEROKOŚĆ */
+    max-width: 450px; /* TWOJA SZEROKOŚĆ */
     overflow: hidden;
     display: flex;
     flex-direction: column;
