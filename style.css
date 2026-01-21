@@ -315,3 +315,116 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 }
 
 @keyframes lAnimMobile { 0% { bottom: 5%; } 30% { bottom: 20%; } 60% { bottom: 35%; } 100% { bottom: 40%; transform: translateX(-50%) scale(1.3); } }
+
+/* --- STYLE DLA PODSTRONY OFERTA --- */
+
+.offer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.detail-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-dark);
+    border: 3px solid var(--gold);
+    border-radius: 30px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: transform 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-cyan);
+}
+
+.detail-info {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.detail-info h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    /* Styl nagłówka z kafelków */
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 2px 0 var(--text-outline));
+}
+
+.detail-info p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.feature-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.feature-list li {
+    font-size: 0.95rem;
+    color: #fff;
+    opacity: 0.9;
+}
+
+/* Kółko z ceną */
+.detail-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 160px;
+    height: 160px;
+    background: #000;
+    border: 4px solid var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+}
+
+.price-value {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.price-unit {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--neon-cyan);
+    margin-top: 5px;
+}
+
+/* --- RESPANSYWNOŚĆ OFERTY --- */
+@media (max-width: 850px) {
+    .detail-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .detail-info {
+        padding-right: 0;
+        margin-bottom: 25px;
+    }
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+    .detail-price {
+        min-width: 140px;
+        height: 140px;
+    }
+}
