@@ -664,3 +664,29 @@ nav ul li a:hover { color: var(--neon-cyan); }
             drop-shadow(0 0 20px var(--neon-cyan)); /* Dodatkowy glow */
     }
 }
+
+/* --- FIX NA WYSTAJĄCY TEKST W WERSJI MOBILNEJ --- */
+@media (max-width: 600px) {
+    
+    /* 1. Zmniejszamy nagłówek na telefonie */
+    .page-title {
+        /* Było clamp(...), ale na mobile ustawiamy sztywno mniej */
+        font-size: 2rem; 
+        
+        /* KLUCZOWE: Pozwala przełamać słowo w połowie, jeśli się nie mieści */
+        overflow-wrap: break-word; 
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    /* 2. Dajemy więcej miejsca wewnątrz ramki */
+    .hero-glass-box.small-hero {
+        padding: 30px 15px; /* Zmniejszamy boczny padding z 40px na 15px */
+        width: 100%;        /* Upewniamy się, że box nie wychodzi poza ekran */
+    }
+    
+    /* Opcjonalnie: poprawiamy też podtytuł */
+    .subtitle {
+        font-size: 1rem;
+    }
+}
