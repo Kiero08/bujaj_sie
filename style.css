@@ -223,7 +223,7 @@ nav ul li a:hover { color: var(--neon-cyan); }
 
 /* ZMIANA CZASU NA 3s (wolniej) */
 .card-bilard:hover .ball-8 { 
-    animation: bAnim 3s linear forwards; 
+    animation: bAnim 2,5s linear forwards; 
 }
 
 @keyframes bAnim {
@@ -268,9 +268,29 @@ nav ul li a:hover { color: var(--neon-cyan); }
     }
 }
 
-.puck-shuffle { width: 44px; height: 26px; border-radius: 50%; background: radial-gradient(circle, #eee, #f00, #800); top: 50%; left: 10%; }
-.card-shuffle:hover .puck-shuffle { animation: sAnim 3s ease-out forwards; }
-@keyframes sAnim { 100% { left: 85%; } }
+/* NOWY KRĄŻEK SHUFFLEBOARD - Okrągły i czerwony */
+.puck-shuffle {
+    width: 40px;  /* Idealne koło (szerokość = wysokość) */
+    height: 40px;
+    border-radius: 50%;
+    /* Gradient tylko z odcieni czerwieni dla efektu 3D */
+    background: radial-gradient(circle at 30% 30%, #ff6666 0%, #cc0000 50%, #800000 100%);
+    /* Pozycja startowa */
+    top: 45%;
+    left: 10%;
+    z-index: 15;
+}
+/* NOWA TRASA - DOJEŻDŻA DO SAMEGO KOŃCA */
+@keyframes sAnim {
+    0% {
+        left: 10%; /* Start tam gdzie stoi */
+        opacity: 1;
+    }
+    100% {
+        left: 92%; /* Koniec przy prawej krawędzi (uwzględniając szerokość krążka) */
+        opacity: 1; /* Zostaje widoczny na końcu */
+    }
+}
 
 .pawn-ludo { width: 30px; height: 45px; display: flex; flex-direction: column; align-items: center; bottom: 10%; left: 15%; }
 .pawn-head { width: 16px; height: 16px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -4px; z-index: 2; }
