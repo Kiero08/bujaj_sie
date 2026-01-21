@@ -452,11 +452,7 @@ nav ul li a:hover { color: var(--neon-cyan); }
         drop-shadow(-1px -1px 0 var(--text-outline));
         
     /* Usunąłem stare text-shadow, bo gryzie się z gradientem */
-}
-.neon-text {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 15px var(--neon-cyan);
-}
+
 .subtitle {
     font-size: 1.2rem;
     margin-top: 10px;
