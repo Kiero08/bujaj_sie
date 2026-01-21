@@ -128,11 +128,42 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 /* --- ANIMACJE OBIEKTÓW --- */
 .game-obj { position: absolute; z-index: 15; opacity: 0; }
 
-/* 1. BILARD */
-.ball-8 { width: 40px; height: 40px; background: #000; border-radius: 50%; top: 50%; left: 15%; background-image: radial-gradient(circle at 30% 30%, #333, #000); display: flex; align-items: center; justify-content: center;}
-.ball-8::after { content: '8'; font-size: 0.8rem; width: 18px; height: 18px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
-.card-bilard:hover .ball-8 { animation: bAnim 3s linear forwards; }
-@keyframes bAnim { 0% { top: 50%; left: 15%; opacity: 1; transform: scale(1); } 35% { top: 82%; left: 45%; } 70% { top: 8%; left: 75%; } 100% { top: 90%; left: 92%; transform: scale(0.2); opacity: 0; } }
+/* 1. BILARD - POPRAWIONA BILA I FIZYKA WPADANIA */
+.ball-8 { 
+    width: 40px; height: 40px; 
+    background: #000; border-radius: 50%; 
+    top: 50%; left: 15%; 
+    background-image: radial-gradient(circle at 30% 30%, #333, #000); 
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; /* Ukryta przed najechaniem */
+}
+
+.ball-8::after { 
+    content: '8'; font-size: 0.8rem; width: 18px; height: 18px; 
+    background: #fff; border-radius: 50%; color: #000; 
+    display: flex; align-items: center; justify-content: center; font-weight: 900; 
+}
+
+/* Wyzwalacz */
+.card-bilard:hover .ball-8 { 
+    animation: bAnim 3s linear forwards; 
+}
+
+@keyframes bAnim {
+    0% { top: 50%; left: 15%; opacity: 1; transform: scale(1); }
+    35% { top: 82%; left: 45%; } /* Odbicie od dolnej bandy */
+    70% { top: 8%; left: 75%; }  /* Odbicie od górnej bandy */
+    
+    /* KLUCZOWE: Trzymamy pełną widoczność do samego końca */
+    92% { top: 88%; left: 91%; opacity: 1; transform: scale(1); } 
+    
+    /* Gwałtowne wpadnięcie w 0.2 sekundy */
+    100% { 
+        top: 94%; left: 94%;     /* Środek łuzy narożnej */
+        transform: scale(0.2); 
+        opacity: 0; 
+    }
+}
 
 /* 2. SHUFFLEBOARD */
 .puck-shuffle { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff6666, #800000); top: 45%; left: 10%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
