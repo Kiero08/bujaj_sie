@@ -199,22 +199,26 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 .pawn-body { width: 24px; height: 28px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 10% 10%; }
 .card-planszowki:hover .pawn-ludo { 
     /* 3 równe skoki zajmą 2.4 sekundy */
-    animation: lAnimDesktop 2.4s ease-in-out forwards; 
+    animation: lAnimDesktop 3.2s ease-in-out forwards; 
 }
 @keyframes lAnimDesktop {
     0% { bottom: 5%; transform: translateX(-50%) scale(1); }
     
-    /* SKOK 1 (Lądowanie na ~17%) */
-    16% { bottom: 25%; }
-    33% { bottom: 17%; }
+    /* SKOK 1 (Lądowanie na 14%) */
+    12.5% { bottom: 22%; }
+    25%   { bottom: 14%; }
     
-    /* SKOK 2 (Lądowanie na ~30%) */
-    50% { bottom: 40%; }
-    66% { bottom: 30%; }
+    /* SKOK 2 (Lądowanie na 23%) */
+    37.5% { bottom: 32%; }
+    50%   { bottom: 23%; }
     
-    /* SKOK 3 (Finałowe lądowanie na 42%) */
-    83% { bottom: 58%; }
-    100% { 
+    /* SKOK 3 (Lądowanie na 32%) */
+    62.5% { bottom: 42%; }
+    75%   { bottom: 32%; }
+    
+    /* SKOK 4 (Finał na 42%) */
+    87.5% { bottom: 55%; }
+    100%  { 
         bottom: 42%; 
         transform: translateX(-50%) scale(1.3); 
     }
