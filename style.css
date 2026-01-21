@@ -53,7 +53,6 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 .hero-logo-img { 
     max-width: 550px; width: 100%; height: auto; margin-bottom: 20px;
     transform-origin: top center;
-    /* PRZYWRÓCONY NEON (glowPulse) */
     animation: swingLogo 3s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite;
 }
 @keyframes swingLogo { 0% { transform: rotate(10deg); } 100% { transform: rotate(-10deg); } }
@@ -90,12 +89,20 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 /* --- GRID OFERTA --- */
 .container { max-width: 1300px; margin: 0 auto; padding: 20px 40px; }
 .grid { display: grid; grid-template-columns: repeat(2, 550px); gap: 30px; justify-content: center; }
+
 .offer-item {
     background-color: var(--card-dark); border: 4px solid var(--gold);
     border-radius: 30px; padding: 30px; position: relative;
     height: 300px; overflow: hidden; transition: 0.3s;
 }
 .offer-item:hover { transform: scale(1.02); }
+
+/* Ustawienie tekstu nad efektami */
+.card-content {
+    position: relative;
+    z-index: 20;
+}
+
 .offer-item h2 {
     font-family: 'Baloo 2', cursive; font-size: 2rem;
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
@@ -120,49 +127,40 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
     background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.7)); z-index: 1;
 }
 .card-bilard { background-color: #0a4d2e; }
-.card-shuffle { background-image: url('shuffle_bg.png'); background-size: cover; background-position: center; }
+.card-shuffle { 
+    background-image: url('shuffle_bg.png'); 
+    background-size: 100% 100% !important; /* FIX: Dopasowanie tła */
+    background-position: center; 
+}
 .card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; }
 .card-planszowki.photo-bg::before { background: linear-gradient(to bottom, var(--overlay), rgba(0, 0, 0, 0.45)); }
 .card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; }
+
+/* --- SVG I ELEMENTY GRAFICZNE --- */
+.table-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.7; pointer-events: none; }
 
 /* --- ANIMACJE OBIEKTÓW --- */
 .game-obj { position: absolute; z-index: 15; opacity: 0; }
 
 /* 1. BILARD - POPRAWIONA BILA I FIZYKA WPADANIA */
 .ball-8 { 
-    width: 40px; height: 40px; 
-    background: #000; border-radius: 50%; 
+    width: 40px; height: 40px; background: #000; border-radius: 50%; 
     top: 50%; left: 15%; 
     background-image: radial-gradient(circle at 30% 30%, #333, #000); 
     display: flex; align-items: center; justify-content: center;
-    opacity: 0; /* Ukryta przed najechaniem */
 }
+.ball-8::after { content: '8'; font-size: 0.8rem; width: 18px; height: 18px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
 
-.ball-8::after { 
-    content: '8'; font-size: 0.8rem; width: 18px; height: 18px; 
-    background: #fff; border-radius: 50%; color: #000; 
-    display: flex; align-items: center; justify-content: center; font-weight: 900; 
-}
-
-/* Wyzwalacz */
-.card-bilard:hover .ball-8 { 
-    animation: bAnim 3s linear forwards; 
-}
+.card-bilard:hover .ball-8 { animation: bAnim 3s linear forwards; }
 
 @keyframes bAnim {
     0% { top: 50%; left: 15%; opacity: 1; transform: scale(1); }
-    35% { top: 82%; left: 45%; } /* Odbicie od dolnej bandy */
-    70% { top: 8%; left: 75%; }  /* Odbicie od górnej bandy */
-    
-    /* KLUCZOWE: Trzymamy pełną widoczność do samego końca */
+    35% { top: 82%; left: 45%; } 
+    70% { top: 8%; left: 75%; }
+    /* Bila jest widoczna do samego końca */
     92% { top: 88%; left: 91%; opacity: 1; transform: scale(1); } 
-    
-    /* Gwałtowne wpadnięcie w 0.2 sekundy */
-    100% { 
-        top: 94%; left: 94%;     /* Środek łuzy narożnej */
-        transform: scale(0.2); 
-        opacity: 0; 
-    }
+    /* Wygaszenie i wpadnięcie */
+    100% { top: 94%; left: 94%; transform: scale(0.2); opacity: 0; }
 }
 
 /* 2. SHUFFLEBOARD */
@@ -209,10 +207,19 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
     .grid { grid-template-columns: 1fr; padding: 0 15px; }
     .offer-item { width: 100%; }
     .hero-glass-box { padding: 30px 15px; width: 95%; }
-    .hero-glass-box.small-hero { padding: 20px 10px; }
-    .page-title { font-size: 1.8rem; overflow-wrap: break-word; text-align: center; width: 100%; }
+    
+    /* FIX: Nadchodzące imprezy nie rozwalają już ramki */
+    .page-title { 
+        font-size: 1.6rem !important; 
+        text-align: center; 
+        width: 100%; 
+        overflow-wrap: break-word;
+    }
+    
+    .hero-glass-box.small-hero { padding: 20px 10px; width: 90%; margin: 20px auto; }
     .event-card { flex-direction: column; gap: 15px; }
     .event-date { width: 100%; flex-direction: row; display: flex; justify-content: center; gap: 10px; margin: 0; }
     .card-planszowki:hover .pawn-ludo { animation: lAnimMobile 3s ease-in-out forwards; }
 }
+
 @keyframes lAnimMobile { 0% { bottom: 5%; } 30% { bottom: 20%; } 60% { bottom: 35%; } 100% { bottom: 40%; transform: translateX(-50%) scale(1.3); } }
