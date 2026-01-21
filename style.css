@@ -211,30 +211,64 @@ nav ul li a:hover { color: var(--neon-cyan); }
 .card-pilkarzyki:hover .soccer-ball { animation: fAnim 5s linear infinite; }
 @keyframes fAnim { 25% { top: 20%; left: 85%; } 50% { top: 80%; left: 15%; } 100% { top: 50%; left: 50%; } }
 
-/* --- MOBILE --- */
-@media (max-width: 1150px) {
-    .grid { grid-template-columns: 550px; }
+/* --- RESPONSYWNOŚĆ (MEDIA QUERIES) --- */
+
+/* 1. Laptopy i Tablety (poniżej 1200px) */
+@media (max-width: 1200px) {
+    .grid { 
+        grid-template-columns: 550px; /* Jedna kolumna */
+    }
 }
-@media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .offer-item { width: 100%; height: auto; min-height: 250px; }
-}
-/* --- RESPANSYWNOŚĆ NAWIGACJI (MOBILE) --- */
+
+/* 2. Tablety pionowo / Duże telefony (poniżej 768px) */
 @media (max-width: 768px) {
     nav {
-        /* Zmieniamy układ na pionowy (kolumna) */
-        flex-direction: column; 
-        /* Centrujemy elementy */
-        align-items: center; 
-        /* Dodajemy odstęp między logiem a napisami */
-        gap: 15px; 
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
-
-    /* Opcjonalnie: trochę więcej miejsca w nagłówku na mobile */
     header {
-        padding: 15px 0; 
+        padding: 10px 0;
+    }
+    .logo-nav-img {
+        height: 50px; /* Mniejsze logo na mobilkach */
+    }
+}
+
+/* 3. Telefony (poniżej 600px) - TU JEST FIX NA UCINANIE TEKSTU */
+@media (max-width: 600px) {
+    .grid { 
+        grid-template-columns: 1fr; /* Pełna szerokość */
+        gap: 20px;
+        padding: 0 15px; /* Mniejszy margines boczny siatki */
     }
 
-    /* Opcjonalnie: Jeśli logo wydaje się za duże na telefonie, odkomentuj linię niżej */
-    /* .logo-nav-img { height: 50px; } */
+    .offer-item { 
+        width: 100%; 
+        /* KLUCZOWE: height: auto pozwala kontenerowi rosnąć wraz z tekstem */
+        height: auto; 
+        min-height: 250px; 
+        padding: 20px; /* Mniejszy padding, żeby tekst miał miejsce */
+    }
+
+    /* Zmniejszamy nagłówek w kontenerze na telefonie */
+    .offer-item h2 { 
+        font-size: 1.6rem; 
+        margin-bottom: 5px;
+    }
+
+    /* Zmniejszamy opis na telefonie */
+    .offer-item p { 
+        font-size: 0.95rem; 
+        line-height: 1.3;
+    }
+
+    /* Zmniejszamy główny nagłówek strony */
+    .hero-section h1 {
+        font-size: 2.2rem; 
+    }
+    
+    .hero-glass-box {
+        padding: 30px 20px;
+    }
 }
