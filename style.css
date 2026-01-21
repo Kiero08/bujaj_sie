@@ -192,10 +192,70 @@ nav ul li a:hover { color: var(--neon-cyan); }
 .game-obj { position: absolute; z-index: 15; opacity: 0; }
 .offer-item:hover .game-obj { opacity: 1; }
 
-.ball-8 { width: 40px; height: 40px; background: #000; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #333, #000); display: flex; align-items: center; justify-content: center; top: 45%; left: 15%; }
-.ball-8::after { content: '8'; font-size: 0.8rem; width: 18px; height: 18px; background: #fff; border-radius: 50%; color: #000; display: flex; align-items: center; justify-content: center; font-weight: 900; }
-.card-bilard:hover .ball-8 { animation: bAnim 2.5s ease-in-out forwards; }
-@keyframes bAnim { 100% { top: 85%; left: 88%; transform: scale(0.2); opacity: 0; } }
+/* --- BILARD (TRICK SHOT: Środek -> Dół -> Góra -> Łuza) --- */
+.ball-8 { 
+    width: 40px; 
+    height: 40px; 
+    background: #000; 
+    border-radius: 50%; 
+    background-image: radial-gradient(circle at 30% 30%, #333, #000); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    /* Pozycja startowa (środek lewej strony, ale nie przy krawędzi) */
+    top: 50%; 
+    left: 15%; 
+}
+
+.ball-8::after { 
+    content: '8'; 
+    font-size: 0.8rem; 
+    width: 18px; 
+    height: 18px; 
+    background: #fff; 
+    border-radius: 50%; 
+    color: #000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 900; 
+}
+
+/* Wyzwalanie animacji */
+.card-bilard:hover .ball-8 { 
+    animation: bAnim 2s linear forwards; /* linear = stała prędkość, bardziej fizyczna */
+}
+
+/* Definicja ruchu bili */
+@keyframes bAnim {
+    /* 1. START: Środek lewej strony (nie od krawędzi) */
+    0% {
+        top: 50%;
+        left: 15%;
+        transform: scale(1);
+        opacity: 1;
+    }
+    
+    /* 2. ODBICIE: Dolna banda (leci po skosie w dół) */
+    35% {
+        top: 86%;  /* Prawie dotyka dołu */
+        left: 45%; /* Przesuwa się w prawo */
+    }
+    
+    /* 3. ODBICIE: Górna banda (leci po skosie w górę) */
+    70% {
+        top: 4%;   /* Prawie dotyka góry */
+        left: 75%; /* Dalej w prawo */
+    }
+    
+    /* 4. KONIEC: Prawa dolna kieszeń (wpada i znika) */
+    100% {
+        top: 86%;  /* Dół */
+        left: 90%; /* Prawy róg (kieszeń) */
+        transform: scale(0.3); /* Zmniejsza się */
+        opacity: 0; /* Znika */
+    }
+}
 
 .puck-shuffle { width: 44px; height: 26px; border-radius: 50%; background: radial-gradient(circle, #eee, #f00, #800); top: 50%; left: 10%; }
 .card-shuffle:hover .puck-shuffle { animation: sAnim 3s ease-out forwards; }
