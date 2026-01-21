@@ -11,7 +11,7 @@
     --text-yellow-top: #ffe552;
     --text-orange-bottom: #ffb300;
     --text-outline: #000000;
-    --overlay: rgba(0, 30, 35, 0.7); /* Filtr na zdjęcia */
+    --overlay: rgba(0, 30, 35, 0.75); 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,7 +27,7 @@ body {
 
 /* --- NAWIGACJA --- */
 header {
-    position: sticky; top: 0; z-index: 1000; padding: 15px 0;
+    position: sticky; top: 0; z-index: 1000; padding: 12px 0;
     background: var(--nav-dark);
     border-bottom: 3px solid var(--gold);
 }
@@ -49,116 +49,114 @@ nav ul li a { text-decoration: none; color: #fff; font-weight: 700; }
 .hero-glass-box {
     background: rgba(0, 20, 25, 0.8);
     border-radius: 40px; border: 3px solid var(--gold);
-    padding: 60px 40px; max-width: 900px; margin: 40px auto;
+    padding: 50px 40px; max-width: 800px; margin: 30px auto;
     text-align: center; backdrop-filter: blur(20px);
 }
-.hero-logo-img { max-width: 250px; width: 100%; height: auto; margin-bottom: 20px; }
+.hero-logo-img { max-width: 200px; width: 100%; height: auto; margin-bottom: 15px; }
 
-/* --- SIATKA KART (UKŁAD POZIOMY WYMUSZONY) --- */
-/* Zwiększamy szerokość kontenera na dużych ekranach, żeby pomieścić 4 obok siebie */
-.container { max-width: 95vw; margin: 0 auto; padding: 40px 20px; }
-
+/* --- SIATKA KART (POZIOMA I KOMPAKTOWA) --- */
+.container { max-width: 1300px; margin: 0 auto; padding: 20px; }
 .grid { 
     display: grid;
-    /* Wymuszamy 4 równe kolumny na start */
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px; 
+    gap: 20px; 
     align-items: stretch;
 }
 
 .offer-item {
     background-color: var(--card-dark);
-    border: 5px solid var(--gold);
-    border-radius: 30px;
-    padding: 25px; /* Lekko mniejszy padding wewnętrzny */
+    border: 4px solid var(--gold);
+    border-radius: 25px;
+    padding: 25px;
     position: relative;
-    /* Zmniejszamy minimalną wysokość, żeby ładniej wyglądały w poziomie */
-    min-height: 450px; 
+    /* MNIEJSZE WYMIARY */
+    min-height: 380px; 
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    box-shadow: inset 0 0 50px #000, 0 10px 30px rgba(0,0,0,0.5);
+    /* NAZWA NA GÓRZE */
+    justify-content: flex-start;
+    text-align: left;
+    box-shadow: inset 0 0 50px #000, 0 10px 20px rgba(0,0,0,0.5);
     transition: 0.4s;
 }
-.offer-item:hover { transform: translateY(-10px); }
+.offer-item:hover { transform: translateY(-8px); }
 
-/* NAKŁADKA NA ZDJĘCIA (03 i 04) */
+/* NAKŁADKA NA ZDJĘCIA */
 .photo-bg::before {
     content: '';
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to bottom, var(--overlay), rgba(0,0,0,0.85));
     z-index: 1;
 }
-.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; background-position: center; }
-.card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: cover; background-position: center; }
+.card-planszowki { background-image: url('planszowki_bg.jpg'); background-size: cover; background-position: center; }
+.card-pilkarzyki { background-image: url('pilkarzyki_bg.jpg'); background-size: cover; background-position: center; }
 
+/* NAPISY WYRÓWNANE DO LEWEJ NA GÓRZE */
 .offer-item h2 {
-    font-family: 'Baloo 2', cursive; font-size: 1.6rem; /* Lekko mniejszy font nagłówka */
+    font-family: 'Baloo 2', cursive; 
+    font-size: 2rem; /* WIĘKSZE */
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     filter: drop-shadow(1.5px 1.5px 0 var(--text-outline)) drop-shadow(3px 3px 0 var(--text-outline));
-    position: relative; z-index: 10; margin-bottom: 10px;
+    position: relative; z-index: 20; 
+    margin-bottom: 8px;
+    line-height: 1.1;
 }
-.offer-item p { position: relative; z-index: 10; font-size: 0.9rem; color: #fff; line-height: 1.4; }
+.offer-item p { 
+    position: relative; z-index: 20; 
+    font-size: 1rem; color: #fff; 
+    line-height: 1.3; 
+    font-weight: 400;
+    max-width: 90%;
+}
 
-/* SVG Background dla Shuffleboard */
+/* SVG Background */
 .table-svg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 1; opacity: 0.6; pointer-events: none;
 }
 
 /* --- BILARD POCKETS --- */
-.pocket { position: absolute; background: #000; border: 3px solid var(--gold); z-index: 10; }
-.p-tl { top: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 0 40px 0; }
-.p-tr { top: -5px; right: -5px; width: 50px; height: 50px; border-radius: 0 0 0 40px; }
-.p-bl { bottom: -5px; left: -5px; width: 50px; height: 50px; border-radius: 0 40px 0 0; }
-.p-br { bottom: -5px; right: -5px; width: 50px; height: 50px; border-radius: 40px 0 0 0; }
-.p-mt { top: -2px; left: 50%; transform: translateX(-50%); width: 60px; height: 30px; border-radius: 0 0 30px 30px; border-top: none; }
-.p-mb { bottom: -2px; left: 50%; transform: translateX(-50%); width: 60px; height: 30px; border-radius: 30px 30px 0 0; border-bottom: none; }
+.pocket { position: absolute; background: #000; border: 2px solid var(--gold); z-index: 10; }
+.p-tl { top: -4px; left: -4px; width: 45px; height: 45px; border-radius: 0 0 35px 0; }
+.p-tr { top: -4px; right: -4px; width: 45px; height: 45px; border-radius: 0 0 0 35px; }
+.p-bl { bottom: -4px; left: -4px; width: 45px; height: 45px; border-radius: 0 35px 0 0; }
+.p-br { bottom: -4px; right: -4px; width: 45px; height: 45px; border-radius: 35px 0 0 0; }
+.p-mt { top: -2px; left: 50%; transform: translateX(-50%); width: 55px; height: 25px; border-radius: 0 0 25px 25px; border-top: none; }
+.p-mb { bottom: -2px; left: 50%; transform: translateX(-50%); width: 55px; height: 25px; border-radius: 25px 25px 0 0; border-bottom: none; }
 
-/* --- ANIMACJE --- */
+/* --- ANIMACJE (PRZESKALOWANE DO MNIEJSZYCH KART) --- */
 .game-obj { position: absolute; z-index: 15; opacity: 0; pointer-events: none; }
 .offer-item:hover .game-obj, .offer-item:active .game-obj { opacity: 1; }
 
-.ball-8 { width: 40px; height: 40px; background: #000; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #444, #000); display: flex; align-items: center; justify-content: center; }
-.ball-8::after { content: '8'; width: 18px; height: 18px; background: #fff; border-radius: 50%; color: #000; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+.ball-8 { width: 36px; height: 36px; background: #000; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #444, #000); display: flex; align-items: center; justify-content: center; }
+.ball-8::after { content: '8'; width: 16px; height: 16px; background: #fff; border-radius: 50%; color: #000; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
 .card-bilard:hover .ball-8 { animation: billardAnim 2.5s ease-in-out forwards; }
 
-.puck-shuffle { width: 40px; height: 24px; border-radius: 50%; background: radial-gradient(circle at center, #eee 0%, #c0c0c0 35%, #ff0000 36%, #8b0000 100%); }
+.puck-shuffle { width: 36px; height: 22px; border-radius: 50%; background: radial-gradient(circle at center, #eee 0%, #c0c0c0 35%, #ff0000 36%, #8b0000 100%); }
 .card-shuffle:hover .puck-shuffle { animation: shuffleAnim 4s ease-out forwards; }
 
-.pawn-ludo { width: 30px; height: 45px; display: flex; flex-direction: column; align-items: center; }
-.pawn-head { width: 16px; height: 16px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -4px; z-index: 2; }
-.pawn-body { width: 24px; height: 28px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 15% 15% / 100% 100% 10% 10%; }
+.pawn-ludo { width: 28px; height: 40px; display: flex; flex-direction: column; align-items: center; }
+.pawn-head { width: 14px; height: 14px; background: var(--gold); border: 2px solid #000; border-radius: 50%; margin-bottom: -4px; z-index: 2; }
+.pawn-body { width: 22px; height: 26px; background: var(--gold); border: 2px solid #000; border-radius: 50% 50% 15% 15% / 100% 100% 10% 10%; }
 .card-planszowki:hover .pawn-ludo { animation: ludoAnim 3s ease-in-out forwards; }
 
-.soccer-ball { width: 20px; height: 20px; background: #fff; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #fff, #111); border: 1px solid #000; }
+.soccer-ball { width: 18px; height: 18px; background: #fff; border-radius: 50%; background-image: radial-gradient(circle at 30% 30%, #fff, #111); border: 1px solid #000; }
 .card-pilkarzyki:hover .soccer-ball { animation: foosAnim 6s linear infinite; }
 
-@keyframes billardAnim { 0% { top: 40%; left: 10%; opacity: 0; } 10% { opacity: 1; } 100% { top: 90%; left: 90%; transform: scale(0.2); opacity: 0; } }
-@keyframes shuffleAnim { 0% { left: 5%; top: 50%; opacity: 0; } 10% { opacity: 1; } 100% { left: 82%; top: 50%; opacity: 1; } }
-@keyframes ludoAnim { 0% { bottom: 10%; left: 10%; opacity: 0; } 100% { bottom: 42%; left: 45%; opacity: 1; transform: scale(1.3); } }
-@keyframes foosAnim { 0% { top: 50%; left: 50%; } 25% { top: 15%; left: 75%; } 50% { top: 85%; left: 25%; } 75% { top: 30%; left: 85%; } 100% { top: 50%; left: 50%; } }
+@keyframes billardAnim { 0% { top: 40%; left: 10%; opacity: 0; } 10% { opacity: 1; } 100% { top: 85%; left: 85%; transform: scale(0.2); opacity: 0; } }
+@keyframes shuffleAnim { 0% { left: 5%; top: 55%; opacity: 0; } 10% { opacity: 1; } 100% { left: 80%; top: 55%; opacity: 1; } }
+@keyframes ludoAnim { 0% { top: 70%; left: 10%; opacity: 0; } 100% { top: 45%; left: 45%; opacity: 1; transform: scale(1.2); } }
+@keyframes foosAnim { 0% { top: 50%; left: 50%; } 25% { top: 20%; left: 75%; } 50% { top: 80%; left: 25%; } 75% { top: 30%; left: 85%; } 100% { top: 50%; left: 50%; } }
 
-/* --- RESPANSYWNOŚĆ (MEDIA QUERIES) --- */
-
-/* Tablet / Mały Laptop (np. poniżej 1200px szerokości) */
+/* --- RESPANSYWNOŚĆ --- */
 @media (max-width: 1200px) {
-    .grid {
-        /* Zmieniamy układ na 2 kolumny po 2 rzędy */
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .container { max-width: 900px; } /* Zwężamy kontener */
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .container { max-width: 900px; }
 }
-
-/* Mobile (Telefony - poniżej 768px) */
 @media (max-width: 768px) {
-    .grid { 
-        /* Zmieniamy układ na 1 kolumnę (pionowo) */
-        grid-template-columns: 1fr; 
-    }
-    nav { flex-direction: column; gap: 10px; }
-    .hero-glass-box { padding: 40px 20px; }
-    .offer-item { min-height: 400px; } /* Trochę niższe karty na mobile */
+    .grid { grid-template-columns: 1fr; }
+    .logo a { font-size: 1.8rem; }
+    .offer-item h2 { font-size: 1.8rem; }
 }
