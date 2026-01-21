@@ -263,9 +263,46 @@ nav ul li a:hover { color: var(--neon-cyan); }
         opacity: 1;
     }
 }
-.soccer-ball { width: 22px; height: 22px; background: #fff; border-radius: 50%; border: 1px solid #000; top: 50%; left: 50%; background-image: radial-gradient(circle at 30% 30%, #fff, #333); }
-.card-pilkarzyki:hover .soccer-ball { animation: fAnim 5s linear infinite; }
-@keyframes fAnim { 25% { top: 20%; left: 85%; } 50% { top: 80%; left: 15%; } 100% { top: 50%; left: 50%; } }
+
+/* 4. PIŁKARZYKI (CHAOS I GOL) */
+.soccer-ball {
+    width: 22px; height: 22px;
+    background: #fff; border-radius: 50%; border: 1px solid #000;
+    /* Start na środku */
+    top: 50%; left: 50%;
+    /* Tekstura piłki, żeby było widać obrót */
+    background-image: radial-gradient(circle at 30% 30%, #fff 40%, #222 60%, #fff 70%);
+    background-size: 150% 150%;
+    z-index: 15;
+}
+
+/* Wyzwalacz: 7 sekund, ruch liniowy (stała prędkość), zatrzymuje się na końcu (forwards) */
+.card-pilkarzyki:hover .soccer-ball {
+    animation: fAnim 7s linear forwards;
+}
+
+/* NOWA ŚCIEŻKA: Długie ruchy, nagłe zwroty, finał w bramce */
+@keyframes fAnim {
+    0% { top: 50%; left: 50%; opacity: 1; transform: scale(1) rotate(0deg); } /* Start */
+
+    /* --- FAZA CHAOSU --- */
+    10% { top: 15%; left: 20%; } /* Strzał w lewy górny róg */
+    22% { top: 85%; left: 80%; } /* Długa piłka na prawy dół */
+    35% { top: 50%; left: 5%;  } /* Odbicie od lewej bandy */
+    48% { top: 10%; left: 60%; } /* Szybka kontra górą */
+    60% { top: 90%; left: 30%; } /* Dolny róg */
+    75% { top: 25%; left: 90%; } /* Prawy górny róg */
+
+    /* --- FAZA STRZAŁU NA BRAMKĘ --- */
+    88% { top: 50%; left: 85%; opacity: 1; transform: scale(1) rotate(720deg); } /* Ustawienie przed prawą bramką */
+
+    100% {
+        top: 50%;       /* Środek wysokości (bramka) */
+        left: 105%;     /* Wpada za linię końcową */
+        opacity: 0;     /* Znika */
+        transform: scale(0.5) rotate(1080deg); /* Zmniejsza się i kręci wpadając */
+    }
+}
 
 /* --- RESPANSYWNOŚĆ (MEDIA QUERIES) --- */
 
