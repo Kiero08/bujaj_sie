@@ -352,11 +352,16 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
     font-family: 'Baloo 2', cursive;
     font-size: 2.2rem;
     margin-bottom: 15px;
-    /* Styl nagłówka z kafelków */
+    color: #fff; /* Kolor bazowy dla emoji */
+    filter: drop-shadow(2px 2px 0 var(--text-outline));
+}
+
+/* Tylko tekst wewnątrz h2 dostaje złoty gradient */
+.text-grad {
     background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px 0 var(--text-outline));
+    display: inline-block;
 }
 
 .detail-info p {
