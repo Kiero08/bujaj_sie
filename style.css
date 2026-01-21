@@ -62,7 +62,7 @@ nav ul li a:hover { color: var(--neon-cyan); }
 }
 
 .hero-logo-img { 
-    max-width: 250px; 
+    max-width: 350px; 
     width: 100%; 
     height: auto; 
     margin-bottom: 20px; 
