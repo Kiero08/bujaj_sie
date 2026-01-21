@@ -111,7 +111,7 @@ nav ul li a:hover {
 
 .offer-item {
     background-color: var(--card-dark);
-    /* WSZYSTKIE KARTY MAJĄ ZŁOTĄ RAMKĘ (KRAWĘDŹ STOŁU) */
+    /* WSZYSTKIE KARTY MAJĄ SOLIDNĄ ZŁOTĄ RAMKĘ (KRAWĘDŹ STOŁU) */
     border: 4px solid var(--gold-border);
     padding: 40px; position: relative; transition: 0.4s; 
     box-shadow: inset 0 0 50px rgba(0,0,0,0.9), 0 15px 30px rgba(0,0,0,0.5);
@@ -181,15 +181,15 @@ nav ul li a:hover {
 
 /* --- 2. SHUFFLEBOARD (Card Shuffle) --- */
 .card-shuffle {
-    /* Tło drewnopodobne */
+    /* Tło drewnopodobne ciemne */
     background-image: 
-        linear-gradient(90deg, transparent 60%, rgba(255, 255, 255, 0.07) 60%, rgba(255, 255, 255, 0.07) 80%, rgba(255, 204, 0, 0.07) 80%),
-        repeating-linear-gradient(90deg, #002a2e, #002a2e 15px, #002024 15px, #002024 30px);
+        linear-gradient(90deg, transparent 60%, rgba(255, 255, 255, 0.05) 60%, rgba(255, 255, 255, 0.05) 80%, rgba(255, 204, 0, 0.05) 80%),
+        repeating-linear-gradient(90deg, #002225, #002225 15px, #001a1d 15px, #001a1d 30px);
 }
 /* Ukrycie łuz */
 .card-shuffle .pocket-tl, .card-shuffle .pocket-tr, .card-shuffle .pocket-bl, .card-shuffle .pocket-br, .card-shuffle .pocket-mt, .card-shuffle .pocket-mb { display: none; }
 
-/* Krążek - POPRAWIONY (Srebrny środek, ostre odcięcie) */
+/* Krążek - SREBRNY ŚRODEK CENTRALNIE */
 .card-shuffle::after {
     content: ''; position: absolute; top: 50%; left: 10%;
     width: 50px; height: 30px;
@@ -211,23 +211,32 @@ nav ul li a:hover {
 }
 
 /* --- 3. PLANSZÓWKI (Card Ludo/Chińczyk) --- */
+/* ODWZOROWANIE PLANSZY Z REFERENCJI (Krzyż i Bazy) */
 .card-ludo {
-    background-color: #001a1d; /* Bardzo ciemne tło */
-    /* Tło: ODWZOROWANIE PLANSZY CHIŃCZYKA (Krzyż i Bazy) */
+    background-color: #001518; /* Bardzo ciemne tło bazy */
     background-image: 
-        /* Środek (Meta - Złoty) */
-        radial-gradient(circle at center, var(--gold-border) 0%, var(--text-orange-bottom) 15%, transparent 16%),
+        /* --- ŚRODEK (Meta - Złota Gwiazda/Diament) --- */
+        linear-gradient(45deg, transparent 45%, var(--gold-border) 45%, var(--text-orange-bottom) 55%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, var(--gold-border) 45%, var(--text-orange-bottom) 55%, transparent 55%),
 
-        /* Ścieżki Krzyża (Szare) */
-        linear-gradient(to bottom, transparent 42%, rgba(255,255,255,0.1) 42%, rgba(255,255,255,0.1) 58%, transparent 58%),
-        linear-gradient(to right, transparent 42%, rgba(255,255,255,0.1) 42%, rgba(255,255,255,0.1) 58%, transparent 58%),
+        /* --- ŚCIEŻKI KRZYŻA (Jasne pola) --- */
+        /* Pozioma */
+        linear-gradient(0deg, transparent 40%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.1) 60%, transparent 60%),
+        /* Pionowa */
+        linear-gradient(90deg, transparent 40%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.1) 60%, transparent 60%),
 
-        /* Bazy Narożne (Dopasowane kolory: Złoto i Turkus) */
-        radial-gradient(circle at 15% 15%, var(--text-yellow-top) 0%, var(--text-orange-bottom) 20%, transparent 21%), /* LG */
-        radial-gradient(circle at 85% 15%, var(--neon-cyan) 0%, var(--deep-teal) 20%, transparent 21%), /* PG */
-        radial-gradient(circle at 15% 85%, var(--neon-cyan) 0%, var(--deep-teal) 20%, transparent 21%), /* LD */
-        radial-gradient(circle at 85% 85%, var(--text-yellow-top) 0%, var(--text-orange-bottom) 20%, transparent 21%); /* PD */
+        /* --- BAZY NAROŻNE (Kolorowe koła w rogach) --- */
+        /* Lewa Góra (Złota) */
+        radial-gradient(circle at 20% 20%, var(--text-yellow-top) 0%, var(--text-orange-bottom) 18%, transparent 19%),
+        /* Prawa Góra (Turkusowa) */
+        radial-gradient(circle at 80% 20%, var(--neon-cyan) 0%, var(--deep-teal) 18%, transparent 19%),
+        /* Lewa Dół (Turkusowa) */
+        radial-gradient(circle at 20% 80%, var(--neon-cyan) 0%, var(--deep-teal) 18%, transparent 19%),
+        /* Prawa Dół (Złota) */
+        radial-gradient(circle at 80% 80%, var(--text-yellow-top) 0%, var(--text-orange-bottom) 18%, transparent 19%);
+    
     background-size: 100% 100%;
+    background-position: center;
 }
 .card-ludo .pocket-tl, .card-ludo .pocket-tr, .card-ludo .pocket-bl, .card-ludo .pocket-br, .card-ludo .pocket-mt, .card-ludo .pocket-mb { display: none; }
 
@@ -254,24 +263,27 @@ nav ul li a:hover {
 }
 
 /* --- 4. PIŁKARZYKI (Card Foosball) --- */
+/* ODWZOROWANIE STOŁU Z REFERENCJI (Murawa, Drążki, Piłkarze) */
 .card-foosball {
-    background-color: #1a472a; /* Ciemna zieleń boiska */
-    /* Tło: Murawa, Linie, Drążki, Piłkarze */
+    background-color: #1e5936; /* Ciemna zieleń boiska */
     background-image:
         /* --- PIŁKARZE (Prostokąty na drążkach) --- */
-        /* Rząd Złoty */
-        repeating-linear-gradient(90deg, transparent, transparent 20%, var(--text-orange-bottom) 20%, var(--text-yellow-top) 24%, transparent 24%, transparent 33.3%),
-        /* Rząd Turkusowy */
-        repeating-linear-gradient(90deg, transparent, transparent 35%, var(--deep-teal) 35%, var(--neon-cyan) 39%, transparent 39%, transparent 50%),
+        /* Złota drużyna (na 2. i 4. drążku od góry) */
+        linear-gradient(90deg, transparent 20%, var(--text-orange-bottom) 20%, var(--text-yellow-top) 25%, transparent 25%, transparent 60%, var(--text-orange-bottom) 60%, var(--text-yellow-top) 65%, transparent 65%),
+        /* Turkusowa drużyna (na 3. drążku) */
+        linear-gradient(90deg, transparent 40%, var(--deep-teal) 40%, var(--neon-cyan) 45%, transparent 45%, transparent 80%, var(--deep-teal) 80%, var(--neon-cyan) 85%, transparent 85%),
 
         /* --- DRĄŻKI (Srebrne linie poprzeczne) --- */
-        repeating-linear-gradient(180deg, transparent, transparent 18%, silver 18%, #a0a0a0 19%, transparent 19%, transparent 36%),
+        repeating-linear-gradient(180deg, transparent, transparent 20%, #ccc 20%, #999 21%, #ccc 22%, transparent 22%, transparent 40%),
 
-        /* --- LINIE BOISKA (Białe) --- */
-        radial-gradient(circle at center, transparent 0%, transparent 8%, rgba(255,255,255,0.4) 8%, rgba(255,255,255,0.4) 9%, transparent 9%), /* Środek koło */
-        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.4) 49.5%, rgba(255,255,255,0.4) 50.5%, transparent 50.5%), /* Środek linia */
-        linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 5%, transparent 5%, transparent 95%, rgba(255,255,255,0.3) 95%); /* Pola karne */
-    background-size: 100% 100%;
+        /* --- LINIE BOISKA (Białe, ostre) --- */
+        radial-gradient(circle at 50% 50%, transparent 8%, rgba(255,255,255,0.6) 8%, rgba(255,255,255,0.6) 9%, transparent 9%), /* Środek koło */
+        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.6) 49.5%, rgba(255,255,255,0.6) 50.5%, transparent 50.5%); /* Środek linia */
+
+    /* Pozycjonowanie warstw, aby piłkarze byli na drążkach */
+    background-size: 100% 40%, 100% 40%, 100% 100%, 100% 100%, 100% 100%;
+    background-position: 0 21%, 0 61%, 0 0, 0 0, 0 0;
+    background-repeat: repeat-x, repeat-x, no-repeat, no-repeat, no-repeat;
 }
 .card-foosball .pocket-tl, .card-foosball .pocket-tr, .card-foosball .pocket-bl, .card-foosball .pocket-br, .card-foosball .pocket-mt, .card-foosball .pocket-mb { display: none; }
 
@@ -284,7 +296,7 @@ nav ul li a:hover {
     opacity: 0; pointer-events: none; z-index: 10;
 }
 .card-foosball:hover::after, .card-foosball:active::after { 
-    animation: bounceFoosball 8s linear infinite; /* Długa animacja */
+    animation: bounceFoosball 8s linear infinite; /* Długa, chaotyczna animacja */
 }
 @keyframes bounceFoosball {
     0% { top: 50%; left: 50%; opacity: 1; }
