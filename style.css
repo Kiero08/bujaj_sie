@@ -99,6 +99,63 @@ nav ul li a:hover { color: var(--neon-cyan); }
     position: relative; z-index: 20;
 }
 
+/* --- PRZYCISK REZERWUJ (STYL CARTOON/JUICY) --- */
+.hero-btn {
+    display: inline-block;
+    margin-top: 40px; /* Odstęp od napisu CENTRUM... */
+    padding: 15px 60px;
+    
+    font-family: 'Baloo 2', cursive;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    
+    /* Kolory - ciemny tekst na złotym tle dla kontrastu */
+    color: #2c1a0a; 
+    background: linear-gradient(180deg, #fff9c4 0%, #ffc107 50%, #ff9800 100%);
+    
+    /* Kształt i obrys */
+    border: 3px solid #000;
+    border-radius: 50px;
+    
+    /* EFEKTY: Twardy cień 3D (czarny) + Poświata (złota) */
+    box-shadow: 
+        0 6px 0 #000,                /* Twardy spód przycisku */
+        0 0 25px rgba(255, 193, 7, 0.6); /* Neonowa poświata */
+        
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    z-index: 30;
+}
+
+/* Stan po najechaniu (Hover) - Przycisk rośnie i jaśnieje */
+.hero-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(180deg, #ffffff 0%, #ffeb3b 50%, #ffc107 100%);
+    box-shadow: 
+        0 10px 0 #000, 
+        0 0 40px rgba(255, 193, 7, 1);
+    cursor: pointer;
+}
+
+/* Stan wciśnięcia (Active) - Przycisk się zapada */
+.hero-btn:active {
+    transform: translateY(4px) scale(0.98);
+    box-shadow: 
+        0 2px 0 #000,
+        0 0 15px rgba(255, 193, 7, 0.4);
+}
+
+/* RESPANSYWNOŚĆ: Mniejszy przycisk na telefonie */
+@media (max-width: 600px) {
+    .hero-btn {
+        padding: 12px 40px;
+        font-size: 1.5rem;
+        margin-top: 25px;
+    }
+}
 /* --- GRID / KONTENERY --- */
 .container { 
     width: 100%; max-width: 1300px; margin: 0 auto; 
