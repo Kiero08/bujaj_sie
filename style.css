@@ -132,8 +132,12 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
     background-size: 100% 100% !important; /* FIX: Dopasowanie tła */
     background-position: center; 
 }
-.card-planszowki { background-image: url('planszowki_bg.png'); background-size: cover; }
-.card-planszowki.photo-bg::before { background: linear-gradient(to bottom, var(--overlay), rgba(0, 0, 0, 0.45)); }
+.card-planszowki {
+    background-image: url('planszowki_bg.png');
+    /* ZMIANA: Wymuszamy rozciągnięcie na pełną szerokość i wysokość */
+    background-size: 100% 100%;
+    background-position: center;
+}
 .card-pilkarzyki { background-image: url('pilkarzyki_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; }
 
 /* --- SVG I ELEMENTY GRAFICZNE --- */
