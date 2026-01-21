@@ -690,3 +690,42 @@ nav ul li a:hover { color: var(--neon-cyan); }
         font-size: 1rem;
     }
 }
+
+/* --- SEKCJA "NAJBLIŻSZE WYDARZENIE" NA STRONIE GŁÓWNEJ --- */
+
+.latest-event-section {
+    margin-top: 80px;      /* Wyraźny odstęp od kafelków oferty */
+    margin-bottom: 60px;   /* Odstęp od stopki */
+    padding: 0 20px;       /* Margines boczny na wypadek wąskich ekranów */
+}
+
+/* Styl nagłówka sekcji - identyczny jak h2 w kafelkach */
+.section-title {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    
+    /* Złoty gradient */
+    background: linear-gradient(to bottom, var(--text-yellow-top) 50%, var(--text-orange-bottom) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Twardy obrys */
+    filter: 
+        drop-shadow(3px 3px 0 var(--text-outline)) 
+        drop-shadow(-1px -1px 0 var(--text-outline));
+}
+
+/* Responsywność nagłówka dla mniejszych ekranów */
+@media (max-width: 600px) {
+    .latest-event-section {
+        margin-top: 50px;
+    }
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+}
