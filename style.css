@@ -62,10 +62,23 @@ nav ul li a:hover { color: var(--neon-cyan); }
 }
 
 .hero-logo-img { 
-    max-width: 550px; width: 100%; height: auto; margin-bottom: 20px; 
-    animation: swingLogo 5s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+    max-width: 350px; 
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 20px; 
+    
+    /* KLUCZ DO EFEKTU HUŚTAWKI: "Wieszamy" logo za górną krawędź */
+    transform-origin: top center;
+    
+    /* Zmieniamy czas na 3s i dodajemy 'alternate', żeby ruch był płynniejszy (lewo-prawo-lewo...) */
+    animation: swingLogo 3s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite;
 }
-@keyframes swingLogo { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+@keyframes swingLogo { 
+    /* Wychylenie w lewo */
+    0% { transform: rotate(10deg); } 
+    /* Wychylenie w prawo */
+    100% { transform: rotate(-10deg); } 
+}
 @keyframes glowPulse { 0%, 100% { filter: drop-shadow(0 0 10px var(--neon-cyan)); } 50% { filter: drop-shadow(0 0 25px var(--neon-cyan)) brightness(1.2); } }
 
 /* H1 - STYL "BUJAJ SIĘ" (ZŁOTY GRADIENT, BEZ CZERWIENI) */
