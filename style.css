@@ -237,7 +237,7 @@ nav ul li a:hover { color: var(--neon-cyan); }
     /* Skok 2 (Finał na 42%) */
     80% { bottom: 50%; transform: translateX(-50%) scale(1.2) translateY(-10px); } /* Wyskakuje trochę wyżej */
     100% {
-        bottom: 42%; /* Stop tuż pod środkiem */
+        bottom: 40%; /* Stop tuż pod środkiem */
         transform: translateX(-50%) scale(1.3);
         opacity: 1;
     }
