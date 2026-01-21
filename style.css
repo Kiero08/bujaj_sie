@@ -158,13 +158,33 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 .card-bilard:hover .ball-8 { animation: bAnim 3s linear forwards; }
 
 @keyframes bAnim {
-    0% { top: 50%; left: 15%; opacity: 1; transform: scale(1); }
-    35% { top: 82%; left: 45%; } 
-    70% { top: 8%; left: 75%; }
-    /* Bila jest widoczna do samego końca */
-    92% { top: 88%; left: 91%; opacity: 1; transform: scale(1); } 
-    /* Wygaszenie i wpadnięcie */
-    100% { top: 94%; left: 94%; transform: scale(0.2); opacity: 0; }
+    0% { 
+        top: 50%; left: 15%; 
+        opacity: 1; transform: scale(1); 
+    }
+    
+    /* UDERZENIE O DOLNĄ BANDĘ (Zwiększyłem top z 82% na 87%) */
+    35% { 
+        top: 87%; left: 45%; 
+    } 
+    
+    /* UDERZENIE O GÓRNĄ BANDĘ (Zmniejszyłem top z 8% na 4%) */
+    70% { 
+        top: 4%; left: 75%; 
+    } 
+    
+    /* MOMENT PRZED ŁUZĄ - bila wciąż 100% widoczna na krawędzi */
+    92% { 
+        top: 88%; left: 91%; 
+        opacity: 1; transform: scale(1); 
+    } 
+    
+    /* WPADNIĘCIE I WYGASZENIE */
+    100% { 
+        top: 96%; left: 96%;     /* Głęboko w rogu */
+        transform: scale(0.2); 
+        opacity: 0; 
+    }
 }
 
 /* 2. SHUFFLEBOARD */
@@ -184,18 +204,18 @@ nav ul li a:hover, .active-link { color: var(--gold) !important; }
 @keyframes lAnimDesktop {
     0% { bottom: 5%; transform: translateX(-50%) scale(1); }
     
-    /* Skok 1 (0% - 33%) */
+    /* SKOK 1 (Lądowanie na ~17%) */
     16% { bottom: 25%; }
-    33% { bottom: 5%; }
+    33% { bottom: 17%; }
     
-    /* Skok 2 (33% - 66%) */
-    50% { bottom: 25%; }
-    66% { bottom: 5%; }
+    /* SKOK 2 (Lądowanie na ~30%) */
+    50% { bottom: 40%; }
+    66% { bottom: 30%; }
     
-    /* Skok 3 (66% - 100%) */
-    83% { bottom: 55%; } /* Peak ostatniego skoku */
+    /* SKOK 3 (Finałowe lądowanie na 42%) */
+    83% { bottom: 58%; }
     100% { 
-        bottom: 42%; /* Pozycja końcowa */
+        bottom: 42%; 
         transform: translateX(-50%) scale(1.3); 
     }
 }
