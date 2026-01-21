@@ -192,7 +192,7 @@ nav ul li a:hover { color: var(--neon-cyan); }
 .game-obj { position: absolute; z-index: 15; opacity: 0; }
 .offer-item:hover .game-obj { opacity: 1; }
 
-/* --- BILARD (TRICK SHOT: Środek -> Dół -> Góra -> Łuza) --- */
+/* --- BILARD (WOLNIEJSZA, POPRAWIONE ZNIKANIE) --- */
 .ball-8 { 
     width: 40px; 
     height: 40px; 
@@ -202,9 +202,9 @@ nav ul li a:hover { color: var(--neon-cyan); }
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    /* Pozycja startowa (środek lewej strony, ale nie przy krawędzi) */
     top: 50%; 
     left: 15%; 
+    z-index: 15; /* Ważne, żeby była nad stołem */
 }
 
 .ball-8::after { 
@@ -221,14 +221,13 @@ nav ul li a:hover { color: var(--neon-cyan); }
     font-weight: 900; 
 }
 
-/* Wyzwalanie animacji */
+/* ZMIANA CZASU NA 3s (wolniej) */
 .card-bilard:hover .ball-8 { 
-    animation: bAnim 2s linear forwards; /* linear = stała prędkość, bardziej fizyczna */
+    animation: bAnim 3s linear forwards; 
 }
 
-/* Definicja ruchu bili */
 @keyframes bAnim {
-    /* 1. START: Środek lewej strony (nie od krawędzi) */
+    /* 1. START */
     0% {
         top: 50%;
         left: 15%;
@@ -236,24 +235,36 @@ nav ul li a:hover { color: var(--neon-cyan); }
         opacity: 1;
     }
     
-    /* 2. ODBICIE: Dolna banda (leci po skosie w dół) */
+    /* 2. ODBICIE DOLNE */
     35% {
-        top: 86%;  /* Prawie dotyka dołu */
-        left: 45%; /* Przesuwa się w prawo */
+        top: 86%;
+        left: 45%;
     }
     
-    /* 3. ODBICIE: Górna banda (leci po skosie w górę) */
+    /* 3. ODBICIE GÓRNE */
     70% {
-        top: 4%;   /* Prawie dotyka góry */
-        left: 75%; /* Dalej w prawo */
+        top: 4%;
+        left: 75%;
+        /* Tutaj wciąż pełna widoczność */
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* 4. TUŻ PRZED ŁUZĄ (90%) - KLUCZOWE */
+    /* Dzięki temu bila nie znika w locie, tylko dopiero nad dziurą */
+    90% {
+        top: 75%; 
+        left: 88%;
+        opacity: 1;     /* Wciąż widoczna */
+        transform: scale(1); /* Wciąż duża */
     }
     
-    /* 4. KONIEC: Prawa dolna kieszeń (wpada i znika) */
+    /* 5. WPADNIĘCIE */
     100% {
-        top: 86%;  /* Dół */
-        left: 90%; /* Prawy róg (kieszeń) */
-        transform: scale(0.3); /* Zmniejsza się */
-        opacity: 0; /* Znika */
+        top: 86%;
+        left: 90%;
+        transform: scale(0.3); /* Zmniejszenie */
+        opacity: 0;            /* Zniknięcie */
     }
 }
 
